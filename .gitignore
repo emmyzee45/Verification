@@ -1,0 +1,6 @@
+client/package-lock.json
+client/node_modules
+client/text.txt
+api/.env
+api/package-lock.json
+api/node_modules
