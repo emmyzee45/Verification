@@ -1,6 +1,6 @@
-import userReducer from "./redux-slices/UserSlice";
-import messageReducer from "./redux-slices/MessageSlice";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import subscriptionReducer from "./redux-slices/SubscriptionSlice";
+import userReducer from "./redux-slices/UserSlice";
 import {
   persistStore,
   persistReducer,
@@ -11,34 +11,26 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { createWrapper } from 'next-redux-wrapper';
-import storage from 'redux-persist/lib/storage';
+import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
+  version: 1,
   storage,
 };
 
-const rootReducer = combineReducers({ 
-  user: userReducer, 
-  message: messageReducer, 
-  subscription: subscriptionReducer,
-});
+const rootReducer = combineReducers({ user: userReducer, subscription: subscriptionReducer });
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const makeStore = () => {
-  const store = configureStore({
-      reducer: persistedReducer,
-      middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-          serializableCheck: {
-            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-          },
-        }),
-    });
-  store.__persistor = persistStore(store);
-  return store;
-};
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
 
-export const wrapper = createWrapper(makeStore);
+export let persistor = persistStore(store);

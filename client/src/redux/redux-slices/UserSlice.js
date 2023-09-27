@@ -3,36 +3,36 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    currentUser: {},
+    currentUser: null,
     isFetching: false,
     isLoggedIn: false,
     error: false,
   },
   reducers: {
     //GET ALL
-    getCurrentUserStart: (state) => {
+    loginStart: (state) => {
       state.isFetching = true;
       state.error = false;
     },
-    getCurrentUserSuccess: (state, action) => {
+    loginSuccess: (state, action) => {
       state.isFetching = false;
       state.currentUser = action.payload;
       state.isLoggedIn = true;
     },
-    getCurrentUserFailure: (state) => {
+    loginFailure: (state) => {
       state.isFetching = false;
       state.error = true;
     },
     //UPDATE
-    updateCurrentUserStart: (state) => {
+    updateUserStart: (state) => {
       state.isFetching = true;
       state.error = false;
     },
-    updateCurrentUserSuccess: (state, action) => {
+    updateUserSuccess: (state, action) => {
       state.isFetching = false;
       state.currentUser = action.payload;
     },
-    updateCurrentUserFailure: (state) => {
+    updateUserFailure: (state) => {
       state.isFetching = false;
       state.error = true;
     },
@@ -42,10 +42,9 @@ export const userSlice = createSlice({
       state.error = false;
     },
     logOutSuccess: (state) => {
-      state.walletAddress = null;
       state.isFetching = false;
       state.isLoggedIn = false;
-      state.currentUser = {};
+      state.currentUser = null;
     },
     logOutFailure: (state) => {
       state.isFetching = false;
@@ -55,12 +54,12 @@ export const userSlice = createSlice({
 });
 
 export const {
-  getCurrentUserStart,
-  getCurrentUserSuccess,
-  getCurrentUserFailure,
-  updateCurrentUserStart,
-  updateCurrentUserSuccess,
-  updateCurrentUserFailure,
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFailure,
   logOutStart,
   logOutSuccess,
   logOutFailure,

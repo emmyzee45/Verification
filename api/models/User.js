@@ -5,6 +5,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    email: {
+        type: String,
+        unique: true,
+        required: true,
+    },
     password: {
         type: String,
         required: true,
@@ -12,7 +17,17 @@ const UserSchema = new mongoose.Schema({
     balance: {
         type: Number,
         default: 0,
-    }
+    },
+    birthday: {
+         type: String
+    },
+    img: {
+        type: String,
+    },
+    isGoogle: {
+        type: Boolean,
+        default: false,
+    },
 }, {timestamps: true});
 
 export default mongoose.model("User", UserSchema);

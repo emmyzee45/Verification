@@ -12,8 +12,7 @@ export const generateToken = (user) => {
 }
 
 export const isAuth = (req, res, next) => {
-    const token = req.cookies.authorization; // slice to get rid of Bearer
-    console.log(token)
+    const token = req.cookies.token; // slice to get rid of Bearer
     if (token) {
         jwt.verify(
             token,
@@ -29,6 +28,6 @@ export const isAuth = (req, res, next) => {
             }
         )
     } else {
-        res.status(401).json("Access denied. No token provided");
+        res.status(401).json('No Token' );
     }
 }
