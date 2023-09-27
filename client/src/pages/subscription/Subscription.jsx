@@ -66,7 +66,7 @@ const Subscription = () => {
               <div className="subText">text</div>
             </li>
           </ul>
-          <button className="subButton">button</button>
+          <button className="subButton">Select plan</button>
         </div>
         <div className="subItem">
           <h2 className="subTitle">Multi-Purpose Line</h2>
@@ -98,7 +98,7 @@ const Subscription = () => {
               <div className="subText">text</div>
             </li>
           </ul>
-          <button className="subButton">button</button>
+          <button className="subButton">Select plan</button>
         </div>
       </div>
     </div>
