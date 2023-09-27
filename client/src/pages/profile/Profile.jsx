@@ -15,10 +15,10 @@ const Profile = () => {
     <div className='profileContainer'>
       <div className="profileTop">
         <div className="imgContainer">
-            <img src={user.img ? user.img : "https://firebasestorage.googleapis.com/v0/b/cardano-d265c.appspot.com/o/images.jpeg?alt=media&token=8c34ea8e-71f2-4b6f-bf93-f823e2b3a90e"} alt="" className="profileImg" />
+            <img src={user?.img ? user?.img : "https://firebasestorage.googleapis.com/v0/b/cardano-d265c.appspot.com/o/images.jpeg?alt=media&token=8c34ea8e-71f2-4b6f-bf93-f823e2b3a90e"} alt="" className="profileImg" />
         </div>
         <div className="profiledetails">
-          <div className="profiledetail">{user.username}</div>
+          <div className="profiledetail">{user?.username}</div>
           <button className="profileButton" onClick={handleEdit}>Edit</button>
         </div>
       </div>

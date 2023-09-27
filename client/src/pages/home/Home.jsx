@@ -1,3 +1,4 @@
+import Footer from "../../components/footer/Footer";
 import "./home.css";
 
 const Intro = () => {
@@ -8,6 +9,7 @@ const Intro = () => {
         <div className="hometext">Verifications</div>
       </div>
       {/* <div className="botton">Botton</div> */}
+      <Footer />
     </div>
   );
 };
