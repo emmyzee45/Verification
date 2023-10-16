@@ -1,5 +1,9 @@
 import React from "react";
 import './subscription.css'
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import { Link } from "react-router-dom";
+
 const Subscription = () => {
   return (
     <div className="subContainer">
@@ -10,27 +14,27 @@ const Subscription = () => {
           <span className="subPrice">$5.6</span>
           <ul className="subList">
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CloseOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">X</div>
+              <CloseOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">X</div>
+              <CloseOutlinedIcon />
               <div className="subText">text</div>
             </li>
           </ul>
@@ -42,27 +46,27 @@ const Subscription = () => {
           <span className="subPrice">$10</span>
           <ul className="subList">
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CloseOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CloseOutlinedIcon />
               <div className="subText">text</div>
             </li>
           </ul>
@@ -74,31 +78,33 @@ const Subscription = () => {
           <span className="subPrice">$15</span>
           <ul className="subList">
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
             <li className="subTexts">
-              <div className="subIcon">icon</div>
+              <CheckOutlinedIcon />
               <div className="subText">text</div>
             </li>
           </ul>
-          <button className="subButton">Select plan</button>
+          <Link to='/subscription/multi'>
+            <button className="subButton">Select plan</button>
+          </Link>
         </div>
       </div>
     </div>

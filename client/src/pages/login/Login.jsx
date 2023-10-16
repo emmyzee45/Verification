@@ -38,6 +38,7 @@ const Login = () => {
     e.preventDefault();
     dispatch(loginStart())
     try {
+      console.log("Login data")
       const res = await makeRequest.post("auth", values);
       console.log(res)
       dispatch(loginSuccess(res.data));

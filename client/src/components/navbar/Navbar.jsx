@@ -3,6 +3,12 @@ import "./navbar.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutSuccess } from "../../redux/redux-slices/UserSlice";
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+import SubscriptionsOutlinedIcon from '@mui/icons-material/SubscriptionsOutlined';
+import LogoutOutlined from "@mui/icons-material/LogoutOutlined";
 
 const Navbar = () => {
   const dispatch = useDispatch()
@@ -22,25 +28,29 @@ const Navbar = () => {
       </div>
        {user && (
         <>
-          <Link to="/" className="navleftItem navitem">${user?.balance.toFixed(2)}</Link>
+          <Link to="/" className="navleftItem navitem">${user?.balance?.toFixed(2)}</Link>
           <Link to="/" className="navleftItem navitem">Top up</Link>
         </>
        )}
       </div>
       <ul className="navlist fw-bolder">
         <li className="navlistItem">
+          <SubscriptionsOutlinedIcon />
           <Link to="/subscription" className="navitem">Subscriptions</Link>
         </li>
         <li className="navlistItem">
+          <MessageOutlinedIcon />
           <Link to="/message" className="navitem">Messages</Link>
         </li>
         {!user ? (
-        <li className="navlistItem">
+          <li className="navlistItem">
+            <PersonAddAltOutlinedIcon />
           <Link to="/login" className="navitem">Login</Link>
         </li>
         ) : (
           <>
             <li className="navlistItem" onClick={handleLogout}>
+              <LoginOutlinedIcon />
               <Link className="navitem">Logout</Link>
             </li>
             <li>
