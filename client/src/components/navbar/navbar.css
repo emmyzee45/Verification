@@ -54,7 +54,7 @@
 .navsubscriptions {
   position: absolute;
   top: 53px;
-  right: 390px;
+  /* right: 390px; */
   width: 150px;
   z-index: 999;
   background-color: #242d53;

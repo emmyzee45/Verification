@@ -41,10 +41,11 @@ const Navbar = () => {
        )}
       </div>
       <ul className="navlist fw-bolder">
-        <li className="navlistItem navsubContainer" onClick={handleSubscriptions}>
-          <Link className="navitem">Subscriptions</Link>
-          <ArrowDropDownOutlinedIcon />
-        </li>
+        <li className="navlistItem navsubContainer" >
+          <div onClick={handleSubscriptions}>
+            <Link className="navitem">Subscriptions</Link>
+            <ArrowDropDownOutlinedIcon />
+          </div>
           {openSub && (
             <div className="navsubscriptions">
               <Link to="/subscription">
@@ -55,6 +56,7 @@ const Navbar = () => {
               </Link>
             </div>
           )}
+        </li>
         <li className="navlistItem">
           <MessageOutlinedIcon />
           <Link to="/message" className="navitem">Messages</Link>
