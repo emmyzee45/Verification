@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./login.css";
 import axios from "axios";
@@ -33,17 +33,17 @@ const Login = () => {
     },
   ];
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     dispatch(loginStart())
     try {
-      console.log("Login data")
       const res = await makeRequest.post("auth", values);
-      console.log(res)
       dispatch(loginSuccess(res.data));
       toast.success("Successfully logged In")
-      window.location.replace("/")
+      navigate("/")
+      // window.location.replace("/")
     }catch(err) {
       toast.error("Something went wront")
       dispatch(loginFailure())
@@ -56,7 +56,7 @@ const Login = () => {
 
   return (
     <div className="loginContainer">
-      <form onSubmit={handleSubmit}>
+      <form>
         <h1>Login</h1>
         {inputs.map((input) => (
           <FormInput
@@ -66,10 +66,16 @@ const Login = () => {
             onChange={onChange}
           />
         ))}
-        <button className="logButton">Submit</button>
-        {/* <div className="loginHr"></div>
-        <div className="loginOr">Or</div>
-        <button className="logingoogle">Login with Google</button> */}
+        <button className="logButton" onClick={handleSubmit}>Submit</button>
+        <div className="loginHrContainer">
+          <div className="loginHr"></div>
+          <div className="loginOr">OR</div>
+          <div className="loginHr"></div>
+        </div>
+        <button className="logingoogle">
+          <img src="/img/g2.png" className="googleIcon"/>
+          <div className="googleText">Login with Google</div>
+        </button>
       </form>
       <Link to="/register" className="registerButton">Register</Link>
     </div>

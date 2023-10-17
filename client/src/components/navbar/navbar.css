@@ -7,7 +7,7 @@
   justify-content: space-between;
   font-size: 18px;
   padding: 0px 100px;
-  position: relative;
+  /* position: relative; */
   overflow: hidden;
 }
 
@@ -46,6 +46,21 @@
 }
 .navitem:hover {
   color: white;
+} 
+
+/* .navsubContainer {
+  position: relative;
+} */
+.navsubscriptions {
+  position: absolute;
+  top: 53px;
+  right: 390px;
+  width: 150px;
+  z-index: 999;
+  background-color: #242d53;
+  padding: 10px;
+  border-radius: 5px;
+  /* color: ; */
 }
 
  ul li .navimg {
@@ -76,14 +91,12 @@ a {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  color: #1e57d1;
+  color: #1C233F;
 }
-
 .navcatimg {
-  width: 30px;
-  height: 30px;
-}
-
+    width: 30px;
+    height: 30px;
+  }
 .navhamburger {
   display: none;
   width: 25px;

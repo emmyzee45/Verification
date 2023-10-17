@@ -8,14 +8,21 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import SubscriptionsOutlinedIcon from '@mui/icons-material/SubscriptionsOutlined';
+import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import LogoutOutlined from "@mui/icons-material/LogoutOutlined";
 
 const Navbar = () => {
-  const dispatch = useDispatch()
+  const [openSub, setOpenSub ] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const dispatch = useDispatch()
   const user = useSelector((state) => state.user.currentUser);
+
   const handleLogout = async() => {
     dispatch(logOutSuccess())
+  }
+  const handleSubscriptions = () => {
+    setOpenSub(!openSub)
   }
 
   return (
@@ -34,10 +41,20 @@ const Navbar = () => {
        )}
       </div>
       <ul className="navlist fw-bolder">
-        <li className="navlistItem">
-          <SubscriptionsOutlinedIcon />
-          <Link to="/subscription" className="navitem">Subscriptions</Link>
+        <li className="navlistItem navsubContainer" onClick={handleSubscriptions}>
+          <Link className="navitem">Subscriptions</Link>
+          <ArrowDropDownOutlinedIcon />
         </li>
+          {openSub && (
+            <div className="navsubscriptions">
+              <Link to="/subscription">
+                <div>Manage</div>
+              </Link>
+              <Link to="/subscription" >
+                <div>Buy</div>
+              </Link>
+            </div>
+          )}
         <li className="navlistItem">
           <MessageOutlinedIcon />
           <Link to="/message" className="navitem">Messages</Link>
