@@ -42,6 +42,10 @@ const Navbar = () => {
           <MessageOutlinedIcon />
           <Link to="/message" className="navitem">Messages</Link>
         </li>
+        <li className="navcart">
+            <img src="/img/cart.png" alt="/" className="navcatimg" />
+            <div className="navcounter">3</div>
+          </li>
         {!user ? (
           <li className="navlistItem">
             <PersonAddAltOutlinedIcon />
@@ -85,9 +89,11 @@ const Navbar = () => {
             <Link to="/login" className="navitem">Login</Link>
           </li>
         ): (
+          <>
           <li className="navlistItem" onClick={handleLogout}>    
           <Link className="navitem">Logout</Link>
         </li>
+        </>
         )}
       </ul>
     </div>
