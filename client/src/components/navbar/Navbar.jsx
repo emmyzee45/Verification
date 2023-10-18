@@ -48,7 +48,7 @@ const Navbar = () => {
           </div>
           {openSub && (
             <div className="navsubscriptions">
-              <Link to="/subscription">
+              <Link to="/">
                 <div>Manage</div>
               </Link>
               <Link to="/subscription" >

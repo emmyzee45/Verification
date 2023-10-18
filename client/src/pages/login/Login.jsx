@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./login.css";
-import axios from "axios";
 import FormInput from "../../components/login/FormInput";
 import { loginFailure, loginStart, loginSuccess } from "../../redux/redux-slices/UserSlice";
 import { toast } from "react-toastify";

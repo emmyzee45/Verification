@@ -4,8 +4,26 @@ import Text from "../models/Text.js";
 
 // GET ALL SUBSCRIPTIONS
 export const getAllSubcriptions = async(req, res) => {
+
+  try {
+    if(req.query) {
+        const subscription = await Subscription.find(req.query);
+        return res.status(200).json(subscription);
+    } else {
+      const subscriptions = await Subscription.find();
+      res.status(200).json(subscriptions);
+    }
+  }catch(err) {
+      res.status(400).json(err);
+  }
+}
+
+// GET ALL SUBSCRIPTIONS
+export const getSubcriptionByType = async(req, res) => {
+  console.log(req.query)
+  const { type } = req.query;
     try {
-        const subscriptions = await Subscription.find();
+        const subscriptions = await Subscription.find({type: true});
         res.status(200).json(subscriptions);
     }catch(err) {
         res.status(400).json(err);

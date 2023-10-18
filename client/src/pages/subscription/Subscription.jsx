@@ -5,6 +5,7 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { Link } from "react-router-dom";
 
 const Subscription = () => {
+  
   return (
     <div className="subContainer">
       <div className="subItems">
@@ -38,7 +39,7 @@ const Subscription = () => {
               <div className="subText">text</div>
             </li>
           </ul>
-          <Link to='/subscription/temperal'>
+          <Link to='/subscription/isTemperal'>
             <button className="subButton">Select plan</button>
           </Link>
         </div>
@@ -72,7 +73,7 @@ const Subscription = () => {
               <div className="subText">text</div>
             </li>
           </ul>
-          <Link to='/subscription/single'>
+          <Link to='/subscription/isPermanent'>
             <button className="subButton">Select plan</button>
           </Link>
         </div>
@@ -106,7 +107,7 @@ const Subscription = () => {
               <div className="subText">text</div>
             </li>
           </ul>
-          <Link to='/subscription/multi'>
+          <Link to='/subscription/isMulti'>
             <button className="subButton">Select plan</button>
           </Link>
         </div>

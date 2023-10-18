@@ -122,6 +122,26 @@ const SubscriptionSchema = new mongoose.Schema({
     subscriberId: {
         type: String,
         required: false
+    },
+    isPermanent: {
+        type: Boolean,
+        default: false,
+    },
+    isTemperal: {
+        type: Boolean,
+        default: false,
+    },
+    isMulti: {
+        type: Boolean,
+        default: false,
+    },
+    price: {
+        type: Number,
+        default: 0,
+    },
+    name: {
+        type: String,
+        required: true,
     }
     
 }, {timestamps: true});

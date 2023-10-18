@@ -1,0 +1,50 @@
+.checkoutContainer {
+    padding: 0 100px;
+}
+.checkItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.checkItems {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.checkoutTitle {
+    font-size: 50px;
+    font-weight: 600;
+    padding: 20px 0;
+}
+
+.heading {
+    padding: 20px 30px;
+    background-color: #3d4c88;
+    color: white;
+}
+
+.boding {
+    padding: 30px;
+}
+.boding:nth-child(even) {
+    background-color: rgb(238, 232, 232);
+}
+.checkTotal {
+    padding: 30px;
+    color: white;
+    font-size: large;
+    background-color: #1C233F;
+}
+.checkBuyButton {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1C233F;
+    color: white;
+    margin-top: 20px;
+}

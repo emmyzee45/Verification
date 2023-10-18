@@ -76,6 +76,7 @@ a {
 }
 .navcart{
   position: relative;
+  cursor: pointer;
 }
 
 .navcounter{
