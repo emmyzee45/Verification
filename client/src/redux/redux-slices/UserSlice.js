@@ -36,6 +36,19 @@ export const userSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    // Top Balance
+    topBalanceStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    topBalanceSuccess: (state, action) => {
+      state.isFetching = false;
+      state.currentUser.balance = action.payload;
+    },
+    topBalanceFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
     //LOGOOUT
     logOutStart: (state) => {
       state.isFetching = true;

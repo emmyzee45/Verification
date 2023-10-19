@@ -30,9 +30,15 @@
 
 .boding {
     padding: 30px;
+    
 }
+
 .boding:nth-child(even) {
     background-color: rgb(238, 232, 232);
+}
+
+.bodyItems {
+    margin-right: 70px;
 }
 .checkTotal {
     padding: 30px;
@@ -47,4 +53,9 @@
     background-color: #1C233F;
     color: white;
     margin-top: 20px;
+}
+
+.checkButtons {
+    display: flex;
+    gap: 5px;
 }

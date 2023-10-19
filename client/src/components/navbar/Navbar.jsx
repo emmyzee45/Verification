@@ -17,6 +17,7 @@ const Navbar = () => {
 
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.currentUser);
+  const quantity = useSelector((state) => state.cart.quantity);
 
   const handleLogout = async() => {
     dispatch(logOutSuccess())
@@ -36,7 +37,7 @@ const Navbar = () => {
        {user && (
         <>
           <Link to="/" className="navleftItem navitem">${user?.balance?.toFixed(2)}</Link>
-          <Link to="/" className="navleftItem navitem">Top up</Link>
+          <Link to="/balance" className="navleftItem navitem">Top up</Link>
         </>
        )}
       </div>
@@ -48,7 +49,7 @@ const Navbar = () => {
           </div>
           {openSub && (
             <div className="navsubscriptions">
-              <Link to="/">
+              <Link to="/subscriptions">
                 <div>Manage</div>
               </Link>
               <Link to="/subscription" >
@@ -62,8 +63,10 @@ const Navbar = () => {
           <Link to="/message" className="navitem">Messages</Link>
         </li>
         <li className="navcart">
+            <Link to='/checkout'>
             <img src="/img/cart.png" alt="/" className="navcatimg" />
-            <div className="navcounter">3</div>
+            <div className="navcounter">{quantity}</div>
+            </Link>
           </li>
         {!user ? (
           <li className="navlistItem">

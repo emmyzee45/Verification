@@ -1,8 +1,9 @@
 import express from "express";
-import { updateUser } from "../controllers/user.js";
+import { getBalance, updateUser } from "../controllers/user.js";
 import { isAuth } from "../midlewares/verify.js";
 const router = express.Router();
 
+router.get("/", isAuth, getBalance)
 router.put("/:id", isAuth, updateUser)
 
 

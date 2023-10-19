@@ -1,0 +1,33 @@
+.manageContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 0 200px;
+}
+
+.manageTop {
+    width: 100%;
+    display: flex;
+    margin-top: 30px;
+    gap: 5px;
+}
+
+.manageTitle {
+    color: rgb(80, 80, 80);
+    margin-right: 5px;
+    font-size: 50px;
+    font-weight: 500;
+}
+
+.manageButton {
+    background-color: rgb(236, 230, 230);
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* .manageButton:active {
+    background-color: gray;
+} */
+

@@ -24,6 +24,9 @@ const UserSchema = new mongoose.Schema({
     img: {
         type: String,
     },
+    subscriptionIds: {
+        type: Array,
+    },
     isGoogle: {
         type: Boolean,
         default: false,
