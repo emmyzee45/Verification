@@ -67,7 +67,7 @@ const Subscriptions = () => {
                         {productIds.includes(item._id) ? (
                             <>
                                 <button className='addButton warning' onClick={() => handleUpdate(item._id)}>Update</button>
-                                <button className='addButton danger' onClick={handleEmptyCart}>Remove</button>
+                                <button className='addButton danger' onClick={() => handleRemoveCart(item._id)}>Remove</button>
                             </>
                         ): (
                             <button className='addButton' onClick={() => handleAdd(item)}>Add</button>

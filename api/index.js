@@ -34,7 +34,7 @@ app.use((req, res, next) => {
   });
   app.use(
     cors({
-      origin: "http://ec2-13-58-73-40.us-east-2.compute.amazonaws.com",
+      origin: "http://localhost:3000",
     })
   );
 app.use(express.json());
@@ -47,16 +47,16 @@ app.use("/api/users", userRoutes);
 app.use("/api/subscriptions", subscriptionRoutes);
 app.use("/api/temporary-rentals", rentalRoutes);
 
-app.get("/*", function(req, res) {
-  res.sendFile(
-    path.join(__dirname, "../client/build/index.html"),
-    function (err) {
-      if(err) {
-        res.status(500).json(err);
-      }
-    }
-  )
-})
+// app.get("/*", function(req, res) {
+//   res.sendFile(
+//     path.join(__dirname, "../client/build/index.html"),
+//     function (err) {
+//       if(err) {
+//         res.status(500).json(err);
+//       }
+//     }
+//   )
+// })
 
 
 app.listen(5000, ()=>{
