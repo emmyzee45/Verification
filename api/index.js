@@ -1,3 +1,5 @@
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import path from "path";
 import express from "express";
 import dotenv from "dotenv";
@@ -23,6 +25,7 @@ const connect = () => {
 
 const _dirname = path.dirname("");
 const buildPath = path.join(_dirname, "../client/build");
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // middlewares
 app.use((req, res, next) => {
@@ -39,9 +42,14 @@ app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(buildPath));
 
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/subscriptions", subscriptionRoutes);
+app.use("/api/temporary-rentals", rentalRoutes);
+
 app.get("/*", function(req, res) {
   res.sendFile(
-    path.join(_dirname, "../client/build/index.html"),
+    path.join(__dirname, "../client/build/index.html"),
     function (err) {
       if(err) {
         res.status(500).json(err);
@@ -49,11 +57,6 @@ app.get("/*", function(req, res) {
     }
   )
 })
-
-app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/subscriptions", subscriptionRoutes);
-app.use("/api/temporary-rentals", rentalRoutes);
 
 
 app.listen(5000, ()=>{

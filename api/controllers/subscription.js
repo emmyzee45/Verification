@@ -4,7 +4,6 @@ import Text from "../models/Text.js";
 
 // GET ALL SUBSCRIPTIONS
 export const getAllSubcriptions = async(req, res) => {
-
   try {
     if(req.query) {
         const subscription = await Subscription.find(req.query);
