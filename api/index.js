@@ -23,41 +23,48 @@ const connect = () => {
   })
 }
 
-const _dirname = path.dirname("");
-const buildPath = path.join(_dirname, "../client/build");
-const __dirname = dirname(fileURLToPath(import.meta.url));
+// const _dirname = path.dirname("");
+// const buildPath = path.join(_dirname, "../client/build");
 
 // middlewares
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Credentials", true);
     next();
   });
   app.use(
     cors({
-      origin: "http://localhost:3000",
+      origin: "http://ec2-13-58-73-40.us-east-2.compute.amazonaws.com",
     })
-  );
+    );
 app.use(express.json());
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(buildPath));
+// app.use(express.static(buildPath));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/subscriptions", subscriptionRoutes);
 app.use("/api/temporary-rentals", rentalRoutes);
 
-// app.get("/*", function(req, res) {
-//   res.sendFile(
-//     path.join(__dirname, "../client/build/index.html"),
-//     function (err) {
-//       if(err) {
-//         res.status(500).json(err);
-//       }
-//     }
-//   )
-// })
+// Serve static assets if in production
+if (process.env.NODE_ENV !== "production") {
+   // Set static folder
+  // All the javascript and css files will be read and served from this folder
+  app.use(express.static("../client/build"));
 
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+
+  app.get("/*", function(req, res) {
+    res.sendFile(
+    path.join(__dirname, "../client/build/index.html"),
+    function (err) {
+      if(err) {
+        res.status(500).json(err);
+      }
+    }
+    )
+  })
+}
 
 app.listen(5000, ()=>{
     console.log("App has started at 5000");
