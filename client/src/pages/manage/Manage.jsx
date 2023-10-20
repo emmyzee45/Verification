@@ -10,13 +10,9 @@ const Manage = () => {
   const [isOpen, setIsOpen ] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
-  console.log(user)
   const subscriptions = useSelector((state) => state.subscription.subscriptions);
   const permanentSub = subscriptions.filter((item) => item.isPermanent == true || item.isMulti == true && user.subscriptionIds.includes(item._id))
   const temperalSub = subscriptions.filter((item) => item.isTemperal == true && user.subscriptionIds.includes(item._id))
-  console.log(subscriptions)
-  console.log(permanentSub)
-  console.log(temperalSub)
   
   useEffect(() => {
     const getSubscriptions = async() => {

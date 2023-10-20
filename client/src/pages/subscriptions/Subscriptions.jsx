@@ -40,7 +40,7 @@ const Subscriptions = () => {
     }
     const handleRemoveCart = (id) => {
         const product = products.filter((product) => product._id === id)[0];
-        dispatch(removeCart(product))
+        dispatch(removeCart({...product, id}))
     }
     const handleEmptyCart = () => {
         dispatch(emptyCart())
