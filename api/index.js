@@ -47,7 +47,8 @@ app.use("/api/subscriptions", subscriptionRoutes);
 app.use("/api/temporary-rentals", rentalRoutes);
 // console.log(process.env.NODE_ENV)
 // Serve static assets if in production
-if (process.env.NODE_ENV === "production") {
+console.log(process.env.NODE_ENV)
+if (process.env.NODE_ENV !== "production") {
 
    // Set static folder
   app.use(express.static("../client/build"));

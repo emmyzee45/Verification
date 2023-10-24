@@ -13,12 +13,19 @@ const Permanent = ({ subscriptions }) => {
       </div>
       {subscriptions.map((item) => {
         return (
-          <div className="permanentItem bodyItem" key={item._id}>
-        <div>43464008</div>
-        <div>{item.name}</div>
-        <div>line 3</div>
-        <div>04/07/2009</div>
-        <div>Actions</div>
+          <div className="permanentItem bodyItem" key={item.id}>
+          <div>{item?.subscriptionNumber}</div>
+          <div>{item?.name}</div>
+          <div className="lines">
+              <div className="line line1">Close All</div>
+              <div className="line line2">{item?.strReservations[0]?.target.name}</div>
+              <div className="line line3">({item?.strReservations[0]?.lineNumber})</div>
+          </div>
+        <div>{item?.noLongerAvailableAt}</div>
+          <div className="actions">
+              <button className="action">View</button>
+              <button className="action action2">Edit Nickname</button>
+          </div>
       </div>
         )
       })}
