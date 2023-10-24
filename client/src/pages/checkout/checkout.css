@@ -55,6 +55,11 @@
     margin-top: 20px;
 }
 
+.subIcon {
+    width: 25px;
+    height: 25px;
+}
+
 .checkButtons {
     display: flex;
     gap: 5px;

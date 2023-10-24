@@ -4,6 +4,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: {
     products: [],
+    duration: null,
     quantity: 0,
     total: 0,
   },
@@ -11,11 +12,12 @@ const cartSlice = createSlice({
     addProduct: (state, action) => {
       state.quantity += 1;
       state.products.push(action.payload);
+      state.duration = action.payload.duration
       state.total += action.payload.price * action.payload.quantity;
     },
     removeCart: (state, action) => {
       state.products.splice(
-        state.products.findIndex((item) => item._id === action.payload.id),
+        state.products.findIndex((item) => item.targetId === action.payload.id),
         1
       );
       state.total -= action.payload.price * action.payload.quantity;
@@ -23,7 +25,7 @@ const cartSlice = createSlice({
     },
     updateCart: (state, action) => {
       state.products[
-        state.products.findIndex((item) => item._id === action.payload._id)
+        state.products.findIndex((item) => item.targetId === action.payload.targetId)
       ] = action.payload;
       state.total += action.payload.price * action.payload.tempQuantity;
     },

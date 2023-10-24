@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
+import axios from "axios";
 import  base64 from 'base-64';
 import { generateToken } from "../midlewares/verify.js";
 
@@ -36,6 +37,7 @@ export const login = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
 // Function to refresh the bearer token
 export const refreshBearerToken = (req, res) => {
     try {
@@ -48,6 +50,27 @@ export const refreshBearerToken = (req, res) => {
       console.error('Error refreshing token:', error);
       return res.status(500).json({ error: 'Error refreshing token' });
     }
+  }
+
+// third party login
+export const thirdPartyLogin = async(req, res, next) => {
+  const apiServerUrl = 'https://www.phoneblur.com/api/auth';
+
+  // Replace with your actual username and API Key
+  const username = 'seammof@gmail.com';
+  const apiKey = 'qntvg4x2UCI2viO3JZec7O7mBiKBAxN5khuTcyv7sQq19f';
+  
+  // Create a base64-encoded token for basic authentication
+  const base64Token = Buffer.from(`${username}:${apiKey}`).toString('base64');
+  
+  try {
+    const result = await axios.post(apiServerUrl,{}, { headers: {'Authorization': `Basic ${base64Token}`,}});
+    req.token = result.data.token;
+    next()
+  }catch(err) {
+    return res.status(401).json("Unauthorized")
+  }
+  
   }
 
   // LOG OUT

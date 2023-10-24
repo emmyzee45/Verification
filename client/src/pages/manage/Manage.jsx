@@ -5,24 +5,28 @@ import Temperal from '../../components/temperal/Temperal';
 import { makeRequest } from '../../axios';
 import { useDispatch, useSelector } from "react-redux";
 import { getSubscriptionFailure, getSubscriptionStart, getSubscriptionSuccess } from '../../redux/redux-slices/SubscriptionSlice';
+import axios from 'axios';
 
 const Manage = () => {
   const [isOpen, setIsOpen ] = useState(false);
+  const [ temperarySub, setTemperarySub ] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
-  const subscriptions = useSelector((state) => state.subscription.subscriptions);
-  const permanentSub = subscriptions.filter((item) => item.isPermanent == true || item.isMulti == true && user.subscriptionIds.includes(item._id))
-  const temperalSub = subscriptions.filter((item) => item.isTemperal == true && user.subscriptionIds.includes(item._id))
+  const subscriptions = useSelector((state) => state.subscription?.subscriptions);
+  const permanentSub = subscriptions.filter((item) => item?.isPermanent == true || item?.isMulti == true && user?.subscriptionIds?.includes(item._id))
+  const temperalSub = temperarySub.filter((item) => user?.subscriptionIds?.includes(item.id))
   
   useEffect(() => {
+   
     const getSubscriptions = async() => {
-      dispatch(getSubscriptionStart())
+      // dispatch(getSubscriptionStart())
       try {
-        const res = await makeRequest.get("subscriptions");
-        console.log(res.data)
-        dispatch(getSubscriptionSuccess(res.data))
+        const res = await makeRequest.get("temporary-rentals/reservations/catalog/all");
+        console.log(res.data);
+        setTemperarySub(res.data);
+        // dispatch(getSubscriptionSuccess(res.data))
       }catch(err) {
-        dispatch(getSubscriptionFailure())
+        // dispatch(getSubscriptionFailure())
       }
     }
     getSubscriptions();

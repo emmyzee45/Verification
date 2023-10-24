@@ -27,6 +27,10 @@ const UserSchema = new mongoose.Schema({
     subscriptionIds: {
         type: Array,
     },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
     isGoogle: {
         type: Boolean,
         default: false,

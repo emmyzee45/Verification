@@ -39,7 +39,7 @@ const Subscription = () => {
               <div className="subText">No Area code Selection</div>
             </li>
           </ul>
-          <Link to='/subscription/isTemperal'>
+          <Link to='/temporary-subscription'>
             <button className="subButton">Select plan</button>
           </Link>
         </div>
@@ -73,7 +73,7 @@ const Subscription = () => {
               <div className="subText">No Area code Selection</div>
             </li>
           </ul>
-          <Link to='/subscription/isPermanent'>
+          <Link to='/permanent-subscription/isSingle'>
             <button className="subButton">Select plan</button>
           </Link>
         </div>
@@ -107,7 +107,7 @@ const Subscription = () => {
               <div className="subText">No Area code Selection</div>
             </li>
           </ul>
-          <Link to='/subscription/isMulti'>
+          <Link to='/permanent-subscription/isMulti'>
             <button className="subButton">Select plan</button>
           </Link>
         </div>

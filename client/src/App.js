@@ -16,6 +16,9 @@ import Subscriptions from "./pages/subscriptions/Subscriptions";
 import Checkout from "./pages/checkout/Checkout";
 import TopBalance from "./pages/balance/TopBalance";
 import Manage from "./pages/manage/Manage";
+import Temperary from "./pages/temperary/Temperary";
+import Permanent from "./pages/permanent/Permanent";
+import PermanentSub from "./pages/permanent-sub/PermanentSub";
 // #1C233F
 // #0C0D0F
 function App() {
@@ -31,6 +34,9 @@ function App() {
         <Route exact path="/subscription" element={<Subscription />}/>
         <Route exact path="/subscription/:category" element={<Subscriptions />}/>
         <Route exact path="/subscriptions" element={<Manage />}/>
+        <Route exact path="/temporary-subscription" element={<Temperary />}/>
+        <Route exact path="/permanent-subscription/catalog" element={<PermanentSub />}/>
+        <Route exact path="/permanent-subscription/:category" element={<Permanent />}/>
         <Route exact path="/checkout" element={<Checkout />}/>
         <Route exact path="/balance" element={<TopBalance />}/>
         <Route exact path="/login" element={<Login />}/>

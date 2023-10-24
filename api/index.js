@@ -33,7 +33,7 @@ app.use((req, res, next) => {
   });
   app.use(
     cors({
-      origin: "http://ec2-13-58-73-40.us-east-2.compute.amazonaws.com",
+      origin: "http://localhost:3000",
     })
     );
 app.use(express.json());
@@ -45,15 +45,15 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/subscriptions", subscriptionRoutes);
 app.use("/api/temporary-rentals", rentalRoutes);
-
+// console.log(process.env.NODE_ENV)
 // Serve static assets if in production
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "production") {
+
    // Set static folder
-  // All the javascript and css files will be read and served from this folder
   app.use(express.static("../client/build"));
 
   const __dirname = dirname(fileURLToPath(import.meta.url));
-
+// qntvg4x2UCI2viO3JZec7O7mBiKBAxN5khuTcyv7sQq19f
   app.get("/*", function(req, res) {
     res.sendFile(
     path.join(__dirname, "../client/build/index.html"),

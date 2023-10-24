@@ -3,12 +3,13 @@ import "./checkout.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Notiflix from "notiflix";
+import { toast } from "react-toastify";
 import { makeRequest } from '../../axios';
 import { updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/redux-slices/UserSlice';
 import { emptyCart } from '../../redux/redux-slices/cartSlice';
 
 const Checkout = () => {
-  const {total, products, quantity } = useSelector((state) => state.cart);
+  const {total, products, quantity, duration } = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Checkout = () => {
 
   const confirmDelete = (id) => {
     Notiflix.Confirm.show(
-      "Purchase Products!!!",
+      "Confirm Purchase!!!",
       "You are about to purchase this products",
       "Ok",
       "Cancel",
@@ -42,18 +43,27 @@ const Checkout = () => {
       }
     );
   };
-
+  // 1fcfd03a-2efb-4c92-9f87-4ecaff9cec49
   const handleSubscriptions = async() => {
+    const data = {
+      targets: products.map((item) => item.targetId),
+      reserveOnSameNumber: true,
+      instantAvailability: products[0].alwaysOn,
+      duration
+    }
+    if(user.balance < total) return toast.error("Insufficient balance");
     dispatch(updateUserStart())
     try {
-      const res = await makeRequest.put(`users/${user._id}`, 
-        {
-          balance: user.balance - total, 
-          subscriptionIds: products.map((item) => item._id)
-        }
-      );
-      dispatch(updateUserSuccess(res.data));
+      const res = await makeRequest.post( 
+        products[0].basePriceOneDay 
+        ? `temporary-rentals/reservations/create` 
+        : `temporary-rentals/single-service`, data
+        );
+      const updateUser = await makeRequest.put(`users/decrease/${user._id}`, {balance: parseInt(total)});
+      console.log(res.data);
+      dispatch(updateUserSuccess(updateUser.data));
       dispatch(emptyCart())
+      toast.success("Transaction successful")
     }catch(err) {
       dispatch(updateUserFailure())
     }
@@ -70,8 +80,11 @@ const Checkout = () => {
         </div>
         {products.map((product) => {
           return (
-            <div className="checkItems boding" key={product._id}>
-              <div>{product.name}</div>
+            <div className="checkItems boding" key={product.targetId}>
+              <div>
+                <img src={`https://www.phoneblur.com${product?.iconUri}`} className='subIcon'/>
+                {product.name}
+              </div>
               <div className='bodyItems'>{product.price} X {product.quantity}</div>
               <div className='bodyItems'>${product.price * product.quantity}</div>
             </div>

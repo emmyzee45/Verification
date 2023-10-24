@@ -16,7 +16,7 @@ export const subscriptionSlice = createSlice({
     getSubscriptionSuccess: (state, action) => {
       state.isFetching = false;
       state.subscriptions = action.payload;
-      state.subscriptions.sort((a, b) => a.createdAt - b.createdAt)
+      // state.subscriptions.sort((a, b) => a.createdAt - b.createdAt)
     },
     getSubscriptionFailure: (state) => {
       state.isFetching = false;

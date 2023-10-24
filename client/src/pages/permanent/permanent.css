@@ -1,0 +1,48 @@
+.subContainer {
+    color: white;
+    height: calc(100vh - 180px);
+}
+.subItems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+.subItem {
+    color: black;
+    max-width: 400px;
+    height: 500px;
+    border: 1.5px solid #1C233F;
+    border-radius: 30px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    font-size: 18px;
+}
+
+.subList {
+    padding: 0px;
+}
+
+.headerprice {
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.subButton {
+    width: 200px;
+    border: none;
+    color: white;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #1C233F;
+}
+
+@media screen and (max-width: 743px) {
+        
+  }
+  
