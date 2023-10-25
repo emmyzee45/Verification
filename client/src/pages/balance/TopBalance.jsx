@@ -26,9 +26,13 @@ export default function TopBalance() {
   return (
     <div className='balanceContainer'>
       <div className="formContainer">
-        <input type='text' ref={amountRef} onChange={(e)=> setAmount(e.target.value)} />
+        {/* <input type='text' ref={amountRef} onChange={(e)=> setAmount(e.target.value)} /> */}
+     <a className="donate-with-crypto" href="https://commerce.coinbase.com/checkout/1fa582e2-8e49-45df-8d81-8f1f6e739e40">
         <button className='balanceButton' onClick={handleTopUp}>Top up</button>
+     </a>
       </div>
+    <script src="https://commerce.coinbase.com/v1/checkout.js?version=201807"></script>
     </div>
+  
   );
 }

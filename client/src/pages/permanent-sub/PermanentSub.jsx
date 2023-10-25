@@ -32,8 +32,8 @@ const PermanentSub = () => {
     }, [alwaysOn, dispatch])
 
     const handleAdd = (product) => {
-        const price = alwaysOn ? product?.baseAlwaysOnRenewalPrice?.amount : product?.baseRenewalPrice?.amount;
-        dispatch(addProduct({...product, quantity, price}))
+        const price = alwaysOn == "true" ? product?.baseAlwaysOnRenewalPrice?.amount : product?.baseRenewalPrice?.amount;
+        dispatch(addProduct({...product, quantity, price: (price + 30/100 * price).toFixed(2)}))
     }
 
     const handleUpdate = (id) => {
@@ -44,9 +44,11 @@ const PermanentSub = () => {
         const product = products.filter((product) => product.targetId === id)[0];
         dispatch(removeCart({...product, id}))
     }
+  
     const handleEmptyCart = () => {
         dispatch(emptyCart())
     }
+   
     return (
     <div className='subsContainer'>
       <h1 className='subsTitle'>AVailable Services</h1>
@@ -63,7 +65,7 @@ const PermanentSub = () => {
             return (
                 <tr key={item?.targetId}>
                     <td><img src={`https://www.phoneblur.com${item?.iconUri}`} className='subIcon'/>{item?.name}</td>
-                        <td className='price'>${item.alwaysOn ? item?.baseAlwaysOnRenewalPrice?.amount : item?.baseRenewalPrice?.amount}</td>
+                        <td className='price'>${alwaysOn == "true" ? (item?.baseAlwaysOnRenewalPrice?.amount + 30/100 * item?.baseAlwaysOnRenewalPrice?.amount).toFixed(2) : (item?.baseRenewalPrice?.amount + 30/100 * item?.baseRenewalPrice?.amount).toFixed(2)}</td>
                     <td className='subsActions'>
                         <input type='number' min={1} className='actionsInput' name='quantity' onChange={(e)=> setQuantity(e.target.value)} />
                         {productIds.includes(item.targetId) ? (

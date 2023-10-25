@@ -33,7 +33,7 @@ const Temperary = () => {
           <h2 className="subTitle">1 day</h2>
           <div className="secondHeader">
             <p className="subDesc">Starting at</p>
-            <div className="subPrice"><b className="headerprice">${ onechecked ? "7.5":"5.6"}</b>/service</div>
+            <div className="subPrice"><b className="headerprice">${ onechecked ? "3.9":"1.95"}</b>/service</div>
           </div>
           <ul className="subList">
             <li className="subTexts">
@@ -71,7 +71,7 @@ const Temperary = () => {
           <h2 className="subTitle">3 days</h2>
           <div className="secondHeader">
             <p className="subDesc">Starting at</p>
-            <div className="subPrice"><b className="headerprice">${ threeChecked ? "9.5":"7"}</b>/service</div>
+            <div className="subPrice"><b className="headerprice">${ threeChecked ? "4.55":"2.27"}</b>/service</div>
           </div>
           <ul className="subList">
             <li className="subTexts">
@@ -109,7 +109,7 @@ const Temperary = () => {
           <h2 className="subTitle">1 week</h2>
           <div className="secondHeader">
             <p className="subDesc">Starting at</p>
-            <div className="subPrice"><b className="headerprice">${ weekChecked ? "11":"9.6"}</b>/service</div>
+            <div className="subPrice"><b className="headerprice">${ weekChecked ? "5.20":"2.60"}</b>/service</div>
           </div>
           <ul className="subList">
             <li className="subTexts">
@@ -147,7 +147,7 @@ const Temperary = () => {
           <h2 className="subTitle">2 weeks</h2>
           <div className="secondHeader">
             <p className="subDesc">Starting at</p>
-            <div className="subPrice"><b className="headerprice">${ checked ? "13":"11"}</b>/service</div>
+            <div className="subPrice"><b className="headerprice">${ checked ? "7.80":"5.20"}</b>/service</div>
           </div>
           <ul className="subList">
             <li className="subTexts">
@@ -177,7 +177,7 @@ const Temperary = () => {
           </div>
           <div>No Wake up</div>
           </div>
-          <Link to={`/subscription/14?alwaysOn=true`}>
+          <Link to={`/subscription/14?alwaysOn=${checked}`}>
             <button className="subButton">Select plan</button>
           </Link>
         </div>

@@ -46,8 +46,8 @@ const Subscriptions = () => {
         const three = product?.basePriceThreeDay?.amount;
         const seven = product?.basePriceOneWeek?.amount;
         const fourteen = product?.basePriceTwoWeek?.amount;
-        const price = category == 1 && alwaysOn ? oneOn: category == 3 && alwaysOn ? threeOn : category == 7 && alwaysOn ? sevenOn : category == 14 && alwaysOn ? fourteenOn : category == 1 ? one : category == 3 ? three : category == 7 ? seven : fourteen;
-        dispatch(addProduct({...product, quantity, price, duration: `${category}:00:00:00`}))
+        const price = category == 1 && alwaysOn == "true" ? oneOn: category == 3 && alwaysOn == "true" ? threeOn : category == 7 && alwaysOn == "true" ? sevenOn : category == 14 && alwaysOn == "true" ? fourteenOn : category == 1 ? one : category == 3 ? three : category == 7 ? seven : fourteen;
+        dispatch(addProduct({...product, quantity, price: (price + (30/100 * price)).toFixed(2), duration: `${category}:00:00:00`}))
     }
 
     const handleUpdate = (id) => {
@@ -63,7 +63,7 @@ const Subscriptions = () => {
     }
     return (
     <div className='subsContainer'>
-      <h1 className='subsTitle'>AVailable Services</h1>
+      <h1 className='subsTitle'>Available Services</h1>
       <table>
         <thead>
             <tr>
@@ -77,22 +77,22 @@ const Subscriptions = () => {
             return (
                 <tr key={item?.targetId}>
                     <td><img src={`https://www.phoneblur.com${item?.iconUri}`} className='subIcon'/>{item?.name}</td>
-                        {category == 1 && alwaysOn ? (
-                            <td className='price'>${item?.baseAlwaysOnPriceOneDay?.amount}</td>
-                        ): category == 3 && alwaysOn ? (
-                            <td className='price'>${item?.baseAlwaysOnPriceThreeDay?.amount}</td>
-                        ): category == 7 && alwaysOn ? (
-                            <td className='price'>${item?.baseAlwaysOnPriceOneWeek?.amount}</td>
-                        ): category == 14 && alwaysOn ? (
-                            <td className='price'>${item?.baseAlwaysOnPriceTwoWeek?.amount}</td>
+                        {category == 1 && alwaysOn == "true" ? (
+                            <td className='price'>${(item?.baseAlwaysOnPriceOneDay?.amount + 30/100 * item?.baseAlwaysOnPriceOneDay?.amount).toFixed(2)}</td>
+                        ): category == 3 && alwaysOn == "true" ? (
+                            <td className='price'>${(item?.baseAlwaysOnPriceThreeDay?.amount + 30/100 * item?.baseAlwaysOnPriceThreeDay?.amount).toFixed(2)}</td>
+                        ): category == 7 && alwaysOn == "true" ? (
+                            <td className='price'>${(item?.baseAlwaysOnPriceOneWeek?.amount + 30/100 * item?.baseAlwaysOnPriceOneWeek?.amount).toFixed(2)}</td>
+                        ): category == 14 && alwaysOn == "true" ? (
+                            <td className='price'>${(item?.baseAlwaysOnPriceTwoWeek?.amount + 30/100 * item?.baseAlwaysOnPriceTwoWeek?.amount).toFixed(2)}</td>
                         ): category == 1 ? (
-                            <td className='price'>${item?.basePriceOneDay?.amount}</td>
+                            <td className='price'>${(item?.basePriceOneDay?.amount + 30/100 * item?.basePriceOneDay?.amount).toFixed(2)}</td>
                         ): category == 3 ? (
-                            <td className='price'>${item?.basePriceThreeDay?.amount}</td>
+                            <td className='price'>${(item?.basePriceThreeDay?.amount + 30/100 * item?.basePriceThreeDay?.amount).toFixed(2)}</td>
                         ): category == 7 ? (
-                            <td className='price'>${item?.basePriceOneWeek?.amount}</td>
+                            <td className='price'>${(item?.basePriceOneWeek?.amount + 30/100 * item?.basePriceOneWeek?.amount).toFixed(2)}</td>
                         ): (
-                            <td className='price'>${item?.basePriceTwoWeek?.amount}</td>
+                            <td className='price'>${(item?.basePriceTwoWeek?.amount + 30/100 * item?.basePriceTwoWeek?.amount).toFixed(2)}</td>
                         )}
                     <td className='subsActions'>
                         <input type='number' min={1} className='actionsInput' name='quantity' onChange={(e)=> setQuantity(e.target.value)} />
