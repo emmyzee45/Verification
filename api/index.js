@@ -5,13 +5,16 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 import userRoutes from "./routes/users.js";
 import authRoutes from "./routes/auth.js";
-import subscriptionRoutes from "./routes/subscriptions.js";
+import webhookRoutes from "./routes/webhook.js";
 import rentalRoutes from "./routes/rentals.js";
-import cookieParser from "cookie-parser";
-const app = express();
+import subscriptionRoutes from "./routes/subscriptions.js";
+
 dotenv.config();
+const app = express();
+
 
 const connect = () => {
   mongoose.connect(process.env.Mongo)
@@ -23,9 +26,8 @@ const connect = () => {
   })
 }
 
-// const _dirname = path.dirname("");
-// const buildPath = path.join(_dirname, "../client/build");
-
+// ngrok config add-authtoken 2XHo8HCbuowu0IsSumfWDbKHhp7_61J7fwGfX5VnEMxXQGojD
+// ngrok http 5000
 // middlewares
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", true);
@@ -33,21 +35,30 @@ app.use((req, res, next) => {
   });
   app.use(
     cors({
-      origin: "http://ec2-13-58-73-40.us-east-2.compute.amazonaws.com",
+      origin: "http://localhost:3000",
     })
     );
+
+app.use(express.json({
+  verify: (req,  res, buf) => {
+      const url = req.originalUrl;
+      if(url.startsWith("/api/webhooks")) {
+          req.rawBody = buf.toString();
+      }
+  }
+}));
 app.use(express.json());
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
-// app.use(express.static(buildPath));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/subscriptions", subscriptionRoutes);
 app.use("/api/temporary-rentals", rentalRoutes);
+app.use("/api/webhooks", webhookRoutes)
 // console.log(process.env.NODE_ENV)
 // Serve static assets if in production
-console.log(process.env.NODE_ENV)
+
 if (process.env.NODE_ENV !== "production") {
 
    // Set static folder

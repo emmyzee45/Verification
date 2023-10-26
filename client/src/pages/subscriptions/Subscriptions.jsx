@@ -27,7 +27,6 @@ const Subscriptions = () => {
             dispatch(getSubscriptionStart())
             try {
                 const res = await makeRequest.get(`/temporary-rentals/reservations/catalog/duration?duration=${category}:00:00:00&instantAvailability=${alwaysOn}`);
-               console.log(res.data.advertisedTargets)
                 dispatch(getSubscriptionSuccess(res.data.advertisedTargets))
             }catch(er) {
                 console.log(er)

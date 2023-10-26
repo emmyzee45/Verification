@@ -58,7 +58,7 @@ export const thirdPartyLogin = async(req, res, next) => {
 
   // Replace with your actual username and API Key
   const username = 'seammof@gmail.com';
-  const apiKey = 'qntvg4x2UCI2viO3JZec7O7mBiKBAxN5khuTcyv7sQq19f';
+  const apiKey = process.env.PHONEBLUR_API_KEY;
   
   // Create a base64-encoded token for basic authentication
   const base64Token = Buffer.from(`${username}:${apiKey}`).toString('base64');
