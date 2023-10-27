@@ -99,6 +99,7 @@ padding-right: 40px;
     }
     tr {
         width: 800px;
+        padding: 7px;
     }
    
 }
@@ -108,6 +109,7 @@ padding-right: 40px;
     }
     tr {
         width: 600px;
+        padding: 7px;
     }
    
 }
@@ -126,7 +128,7 @@ padding-right: 40px;
     tr {
         width: 400px;
         margin: 0px;
-        padding: 5px;
+        padding: 7px;
         justify-content: space-between;
         display: flex;
     }
