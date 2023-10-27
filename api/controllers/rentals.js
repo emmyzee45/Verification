@@ -130,7 +130,7 @@ export const getLatestText = async(req, res) => {
   const { subscriptionId } = req.params;
   
   try {
-    const result = await axios.post(`${base_url}/subscriptions/62d6be98-cc79-47e7-bde0-937eaa7f9bfe/incoming-text-messages`, {
+    const result = await axios.post(`${base_url}/subscriptions/${subscriptionId}/incoming-text-messages`, {
       headers: {
           "Authorization": `Bearer ${req.token}`,
       }

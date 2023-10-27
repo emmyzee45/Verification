@@ -10,11 +10,11 @@ import { toast } from 'react-toastify';
 
 export default function TopBalance() {
     const dispatch = useDispatch();
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState(null);
     const user = useSelector((state) => state.user.currentUser)
     const amountRef = useRef();
     const navigate = useNavigate();
-    console.log(user)
+
     const handleTopUp = async() => {
       const data = {amount, currency: "USD", user_id: user._id }
         // dispatch(updateUserStart())
@@ -66,26 +66,26 @@ export default function TopBalance() {
       <div className="right">
         <div className="rightItems">
           <div className="rightItem">
-            <div className="label">Deposite Currency</div>
-            <div className="text input">USD</div>
+            <div className="rightlabel">Deposite Currency</div>
+            <div className="input">USD</div>
           </div>
           <div className="rightItem">
-            <div className="label">Deposite Amount</div>
+            <div className="rightlabel">Deposite Amount</div>
             <input className="input" ref={amountRef} onChange={(e) => setAmount(e.target.value)} />
           </div>
           <div className="rightItem">
-            <div className="label">Processing fee</div>
-            <div className='text'>$0.00</div>
+            <div className="rightlabel">Processing fee</div>
+            <div className='righttext'>$0.00</div>
           </div>
           <hr />
           <div className="rightItem" style={{fontWeight: "bold"}}>
-            <div className="label">Total</div>
-            <div className='text'>${amount ? amount : "0.00"}</div>
+            <div className="rightlabel">Total</div>
+            <div className='righttext'>${amount ? amount : "0.00"}</div>
           </div>
           {/* <Box sx={{ display: 'flex', }}>
          <CircularProgress />
          </Box> */}
-          <button className='button' onClick={handleTopUp}>Confirm and pay {amount && `$${amount}`}</button>
+          <button className='button' style={{backgroundColor: "#1C233F"}} onClick={handleTopUp}>Confirm and pay {amount && `$${amount}`}</button>
           <ul className="lists">
             <li className="list" style={{fontWeight: "bold"}}>You agree that your deposite is non-refundable!</li>
             <li className="list">Usually the payment is confirmed in few minutes, but it can take up to 3 hours.</li>
