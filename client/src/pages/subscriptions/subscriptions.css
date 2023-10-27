@@ -21,6 +21,7 @@ thead {
 tr {
     display: flex;
     align-items: center;
+    width: 1100px;
     /* justify-content: center; */
 }
 tr:nth-child(2n) {
@@ -92,16 +93,26 @@ padding-right: 40px;
     }
 }
 
-@media screen and (max-width:700px) {
+@media screen and (max-width:1100px) {
     .subsContainer {
         overflow: hidden;
     }
-    table {
-        /* margin-right: 30px; */
+    tr {
+        width: 800px;
     }
+   
+}
+@media screen and (max-width:780px) {
+    .subsContainer {
+        overflow: hidden;
+    }
+    tr {
+        width: 600px;
+    }
+   
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 580px) {
     tbody {
         margin: 0;
         padding: 0;
@@ -111,7 +122,7 @@ padding-right: 40px;
         padding: 0;
         font-size: 22px;
     }
-    
+
     tr {
         width: 400px;
         margin: 0px;
@@ -125,12 +136,7 @@ padding-right: 40px;
         padding: 0;
         /* width: 100px; */
     }
-    .cost {
-        /* margin-right: 90px; */
-    }
-    .emptyDiv {
-        /* display: none; */
-    }
+
     .subsActions {
         margin: 0;
         padding: 0;

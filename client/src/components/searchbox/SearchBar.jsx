@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./searchBar.css"
 // import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
@@ -14,6 +15,7 @@ function SearchBar({ setSearchText }) {
   return (
     <div style={{ width: '60%', margin: '0 auto', display: 'flex', alignItems: 'center' }}>
       <IconButton
+        className='searchIcon'
         onClick={handleSearch}
         style={{
           backgroundColor: 'transparent',
@@ -27,6 +29,7 @@ function SearchBar({ setSearchText }) {
       </IconButton>
       <input
         type="text"
+        className='searchInput'
         placeholder="Search..."
         style={{
           flex: 1, // Take up the remaining space

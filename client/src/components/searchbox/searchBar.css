@@ -1,0 +1,10 @@
+@media screen and (max-width: 480px) {
+    .searchInput {
+        padding: 5px;
+        height: 35px;
+    }
+    .searchIcon {
+        height: 35px;
+        padding: 5px;
+    }
+}
