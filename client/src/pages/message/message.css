@@ -1,4 +1,4 @@
-.container {
+.messageContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,40 +6,15 @@
     position: relative;
     overflow: hidden;
     padding-bottom: 80px;
+    gap: 40px;
   }
-  
-  
-  .success_message {
-    color: green;
+
+  .messageTitle {
+    margin-top: 20px;
   }
-  
-  .form {
-    width: 500px;
-    height: 500px;
-    padding: 50px;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .inputS {
-    flex: 1;
-    height: 50px;
-    padding-left: 10px;
-  }
-  
-  .inputS:first-child {
-    margin-right: 5px;
-  }
-  
-  .inputL {
-    width: 100%;
-    height: 50px;
-    padding-left: 10px;
-  }
-  
-  .textArea {
-    width: 100%;
-    padding-left: 10px;
+
+  .text {
+    width: 400px;
   }
   
   .button {

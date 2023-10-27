@@ -3,6 +3,8 @@ import "./topBalance.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { makeRequest } from '../../axios';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import { updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/redux-slices/UserSlice';
 import { toast } from 'react-toastify';
 
@@ -80,6 +82,9 @@ export default function TopBalance() {
             <div className="label">Total</div>
             <div className='text'>${amount ? amount : "0.00"}</div>
           </div>
+          {/* <Box sx={{ display: 'flex', }}>
+         <CircularProgress />
+         </Box> */}
           <button className='button' onClick={handleTopUp}>Confirm and pay {amount && `$${amount}`}</button>
           <ul className="lists">
             <li className="list" style={{fontWeight: "bold"}}>You agree that your deposite is non-refundable!</li>

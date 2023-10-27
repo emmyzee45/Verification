@@ -60,7 +60,7 @@ const Navbar = () => {
         </li>
         <li className="navlistItem">
           <MessageOutlinedIcon />
-          <Link to="/message" className="navitem">Messages</Link>
+          <Link to="/messages" className="navitem">Messages</Link>
         </li>
         <li className="navcart">
             <Link to='/checkout'>

@@ -21,10 +21,8 @@ export const getTemperalTargetsByLength = async(req, res) => {
               "Authorization": `Bearer ${req.token}`,
           }
       });
-      console.log(result.data)
         return res.status(200).json(result.data);
       } catch (error) {
-        console.error('Error fetching available targets:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
       }
 }
@@ -128,58 +126,19 @@ export const createSingleLineSub = async(req, res) => {
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 }
-////////////////////////////////////////////////
-////////////////////////////////////////////////
-
-
-export const getTemperalTargets = async(req, res) => {
-    try {
-        const { instantAvailability } = req.query;
-        // const filter = {
-        //   isAvailableForTemporaryRentals: true,
-        //   minimumRentalDuration: { $gte: 7 }, // Minimum rental duration of at least one week (7 days)
-        // };
-    
-        // if (instantAvailability === 'true') {
-        //   filter.hasInstantAvailability = true;
-        // }
-    
-        // Assuming you have a Target model, find all targets that meet the criteria
-        const availableTargets = await Target.find({duration: { $gte: 7 }, instantAvailability});
-        if(!availableTargets) return res.status(404).json("No target availability found")
-    
-        return res.status(200).json(availableTargets);
-      } catch (error) {
-        return res.status(500).json({ error: 'Internal Server Error' });
+export const getLatestText = async(req, res) => {
+  const { subscriptionId } = req.params;
+  
+  try {
+    const result = await axios.post(`${base_url}/subscriptions/62d6be98-cc79-47e7-bde0-937eaa7f9bfe/incoming-text-messages`, {
+      headers: {
+          "Authorization": `Bearer ${req.token}`,
       }
-}
-
-//  GET ALL TargetS AVAILABLE FOR SPECIFIED WEEKS
-export const allTargetsForSpicifiedWeeks = async(req,res) => {
-    try {
-        const { weeks } = req.params;
-        const { instantAvailability } = req.query;
-        
-        // Validate the 'weeks' parameter
-        if (!['1', '2'].includes(weeks)) {
-          return res.status(400).json({ error: 'Invalid value for weeks parameter. Must be 1 or 2.' });
-        }
-    
-        // Define the filter criteria based on the 'weeks' parameter and query parameter
-        // const filterCriteria = {
-        //   TargetLength: `${weeks} week${weeks === '1' ? '' : 's'}`, // "1 week" or "2 weeks"
-        // };
-    
-        // if (instantAvailability === 'true') {
-        //   filterCriteria.isInstantlyAvailable = true;
-        // }
-    
-        // Assuming you have a Target model, find all targets that meet the criteria
-        const availableTargets = await Target.find({duration: weeks, instantAvailability});
-    
-        return res.status(200).json(availableTargets);
-      } catch (error) {
-        console.error('Error fetching available targets:', error);
-        return res.status(500).json({ error: 'Internal Server Error' });
-      }
+  });
+  console.log(result.data)
+  return res.status(200).json(result.data);
+  } catch (error) {
+    console.error('Error fetching available targets:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
 }

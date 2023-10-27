@@ -1,47 +1,42 @@
-import React, { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
-import Circle from "../../components/circle/Circle";
-import "./contact.css";
+import React from 'react';
+import "./message.css";
 
-const Contact = () => {
-  const [done, setDone] = useState(false);
-  const form = useRef();
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    emailjs.sendForm('service_5r1pb74', 'template_m86qho8', form.current, process.env.REACT_APP_API_KEY)
-      .then((result) => {
-          console.log(result.text);
-          setDone(true);
-      }, (error) => {
-          console.log(error.text);
-      });
-      e.target.reset();
-  };
-
+const Message = () => {
   return (
-    <div className="container">
-        <Circle backgroundColor="#0265FF" left="-40vh" top="-20vh" className="circle"/>
-        <Circle backgroundColor="#00CCFF" right="-30vh" bottom="-60vh" className="circle"/>
-      <h1 className="title">Get in Touch</h1>
-      {done && <div className="success_message">Thanks, I will reply ASAP...</div>}
-      <form ref={form} onSubmit={sendEmail} className="form">
-        <input className="inputL" name="from_name" type="text" placeholder="Name" />
-        {/* <input className={style.inputS} type="text" placeholder="Phone" /> */}
-        <input className="inputL" name="from_email" type="text" placeholder="Email" />
-        <input className="inputL" name="to_subject" type="text" placeholder="Subject" />
-        <textarea
-          className="textArea"
-          type="text"
-          rows={6}
-          placeholder="Message"
-          name="message"
-        />
-        <button className="button">SUBMIT</button>
-      </form>
+    <div className='messageContainer'>
+      <h1 className="messageTitle">Latest Messages</h1>
+      <table>
+        <thead>
+          <tr>
+          <td>Line Type</td>
+          <td>Service</td>
+          <td>Line Number</td>
+          <td>Message</td>
+          <td>Sent From</td>
+          <td>Timestamp</td>
+          <td>Actions</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className='messageItems'>
+            <td className="messageItem">Temperary Line</td>
+            <td className="messageItem">Amazon</td>
+            <td className="messageItem">5352332142</td>
+            <td className="messageItem text">
+              Below is your code you can do any thing what within 
+              the time interval given 3534
+            </td>
+            <td className="messageItem">Amazon</td>
+            <td className="messageItem">24/04/5554: 03:23:00</td>
+            <td className="messageItem">
+              <button className='action'>Action</button>
+              <button className='action'>Action</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
-};
+}
 
-export default Contact;
+export default Message;

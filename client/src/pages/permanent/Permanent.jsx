@@ -10,7 +10,7 @@ const Permanent = () => {
 
   return (
       <div>
-        <h1></h1>
+        <h1 className="subtitle">Renewable (Permanent) Single Service Subscription Plans</h1>
         {category === "isSingle" ? <SingleLine />: <MultiPurpose /> }
       </div>
       

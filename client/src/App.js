@@ -19,6 +19,7 @@ import Manage from "./pages/manage/Manage";
 import Temperary from "./pages/temperary/Temperary";
 import Permanent from "./pages/permanent/Permanent";
 import PermanentSub from "./pages/permanent-sub/PermanentSub";
+import Message from "./pages/message/Message";
 // #1C233F
 // #0C0D0F
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route exact path="/balance" element={<TopBalance />}/>
         <Route exact path="/login" element={<Login />}/>
         <Route exact path="/register" element={<Register />}/>
+        <Route exact path="/messages" element={<Message />}/>
       </Routes>
       {/* <Footer /> */}
     </div>

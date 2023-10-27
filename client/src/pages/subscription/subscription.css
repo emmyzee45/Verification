@@ -2,6 +2,11 @@
     color: white;
     height: calc(100vh - 180px);
 }
+
+.subtitle {
+    margin: 20px 0;
+    font-size: 35px;
+}
 .subItems {
     display: flex;
     align-items: center;

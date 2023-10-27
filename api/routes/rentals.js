@@ -6,6 +6,7 @@ import {
     availableTargetForParmentSub, 
     createSingleLineSub, 
     getDetailsTemperalRental, 
+    getLatestText, 
     getTemperalTargetsByLength } from "../controllers/rentals.js";
 import { thirdPartyLogin } from "../controllers/auth.js";
 const router = express.Router();
@@ -17,5 +18,6 @@ router.get("/reservations/catalog/:subscriptionId", thirdPartyLogin, getDetailsT
 router.post("/reservations/create", [isAuth,thirdPartyLogin], CreateTemperaryRental);
 router.post("/single-service", [isAuth,thirdPartyLogin], createSingleLineSub);
 router.get("/reservations/catalog/:weeks", isAuth, getTemperalTargetsByLength);
+router.get("/incoming-text-messages", thirdPartyLogin, getLatestText);
 
 export default router;

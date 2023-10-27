@@ -8,6 +8,7 @@ const Subscription = () => {
   
   return (
     <div className="subContainer">
+      <h1 className="subtitle">Subscription Plans</h1>
       <div className="subItems">
         <div className="subItem">
           <h2 className="subTitle">Single Service Line</h2>
