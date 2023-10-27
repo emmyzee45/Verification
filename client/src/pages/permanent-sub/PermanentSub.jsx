@@ -61,7 +61,7 @@ const PermanentSub = () => {
     <div className='subsContainer'>
       <h1 className='subsTitle'>Available Services</h1>
       <SearchBar setSearchText={setSearchText} />
-      <table>
+      <div>
         <thead>
             <tr>
                 <td>Name</td>
@@ -114,7 +114,7 @@ const PermanentSub = () => {
                })
            )}
         </tbody>
-      </table>
+      </div>
     </div>
   );
 }
