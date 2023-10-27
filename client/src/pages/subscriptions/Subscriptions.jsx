@@ -73,12 +73,12 @@ const Subscriptions = () => {
     <div className='subsContainer'>
       <h1 className='subsTitle'>Available Services</h1>
       <SearchBar setSearchText={setSearchText} />
-      <table>
+      <div>
         <thead>
             <tr>
                 <td>Name</td>
-                <td>Cost Per {category == 7 ? "1 week": category > 7 ? "2 weeks" : category == 1 ? "1 day": `3 days`} </td>
-                <td></td>
+                <td className='cost'>Cost Per {category == 7 ? "1 week": category > 7 ? "2 weeks" : category == 1 ? "1 day": `3 days`} </td>
+                <td className='emptyDiv'></td>
             </tr>
         </thead>
         <tbody>
@@ -158,7 +158,7 @@ const Subscriptions = () => {
                    })
             )}
         </tbody>
-      </table>
+      </div>
     </div>
   );
 }
