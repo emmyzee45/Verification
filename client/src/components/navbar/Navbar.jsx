@@ -98,13 +98,13 @@ const Navbar = () => {
           <Link to="/about" className="navitem">$0.00</Link>
         </li>
         <li className="navmenuItem">
-          <Link to="/" className="navitem">Top up</Link>
+          <Link to="/balance" className="navitem">Top up</Link>
         </li>
         <li className="navmenuItem">
           <Link to="/subscription" className="navitem">Subscriptions</Link>
         </li>
         <li className="navmenuItem">
-          <Link to="/message" className="navitem">Messages</Link>
+          <Link to="/messages" className="navitem">Messages</Link>
         </li>
         {!user ? (
           <li className="navmenuItem">
