@@ -1,0 +1,68 @@
+.container {
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.subList {
+    padding: 0px;
+    margin: 10px 0px;
+}
+
+.multiPurposeItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 5px;
+    gap: 5px;
+}
+
+.headerItem {
+    color: rgb(243, 240, 240);
+    background-color: #3c435e;
+}
+
+.headerItemMessage {
+    color: rgb(7, 7, 7);
+    background-color: #e5e8f7;
+}
+
+.lineQty {
+    border: none;
+}
+
+.w-50 {
+    margin-top: 20px;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.promotionCode {
+    width: 300px;
+}
+
+.buttons {
+    display: flex;
+    gap: 2rem;
+}
+
+.subButton {
+    margin-top: 10px;
+    width: 200px;
+    border: none;
+    color: white;
+    padding: 7px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #1C233F;
+}
+
+/*================= MEDIA QUERIES (MEDIUM DEVICES) ============ */
+@media screen and (max-width: 1024px) {
+    
+}
+
+/*================= MEDIA QUERIES (SMALL DEVICES) ============ */
+@media screen and (max-width: 600px) {
+
+}        
