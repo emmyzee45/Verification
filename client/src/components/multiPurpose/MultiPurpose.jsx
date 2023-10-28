@@ -18,7 +18,7 @@ const MultiPurpose = () => {
             p" button and then typically have a delay of at least
              2 minutes before the line is ready for use.
         </div>
-          <Link to={`/permanent-subscription/catalog?alwaysOn=false`}>
+          <Link to={`/MultiPurpose`}>
             <button className="subButton">Select plan</button>
           </Link>
         </div>
@@ -32,7 +32,7 @@ const MultiPurpose = () => {
           No Wake Up lines do not require users to click the "Wake Up" 
           button when they want to use them.
           </div>
-          <Link to={`/permanent-subscription/catalog?alwaysOn=true`}>
+          <Link to={`/MultiPurpose`}>
             <button className="subButton">Select plan</button>
           </Link>
         </div>
