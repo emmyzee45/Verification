@@ -130,12 +130,11 @@ export const getLatestText = async(req, res) => {
   const { subscriptionId } = req.params;
   
   try {
-    const result = await axios.post(`${base_url}/subscriptions/${subscriptionId}/incoming-text-messages`, {
+    const result = await axios.get(`${base_url}/incoming-text-messages`, {
       headers: {
           "Authorization": `Bearer ${req.token}`,
       }
   });
-  console.log(result.data)
   return res.status(200).json(result.data);
   } catch (error) {
     console.error('Error fetching available targets:', error);

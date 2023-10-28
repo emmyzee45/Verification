@@ -28,7 +28,7 @@ const Temperary = () => {
   
   return (
     <div className="subContainer">
-      <h1 className="subtitle">Non-Renewable (Temporary) Subscription Plans</h1>
+      <h1 className="subtitle">Non-Renewable <div className="temperary">(Temporary) Subscription</div> Plans</h1>
       <div className="subItems">
         <div className="subItem">
           <h2 className="subTitle">1 day</h2>

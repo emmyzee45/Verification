@@ -46,7 +46,7 @@ export const confirmTransaction = async(req, res) => {
         let user_id = event.data.metadata.user_id;
 
         console.log(amount, currency, user_id);
-        await User.findByIdAndUpdate(user_id, { $inc: { balance: amount }});
+        // await User.findByIdAndUpdate(user_id, { $inc: { balance: amount }});
         res.status(200).json("Successfully topup account");
     }
 }
