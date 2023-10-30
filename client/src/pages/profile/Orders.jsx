@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./profile.css";
+import "./orders.css";
 import { useSelector } from 'react-redux';
 import EditProfile from '../../components/profile/EditProfile';
 import Crypto from '../../components/orders/crypto/Crypto';

@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import coinbase from "coinbase-commerce-node";
 import User from "../models/User.js";
-import Order from "../models/Orders.js";
+import Order from "../models/Order.js";
 
 dotenv.config();
 const Client = coinbase.Client;

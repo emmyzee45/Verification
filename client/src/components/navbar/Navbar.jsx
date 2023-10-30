@@ -90,7 +90,7 @@ const Navbar = () => {
             <img className="navimg" onClick={handleProfile} src={user?.img ? user?.img : "https://firebasestorage.googleapis.com/v0/b/cardano-d265c.appspot.com/o/images.jpeg?alt=media&token=8c34ea8e-71f2-4b6f-bf93-f823e2b3a90e"} />
             {openProfile && (
               <div className="navprofile">
-                <Link to="/profile">
+                <Link to="/orders">
                   <div  className="profilenav">Order History</div>
                 </Link>
                 <Link to="/ticket" >
