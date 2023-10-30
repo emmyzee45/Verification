@@ -18,10 +18,10 @@ const Manage = () => {
   
   useEffect(() => {
    
-    const getSubscriptions = async() => {
+    const getTemperarySubscriptions = async() => {
       // dispatch(getSubscriptionStart())
       try {
-        const res = await makeRequest.get("temporary-rentals/reservations/catalog/all");
+        const res = await makeRequest.get("subscriptions/reservations/catalog/temperary");
         console.log(res.data);
         setTemperarySub(res.data);
         // dispatch(getSubscriptionSuccess(res.data))
@@ -29,7 +29,23 @@ const Manage = () => {
         // dispatch(getSubscriptionFailure())
       }
     }
-    getSubscriptions();
+    getTemperarySubscriptions();
+  },[])
+
+  useEffect(() => {
+   
+    const getAllSubscriptions = async() => {
+      // dispatch(getSubscriptionStart())
+      try {
+        const res = await makeRequest.get("subscriptions/reservations/catalog/all");
+        console.log(res.data);
+        // setTemperarySub(res.data);
+        // dispatch(getSubscriptionSuccess(res.data))
+      }catch(err) {
+        // dispatch(getSubscriptionFailure())
+      }
+    }
+    getAllSubscriptions();
   },[])
 
   return (

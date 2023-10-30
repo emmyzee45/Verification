@@ -4,6 +4,7 @@ import FormInput from "../../components/register/Register";
 import { Link, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { makeRequest } from "../../axios";
 
 const Register = () => {
   const [values, setValues] = useState({
@@ -69,7 +70,7 @@ const Register = () => {
     e.preventDefault();
     console.log(values)
     try {
-      await axios.post("http://localhost:5000/api/auth/register", values);
+      await makeRequest.post("auth/register", values);
       toast.success("Registration successful")
       window.location.replace("/login");
     }catch(err) {

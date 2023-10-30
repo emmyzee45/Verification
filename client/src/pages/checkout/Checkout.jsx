@@ -56,8 +56,8 @@ const Checkout = () => {
     try {
       const res = await makeRequest.post( 
         products[0].basePriceOneDay 
-        ? `temporary-rentals/reservations/create` 
-        : `temporary-rentals/single-service`, data
+        ? `subscriptions/reservations/create` 
+        : `subscriptions/single-service`, data
         );
       const updateUser = await makeRequest.put(`users/decrease/${user._id}`, {balance: parseInt(total)});
       console.log(res.data);

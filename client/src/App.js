@@ -12,9 +12,9 @@ import { ToastContainer } from "react-toastify";
 import Subscription from "./pages/subscription/Subscription";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import MultiPurpose from "./pages/multiPurpose/MultiPurpose";
 import Subscriptions from "./pages/subscriptions/Subscriptions";
 import Checkout from "./pages/checkout/Checkout";
-import MultiPurpose from "./pages/multiPurpose/MultiPurpose";
 import TopBalance from "./pages/balance/TopBalance";
 import Manage from "./pages/manage/Manage";
 import Temperary from "./pages/temperary/Temperary";
@@ -37,6 +37,7 @@ function App() {
         <Route exact path="/subscription/:category" element={<Subscriptions />}/>
         <Route exact path="/subscriptions" element={<Manage />}/>
         <Route exact path="/temporary-subscription" element={<Temperary />}/>
+        <Route exact path="/MultiPurpose" element={<MultiPurpose />}/>
         <Route exact path="/permanent-subscription/catalog" element={<PermanentSub />}/>
         <Route exact path="/permanent-subscription/:category" element={<Permanent />}/>
         <Route exact path="/checkout" element={<Checkout />}/>

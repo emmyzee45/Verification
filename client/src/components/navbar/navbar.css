@@ -20,15 +20,16 @@
 }
 
 .navlogo {
-  width: 50px;
-  height: 40px;
+  margin-top: 20px;
+  /* width: 150px; */
+  height: 220px;
 }
 .navlist {
   list-style-type: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 40px;
 }
 
 .navlistItem {
@@ -58,9 +59,36 @@
   width: 150px;
   z-index: 999;
   background-color: #242d53;
-  padding: 10px;
   border-radius: 5px;
   /* color: ; */
+}
+
+.navsubItem {
+  padding: 10px;
+}
+
+.navsubItem:hover {
+  padding: 10px;
+  background-color: #131933;
+}
+
+.navprofile {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  width: 150px;
+  z-index: 999;
+  background-color: #242d53;
+  /* padding: 10px; */
+  border-radius: 5px;
+  /* color: ; */
+}
+.profilenav {
+  padding: 10px;
+  cursor: pointer;
+}
+.profilenav:hover {
+  background-color:#131933;
 }
 
  ul li .navimg {
@@ -77,6 +105,7 @@ a {
 .navcart{
   position: relative;
   cursor: pointer;
+  margin-right: 30px;
 }
 
 .navcounter{

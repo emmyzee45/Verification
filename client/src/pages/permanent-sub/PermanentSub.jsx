@@ -21,8 +21,7 @@ const PermanentSub = () => {
         const getSubscriptions = async() => {
             dispatch(getSubscriptionStart())
             try {
-                const res = await makeRequest.get(`/temporary-rentals/reservations/catalog?instantAvailability=${alwaysOn}`);
-               console.log(res.data.advertisedTargets)
+                const res = await makeRequest.get(`subscriptions/reservations/catalog?instantAvailability=${alwaysOn}`);
                 dispatch(getSubscriptionSuccess(res.data.advertisedTargets))
             }catch(er) {
                 dispatch(getSubscriptionFailure())
