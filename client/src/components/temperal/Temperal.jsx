@@ -20,7 +20,7 @@ const handlewakeup = async(id) => {
 
   return (
     <div className='temperalSub'>
-      <h1 className="temperalTitle">Temperal Subscriptions</h1>
+      <h1 className="temperalTitle">Temporal Subscriptions</h1>
       <div className="temperalItem headerItem">
         <div>Number</div>
         <div>Lines</div>
@@ -28,6 +28,11 @@ const handlewakeup = async(id) => {
         <div>AlwaysOn</div>
         <div>Actions</div>
       </div>
+
+      <div className="temperalItem headerItemMessage">
+        <div>You don't have any temporary subscriptions.</div>
+      </div>
+
       {subscriptions.map((item) => {
         return (
             <div className="temperalItem bodyItem" key={item?.id}>
