@@ -7,13 +7,17 @@ import {
     createSingleLineSub, 
     getDetailsTemperalRental, 
     getLatestText, 
-    getTemperalTargetsByLength } from "../controllers/rentals.js";
+    getAllSubscriptions,
+    getTemperalTargetsByLength, 
+    wakeupLine} from "../controllers/rentals.js";
 import { thirdPartyLogin } from "../controllers/auth.js";
 const router = express.Router();
 
 router.get("/reservations/catalog",thirdPartyLogin, availableTargetForParmentSub);
-router.get("/reservations/catalog/all",thirdPartyLogin, allTemperalRentals);
+router.get("/reservations/catalog/all",thirdPartyLogin, getAllSubscriptions);
+router.get("/reservations/catalog/temperary",thirdPartyLogin, allTemperalRentals);
 router.get("/reservations/catalog/duration",thirdPartyLogin, getTemperalTargetsByLength);
+router.post("/reservations/catalog/wakeup",thirdPartyLogin, wakeupLine);
 router.get("/reservations/catalog/:subscriptionId", thirdPartyLogin, getDetailsTemperalRental);
 router.post("/reservations/create", [isAuth,thirdPartyLogin], CreateTemperaryRental);
 router.post("/single-service", [isAuth,thirdPartyLogin], createSingleLineSub);

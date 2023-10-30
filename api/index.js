@@ -26,6 +26,7 @@ const connect = () => {
   })
 }
 
+// https://plutuspbl.io/modules/100/1002
 // ngrok config add-authtoken 2XHo8HCbuowu0IsSumfWDbKHhp7_61J7fwGfX5VnEMxXQGojD
 // ngrok http 5000
 // middlewares
@@ -35,7 +36,7 @@ app.use((req, res, next) => {
   });
   app.use(
     cors({
-      origin: "http://ec2-13-58-73-40.us-east-2.compute.amazonaws.com",
+      origin: "http://localhost:3000",
     })
     );
 
@@ -53,8 +54,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/subscriptions", subscriptionRoutes);
-app.use("/api/temporary-rentals", rentalRoutes);
+// app.use("/api/subscriptions", subscriptionRoutes);
+app.use("/api/subscriptions", rentalRoutes);
 app.use("/api/webhooks", webhookRoutes)
 // console.log(process.env.NODE_ENV)
 // Serve static assets if in production

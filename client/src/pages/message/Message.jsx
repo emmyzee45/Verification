@@ -14,7 +14,8 @@ const Message = () => {
     const getMessages = async() => {
       dispatch(getMessageStart())
       try {
-        const res = await makeRequest.get("temporary-rentals/incoming-text-messages");
+        const res = await makeRequest.get("subscriptions/incoming-text-messages");
+        console.log(res.data)
         dispatch(getMessageSuccess(res.data))
       }catch(err) {
         dispatch(getMessageFailure())

@@ -126,11 +126,57 @@ export const createSingleLineSub = async(req, res) => {
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 }
+
 export const getLatestText = async(req, res) => {
   const { subscriptionId } = req.params;
   
   try {
     const result = await axios.get(`${base_url}/incoming-text-messages`, {
+      headers: {
+          "Authorization": `Bearer ${req.token}`,
+      }
+  });
+  return res.status(200).json(result.data);
+  } catch (error) {
+    console.error('Error fetching available targets:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+export const getAllSubscriptions = async(req, res) => {  
+  try {
+    const result = await axios.get(`${base_url}/subscriptions`, {
+      headers: {
+          "Authorization": `Bearer ${req.token}`,
+      }
+  });
+  return res.status(200).json(result.data);
+  } catch (error) {
+    console.error('Error fetching available targets:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+export const wakeupLine = async(req, res) => {  
+  const { subscriptionId, reservationId } = req.query;
+  console.log(subscriptionId, reservationId)
+  try {
+    const result = await axios.post(`${base_url}/subscriptions/${subscriptionId}/reservations/${reservationId}/wake`, {
+      headers: {
+          "Authorization": `Bearer ${req.token}`,
+      }
+  });
+  return res.status(200).json(result.data);
+  } catch (error) {
+    console.error('Error fetching available targets:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+export const submitRenewal = async(req, res) => {  
+  const { subscriptionId } = req.params
+  try {
+    const result = await axios.post(`${base_url}/subscriptions/${subscriptionId}/renew/submit`, {
       headers: {
           "Authorization": `Bearer ${req.token}`,
       }
