@@ -20,8 +20,9 @@
 }
 
 .navlogo {
-  width: 50px;
-  height: 40px;
+  margin-top: 20px;
+  /* width: 150px; */
+  height: 220px;
 }
 .navlist {
   list-style-type: none !important;
@@ -58,9 +59,17 @@
   width: 150px;
   z-index: 999;
   background-color: #242d53;
-  padding: 10px;
   border-radius: 5px;
   /* color: ; */
+}
+
+.navsubItem {
+  padding: 10px;
+}
+
+.navsubItem:hover {
+  padding: 10px;
+  background-color: #131933;
 }
 
 .navprofile {

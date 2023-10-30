@@ -39,14 +39,20 @@ const Navbar = () => {
         <div className="navline" />
         <div className="navline" />
       </div>
-       {user && (
-        <>
-          <Link to="/" className="navleftItem navitem">${user?.balance?.toFixed(2)}</Link>
-          <Link to="/balance" className="navleftItem navitem">Top up</Link>
-        </>
-       )}
+      <div className="logo">
+        <Link to="/">
+        <img src="img/logo.png" className="navlogo" />
+        </Link>
+      </div>
       </div>
       <ul className="navlist fw-bolder">
+        <li>
+        {user && (
+        <>
+          <Link to="/balance" className="navleftItem navitem">${user?.balance?.toFixed(2)}</Link>
+        </>
+       )}
+        </li>
         <li className="navlistItem navsubContainer" >
           <div onClick={handleSubscriptions}>
             <Link className="navitem">Subscriptions</Link>
@@ -55,10 +61,10 @@ const Navbar = () => {
           {openSub && (
             <div className="navsubscriptions">
               <Link to="/subscriptions">
-                <div>Manage</div>
+                <div className="navsubItem" >Manage</div>
               </Link>
               <Link to="/subscription" >
-                <div>Buy</div>
+                <div className="navsubItem">Buy</div>
               </Link>
             </div>
           )}
@@ -89,6 +95,9 @@ const Navbar = () => {
                 </Link>
                 <Link to="/ticket" >
                   <div className="profilenav">Support</div>
+                </Link>
+                <Link to="/balance" >
+                  <div className="profilenav">Top up</div>
                 </Link>
                 <div onClick={handleLogout} className="profilenav">Sign Out</div>
               </div>
