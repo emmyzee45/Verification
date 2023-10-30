@@ -15,7 +15,6 @@ import Register from "./pages/register/Register";
 import MultiPurpose from "./pages/multiPurpose/MultiPurpose";
 import Subscriptions from "./pages/subscriptions/Subscriptions";
 import Checkout from "./pages/checkout/Checkout";
-import MultiPurpose from "./pages/multiPurpose/MultiPurpose";
 import TopBalance from "./pages/balance/TopBalance";
 import Manage from "./pages/manage/Manage";
 import Temperary from "./pages/temperary/Temperary";

@@ -14,6 +14,7 @@ import LogoutOutlined from "@mui/icons-material/LogoutOutlined";
 const Navbar = () => {
   const [openSub, setOpenSub ] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openProfile, setOpenProfile ] = useState(false);
 
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.currentUser);
@@ -24,6 +25,10 @@ const Navbar = () => {
   }
   const handleSubscriptions = () => {
     setOpenSub(!openSub)
+  }
+
+  const handleProfile = () => {
+    setOpenProfile(!openProfile)
   }
 
   return (
@@ -75,14 +80,19 @@ const Navbar = () => {
         </li>
         ) : (
           <>
-            <li className="navlistItem" onClick={handleLogout}>
-              <LoginOutlinedIcon />
-              <Link className="navitem">Logout</Link>
-            </li>
             <li>
-            <Link to="/profile">
-            <img className="navimg" src={user?.img ? user?.img : "https://firebasestorage.googleapis.com/v0/b/cardano-d265c.appspot.com/o/images.jpeg?alt=media&token=8c34ea8e-71f2-4b6f-bf93-f823e2b3a90e"} />
-            </Link>
+            <img className="navimg" onClick={handleProfile} src={user?.img ? user?.img : "https://firebasestorage.googleapis.com/v0/b/cardano-d265c.appspot.com/o/images.jpeg?alt=media&token=8c34ea8e-71f2-4b6f-bf93-f823e2b3a90e"} />
+            {openProfile && (
+              <div className="navprofile">
+                <Link to="/profile">
+                  <div  className="profilenav">Order History</div>
+                </Link>
+                <Link to="/ticket" >
+                  <div className="profilenav">Support</div>
+                </Link>
+                <div onClick={handleLogout} className="profilenav">Sign Out</div>
+              </div>
+            )}
             </li>
           </>
         )}
