@@ -10,7 +10,7 @@
 }
 
 table {
-    width: 1100px;
+    max-width: 105%; /* This was altered from width:1100 */
 }
 
 thead {
@@ -21,7 +21,6 @@ thead {
 tr {
     display: flex;
     align-items: center;
-    width: 1100px;
     /* justify-content: center; */
 }
 tr:nth-child(2n) {
@@ -73,84 +72,4 @@ padding-right: 40px;
 
 .danger {
     background-color: rgb(248, 36, 8);
-}
-
-@media screen and (max-width: 1080px) {
-    table {
-        /* display: none; */
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        margin-right: 60px;
-    }
-    tr {
-        justify-content: center;
-    }
-    td {
-        padding: 0;
-        margin: 0;
-        /* width: 200px; */
-    }
-}
-
-@media screen and (max-width:1100px) {
-    .subsContainer {
-        overflow: hidden;
-    }
-    tr {
-        width: 800px;
-    }
-   
-}
-@media screen and (max-width:780px) {
-    .subsContainer {
-        overflow: hidden;
-    }
-    tr {
-        width: 600px;
-    }
-   
-}
-
-@media screen and (max-width: 580px) {
-    tbody {
-        margin: 0;
-        padding: 0;
-    }
-    .subsTitle {
-        margin: 0px;
-        padding: 0;
-        font-size: 22px;
-    }
-
-    tr {
-        width: 400px;
-        margin: 0px;
-        padding: 0;
-        justify-content: space-between;
-        display: fle;
-    }
-    td {
-        flex: 1;
-        margin: 0;
-        padding: 0;
-        /* width: 100px; */
-    }
-
-    .subsActions {
-        margin: 0;
-        padding: 0;
-    }
-    .actionsInput {
-        display: none;
-    }
-    .warning {
-        display: none;
-    }
-    .addButton {
-        width: 10px;
-        margin: 0;
-        padding: 0;
-        max-width: 10px;
-    }
 }
