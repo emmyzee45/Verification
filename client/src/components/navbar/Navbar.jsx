@@ -53,6 +53,9 @@ const Navbar = () => {
         </>
        )}
         </li>
+        <li className="navmenuItem">
+          <Link to="/support" className="navitem">Support</Link>
+        </li>
         <li className="navlistItem navsubContainer" >
           <div onClick={handleSubscriptions}>
             <Link className="navitem">Subscriptions</Link>
@@ -93,7 +96,7 @@ const Navbar = () => {
                 <Link to="/profile">
                   <div  className="profilenav">Order History</div>
                 </Link>
-                <Link to="/ticket" >
+                <Link to="/support" >
                   <div className="profilenav">Support</div>
                 </Link>
                 <Link to="/balance" >
@@ -124,6 +127,9 @@ const Navbar = () => {
         </li>
         <li className="navmenuItem">
           <Link to="/messages" className="navitem">Messages</Link>
+        </li>
+        <li className="navmenuItem">
+          <Link to="/support" className="navitem">Support</Link>
         </li>
         {!user ? (
           <li className="navmenuItem">
