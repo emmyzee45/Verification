@@ -7,6 +7,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/users.js";
+import orderRoutes from "./routes/orders.js";
 import authRoutes from "./routes/auth.js";
 import webhookRoutes from "./routes/webhook.js";
 import rentalRoutes from "./routes/rentals.js";
@@ -54,6 +55,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/orders", orderRoutes);
 // app.use("/api/subscriptions", subscriptionRoutes);
 app.use("/api/subscriptions", rentalRoutes);
 app.use("/api/webhooks", webhookRoutes)

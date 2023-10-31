@@ -1,13 +1,14 @@
 .fiatContainer {
-    border: 1px solid #edeef5;
+    /* border: 1px solid #edeef5; */
     border-radius: 10px;
 }
 .fiatheader {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
-    background-color: #fafafaf5;
+    padding: 20px 10px;
+    background-color: #3c435e;
+    color: white;
 }
 
 .f-header-item {
@@ -31,4 +32,6 @@
     padding: 5px 40px;
     border-radius: 10px;
     border: 1px solid lightgray;
+    background-color: #3c435e;
+    color: white;
 }

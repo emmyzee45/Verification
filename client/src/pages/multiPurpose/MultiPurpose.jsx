@@ -2,14 +2,27 @@ import React, { useState } from "react";
 import './multiPurpose.css'
 import SearchBar from '../../components/searchbox/SearchBar';
 import { Link } from "react-router-dom";
+import { State, Country } from "country-state-city";
 
 const MultiPurpose = () => {
+  const [ state, setState ] =  useState(null);
+  const [areaCode, setAreaCode] = useState(null);
+
+  const handleClear = () => {
+    setState(null);
+    setAreaCode(null)
+  }
+
+  const handleSubmit = async() => {
+    console.log(state, areaCode)
+  }
+
   return (
     <div className="container">
-      <SearchBar />
+      {/* <SearchBar /> */}
       <div>
-        <h1> Review Purchase </h1>
-      </div>
+        <h1 className="multi-title"> Review Purchase </h1>
+      </div >
       <div className="subList">
         You can place an order and we will automatically assign 
         you a number when we restock (typically within 72 hours) 
@@ -38,7 +51,37 @@ const MultiPurpose = () => {
           <input className="promotionCode" type="text" placeholder="Have a discount code? Enter it here..."></input>
         </div>
         <div className="d-inline pl-2">
-          <button className="subButton" type="submit">Apply</button>
+          <button className="promoButton" type="submit">Apply</button>
+        </div>
+      </div>
+      <div className="w-50">
+        <select
+          className="stateCode"
+          required
+          value={state}
+          onChange={(e) => setState(e.target.value)}
+        >
+          <option value="">Select a State</option>
+            {State.getStatesOfCountry("US").map((item) => (
+              <option key={item.isoCode} value={item.isoCode}>
+                {item.name}
+          </option>))}
+        </select>
+        <select
+          className="areaCode"
+          required
+          value={areaCode}
+          onChange={(e) => setAreaCode(e.target.value)}
+        >
+          <option value="">Select a State</option>
+            {State.getStatesOfCountry("US").map((item) => (
+              <option key={item.isoCode} value={item.isoCode}>
+                {item.name}
+          </option>))}
+        </select>
+        <div className="multi-buttons">
+          <button className="multi-button" style={{width: "100px"}} type="submit" onClick={handleSubmit}>Apply</button>
+          {/* <button className="subButton" style={{width: "100px"}} type="submit" onClick={handleClear}>Clear</button> */}
         </div>
       </div>
 
@@ -54,14 +97,14 @@ const MultiPurpose = () => {
         </div>
       </div>
 
-      <div className="buttons">
+      <div className="multi-buttons">
         <div className="previous_page">
           <Link to={`/permanent-subscription/isMulti`}>
-            <button className="subButton">Back</button>
+            <button className="multi-button">Back</button>
           </Link>
         </div>
-        <div>
-          <button className="subButton" type="submit">Continue</button>
+        <div className="previous_page">
+          <button className="multi-button" type="submit">Continue</button>
         </div>
       </div>
 
