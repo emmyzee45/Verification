@@ -17,7 +17,6 @@ import rentalRoutes from "./routes/rentals.js";
 dotenv.config();
 const app = express();
 
-
 const connect = () => {
   mongoose.connect(process.env.Mongo)
   .then(()=>{
@@ -38,7 +37,7 @@ app.use((req, res, next) => {
   });
   app.use(
     cors({
-      origin: "http://localhost:3000",
+      origin: "http://ec2-13-58-73-40.us-east-2.compute.amazonaws.com",
     })
     );
 
