@@ -93,7 +93,7 @@ const Navbar = () => {
                 <Link to="/orders">
                   <div  className="profilenav">Order History</div>
                 </Link>
-                <Link to="/ticket" >
+                <Link to="/support" >
                   <div className="profilenav">Support</div>
                 </Link>
                 <Link to="/balance" >

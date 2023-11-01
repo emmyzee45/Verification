@@ -9,7 +9,9 @@ import {
     getLatestText, 
     getAllSubscriptions,
     getTemperalTargetsByLength, 
-    wakeupLine} from "../controllers/rentals.js";
+    wakeupLine,
+    createMultiLineSub,
+    submitRenewal} from "../controllers/rentals.js";
 import { thirdPartyLogin } from "../controllers/auth.js";
 const router = express.Router();
 
@@ -19,8 +21,10 @@ router.get("/reservations/catalog/temperary",thirdPartyLogin, allTemperalRentals
 router.get("/reservations/catalog/duration",thirdPartyLogin, getTemperalTargetsByLength);
 router.post("/reservations/catalog/wakeup",thirdPartyLogin, wakeupLine);
 router.get("/reservations/catalog/:subscriptionId", thirdPartyLogin, getDetailsTemperalRental);
+router.post("/reservations/renew/:subscriptionId", thirdPartyLogin, submitRenewal);
 router.post("/reservations/create", [isAuth,thirdPartyLogin], CreateTemperaryRental);
 router.post("/single-service", [isAuth,thirdPartyLogin], createSingleLineSub);
+router.post("/multi-purpose-line", [isAuth,thirdPartyLogin], createMultiLineSub);
 router.get("/reservations/catalog/:weeks", isAuth, getTemperalTargetsByLength);
 router.get("/incoming-text-messages", thirdPartyLogin, getLatestText);
 

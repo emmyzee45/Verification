@@ -60,7 +60,6 @@ const Checkout = () => {
         : `subscriptions/single-service`, data
         );
       const updateUser = await makeRequest.put(`users/decrease/${user._id}`, {balance: parseInt(total)});
-      console.log(res.data);
       dispatch(updateUserSuccess(updateUser.data));
       dispatch(emptyCart())
       toast.success("Transaction successful")

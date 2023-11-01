@@ -1,11 +1,13 @@
 .messageContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center; */
+    /* justify-content: center; */
     position: relative;
     overflow: hidden;
-    padding-bottom: 80px;
+    width: 100vw;
+    height: calc(100vh - 80px);;
+    padding: 0 200px;
     gap: 40px;
   }
 
@@ -13,9 +15,31 @@
     margin-top: 20px;
   }
 
+  .thead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #3c435e;
+    color: white;
+  }
+
+  .thead-item {
+    padding: 20px;
+  }
+
   .text {
     width: 500px;
   }
+
+.messageItems {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.messageItem {
+  padding: 20px;  
+}
   
   .button {
     margin-top: 20px;

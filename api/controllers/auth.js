@@ -1,7 +1,6 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import axios from "axios";
-import  base64 from 'base-64';
 import { generateToken } from "../midlewares/verify.js";
 
 export const register = async (req, res) => {

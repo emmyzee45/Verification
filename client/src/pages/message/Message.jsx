@@ -28,35 +28,33 @@ const Message = () => {
     <div className='messageContainer'>
       <h1 className="messageTitle">Latest Messages</h1>
       <div>
-        <thead>
-          <tr>
-          <td>Line Type</td>
-          <td>Service</td>
-          <td>Line Number</td>
-          <td>Message</td>
-          <td>Sent From</td>
-          <td>Time</td>
-          <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
+        <div className='thead'>
+          <div className='thead-item'>Line Type</div>
+          <div className='thead-item'>Service</div>
+          <div className='thead-item'>Line Number</div>
+          <div className='thead-item'>Message</div>
+          <div className='thead-item'>Sent From</div>
+          <div className='thead-item'>Time</div>
+          <div className='thead-item'>Actions</div>
+        </div>
+        <div className='tbody'>
           {messages.map((item) => {
             return (
-              <tr className='messageItems'>
-                <td className="messageItem">{item?.lineType}</td>
-                <td className="messageItem">{item?.target?.name}</td>
-                <td className="messageItem">{item?.lineNumber}</td>
-                <td className="messageItem text">{item?.fullPayloadValue}</td>
-                <td className="messageItem">{item?.sentFrom}</td>
-                <td className="messageItem">{format(item?.sentAt)}</td>
-                <td className="messageItem">
+              <div className='messageItems'>
+                <div className="messageItem">{item?.lineType}</div>
+                <div className="messageItem">{item?.target?.name}</div>
+                <div className="messageItem">{item?.lineNumber}</div>
+                <div className="messageItem text">{item?.fullPayloadValue}</div>
+                <div className="messageItem">{item?.sentFrom}</div>
+                <div className="messageItem">{format(item?.sentAt)}</div>
+                <div className="messageItem">
                   <button className='action'>Action</button>
                   {/* <button className='action'>Action</button> */}
-                </td>
-              </tr>
+                </div>
+              </div>
             )
           })}
-        </tbody>
+        </div>
       </div>
     </div>
   );

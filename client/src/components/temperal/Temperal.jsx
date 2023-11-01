@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./temperal.css";
 import { makeRequest } from "../../axios";
+import { toast } from "react-toastify";
 
 const Temperal = ({ subscriptions }) => {
   const [isClose, setIsClose ] = useState(false);
@@ -13,7 +14,9 @@ const handlewakeup = async(id) => {
   try {
     const res = await makeRequest.post(`subscriptions/reservations/catalog/wakeup?subscriptionId=${id}&reservationId=${id}`);
     console.log(res.data);
+    toast.success(`Your line will be available in ${res.data}s`)
   } catch (error) {
+    toast.error("something went wrong")
     console.log(error)
   }
 }

@@ -1,5 +1,3 @@
-import Subscription from "../models/Subscription.js";
-import Target from "../models/Target.js";
 import axios from "axios";
 import User from "../models/User.js";
 const base_url = "https://www.phoneblur.com/api"
@@ -121,6 +119,25 @@ export const createSingleLineSub = async(req, res) => {
   await User.findByIdAndUpdate(req.user.id, { $push: { subscriptionIds: result.data.id }});
 
   return res.status(200).json(result.data);
+  } catch (error) {
+    console.error('Error fetching available targets:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+// CREATE Multi LINE SUBSCRIPTION
+export const createMultiLineSub = async(req, res) => {
+  console.log(req.body)
+  try {
+
+    const result = await axios.post(`${base_url}/multi-purpose-line`, req.body, {
+      headers: {
+          "Authorization": `Bearer ${req.token}`,
+      }
+  });
+  await User.findByIdAndUpdate(req.user.id, { $push: { subscriptionIds: result.data.id }});
+
+  return res.status(200).json("Successful");
   } catch (error) {
     console.error('Error fetching available targets:', error);
     return res.status(500).json({ error: 'Internal Server Error' });

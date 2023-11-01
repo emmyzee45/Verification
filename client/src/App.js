@@ -21,6 +21,7 @@ import Temperary from "./pages/temperary/Temperary";
 import Permanent from "./pages/permanent/Permanent";
 import PermanentSub from "./pages/permanent-sub/PermanentSub";
 import Message from "./pages/message/Message";
+import Support from "./pages/support/Support";
 // #1C233F
 // #0C0D0F
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route exact path="/permanent-subscription/:category" element={<Permanent />}/>
         <Route exact path="/checkout" element={<Checkout />}/>
         <Route exact path="/MultiPurpose" element={<MultiPurpose />}/>
+        <Route exact path="/support" element={<Support />}/>
         <Route exact path="/balance" element={<TopBalance />}/>
         <Route exact path="/login" element={<Login />}/>
         <Route exact path="/register" element={<Register />}/>

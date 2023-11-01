@@ -8,10 +8,11 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/users.js";
 import orderRoutes from "./routes/orders.js";
+import ticketRoutes from "./routes/tickets.js";
+import messageRoutes from "./routes/messages.js";
 import authRoutes from "./routes/auth.js";
 import webhookRoutes from "./routes/webhook.js";
 import rentalRoutes from "./routes/rentals.js";
-import subscriptionRoutes from "./routes/subscriptions.js";
 
 dotenv.config();
 const app = express();
@@ -56,7 +57,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
-// app.use("/api/subscriptions", subscriptionRoutes);
+app.use("/api/tickets", ticketRoutes);
+app.use("/api/messages", messageRoutes);
 app.use("/api/subscriptions", rentalRoutes);
 app.use("/api/webhooks", webhookRoutes)
 // console.log(process.env.NODE_ENV)
