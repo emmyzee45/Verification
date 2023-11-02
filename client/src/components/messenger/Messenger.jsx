@@ -1,0 +1,100 @@
+import "./messenger.css";
+import Message from "../message/Message";
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { makeRequest } from "../../axios";
+
+export default function Messenger({ currentTicket, setOpen }) {
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+  const user = useSelector((state) => state.user.currentUser);
+  const scrollRef = useRef();
+
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const res = await makeRequest.get(`messages/${currentTicket?._id}`);
+        setMessages(res.data);
+      } catch (err) {
+      }
+    };
+    getMessages();
+  }, [currentTicket]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const message = {
+      sender: user._id,
+      text: newMessage,
+      ticketId: currentTicket?._id,
+    };
+
+    try {
+      const res = await makeRequest.post("/messages", message);
+      setMessages([...messages, res.data]);
+      setNewMessage("");
+    } catch (err) {
+    }
+  };
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  const handleclose = () => {
+    setOpen(false)
+  }
+
+  return (
+    <>
+      {/* <Topbar /> */}
+      <div className="messenger">
+        <div className="chatMenu">
+          <div className="chatMenuWrapper">
+            {/* <input placeholder="Search for friends" className="chatMenuInput" />
+            {conversations.map((c) => (
+              <div onClick={() => setCurrentChat(c)}>
+                <Conversation conversation={c} currentUser={user} />
+              </div>
+            ))} */}
+          </div>
+        </div>
+        <div className="chatBox">
+          <div className="chatBoxWrapper">
+            <div className="m-header">
+              <h2>{currentTicket?.title}</h2>
+              <div className="m-close" onClick={handleclose}>X</div>
+            </div>
+                <div className="chatBoxTop">
+                  {messages.map((m) => (
+                    <div ref={scrollRef} key={m?._id}>
+                      <Message message={m} own={m.sender === user?._id} />
+                    </div>
+                  ))}
+                </div>
+                <div className="chatBoxBottom">
+                  <textarea
+                    className="chatMessageInput"
+                    placeholder="write something..."
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    value={newMessage}
+                  ></textarea>
+                  <button className="chatSubmitButton" onClick={handleSubmit}>
+                    Send
+                  </button>
+                </div>
+          </div>
+        </div>
+        <div className="chatOnline">
+          <div className="chatOnlineWrapper">
+            {/* <ChatOnline
+              onlineUsers={onlineUsers}
+              currentId={user._id}
+              setCurrentChat={setCurrentChat}
+            /> */}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

@@ -5,6 +5,9 @@ const router = express.Router();
 
 //add message
 export const addMessage = async (req, res) => {
+  const { ticketId, sender, text } = req.body;
+  if(!ticketId || !sender || !text ) return res.status(400).json("All fields are required");
+  
   const newMessage = new Message(req.body);
 
   try {

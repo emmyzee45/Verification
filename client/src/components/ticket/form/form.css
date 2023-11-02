@@ -1,0 +1,52 @@
+.t-form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.t-form {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px 30px;
+}
+
+.t-form-title {
+    margin-bottom: 10px;
+}
+.t-form-subject {
+  min-width: 400px;  
+}
+
+.t-label {
+    font-size: 16px;
+}
+
+#t-form-message {
+    min-height: 200px;
+    margin-top: 10px;
+}
+
+.t-form-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0 0 0;
+}
+
+.t-form-button {
+    padding: 5px 15px;
+    border-radius: 10px;
+    color: white;
+    background-color: red;
+}
+
+.t-form-submit {
+    background-color: #131933;
+}
