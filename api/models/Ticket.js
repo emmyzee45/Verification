@@ -9,10 +9,6 @@ const TicketSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    msg: {
-        type: String,
-        required: true,
-    },
     status: {
         type: String,
         default: "open"

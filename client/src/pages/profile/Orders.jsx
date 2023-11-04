@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import "./orders.css";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import EditProfile from '../../components/profile/EditProfile';
 import Crypto from '../../components/orders/crypto/Crypto';
 import Fiat from '../../components/orders/fiat/Fiat';
 import { makeRequest } from '../../axios';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { logOutSuccess } from '../../redux/redux-slices/UserSlice';
 
 const Profile = () => {
   const [focus, setFocus] = useState(false);
   const [orders, setOrders] = useState([]);
   const user = useSelector((state) => state.user.currentUser);
+  const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
   const crypto = orders?.filter((item) => item?.method?.toLowerCase() === "crypto");
   const fiat = orders?.filter((item) => item?.method?.toLowerCase() !== "crypto");
+    const navigate = useNavigate();
+    const location = useLocation();
+    const dispatch = useDispatch();
+
+  useEffect(() => {
+    !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
+  }, [isAuthenticated])
   
   const handleFiat = () => {
     setFocus(false);
@@ -26,7 +36,10 @@ const Profile = () => {
         const res = await makeRequest.get(`orders/${user._id}`);
         setOrders(res.data);
       }catch(err) {
-        console.log(err);
+         if (err.response?.status === 401) {
+        dispatch(logOutSuccess());
+        navigate('/login', { state: { from: location }, replace: true });
+      }
       }
     }
     getOrders();

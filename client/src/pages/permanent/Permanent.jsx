@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './permanent.css'
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import SingleLine from "../../components/singleLine/SingleLine";
 import MultiPurpose from "../../components/multiPurpose/MultiPurpose";
+import { useSelector } from "react-redux";
 
 const Permanent = () => {
   const params = useParams();
   const category = params.category;
+  const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
+}, [isAuthenticated])
 
   return (
       <div>

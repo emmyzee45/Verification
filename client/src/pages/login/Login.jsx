@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./login.css";
 import FormInput from "../../components/login/FormInput";
@@ -31,8 +31,11 @@ const Login = () => {
      
     },
   ];
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -41,11 +44,19 @@ const Login = () => {
       const res = await makeRequest.post("auth", values);
       dispatch(loginSuccess(res.data));
       toast.success("Successfully logged In")
-      navigate("/")
+      navigate(from, { replace: true })
       // window.location.replace("/")
     }catch(err) {
-      toast.error("Something went wront")
       dispatch(loginFailure())
+      if (!err?.response) {
+        toast.error('No Server Response');
+    } else if (err.response?.status === 400) {
+        toast.error('Invalid Email or Password');
+    } else if (err.response?.status === 401) {
+        toast.error('Unauthorized');
+    } else {
+        toast.error('Login Failed');
+    }
     }
   };
 

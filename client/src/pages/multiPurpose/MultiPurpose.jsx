@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './multiPurpose.css'
 import SearchBar from '../../components/searchbox/SearchBar';
-import { Link, useLocation, useParams, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { State, Country } from "country-state-city";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserFailure, updateUserStart, updateUserSuccess } from "../../redux/redux-slices/UserSlice"
+import { logOutSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from "../../redux/redux-slices/UserSlice"
 import { makeRequest } from "../../axios";
 import { toast } from "react-toastify";
 
@@ -13,10 +13,16 @@ const MultiPurpose = () => {
   const [areaCode, setAreaCode] = useState(null);
   const [ discount, setDiscount ] = useState(null);
   const user = useSelector((state) => state.user.currentUser);
+  const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
 
   const location = useLocation();
   const dispatch = useDispatch();
   const alwaysOn = location.search.split("=")[1];
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
+  }, [isAuthenticated])
 
   const handleClear = () => {
     setState(null);
@@ -38,9 +44,16 @@ const MultiPurpose = () => {
         dispatch(updateUserSuccess(updateUser.data));
         toast.success("Subscription Successful")
     }catch(err) {
-      console.log(err);
-      toast.error("Something went wrong!")
+      if (!err?.response) {
+        toast.error('No Server Response');
+    }  else if (err.response?.status === 401) {
       dispatch(updateUserFailure())
+      dispatch(logOutSuccess());
+      navigate('/login', { state: { from: location }, replace: true });
+    } else {
+        toast.error('Something went wrong');
+        dispatch(updateUserFailure())
+    }
     }
   }
   console.log(state)

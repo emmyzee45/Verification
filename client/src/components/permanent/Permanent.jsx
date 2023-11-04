@@ -1,15 +1,26 @@
 import { toast } from "react-toastify";
 import { makeRequest } from "../../axios";
 import "./permanent.css";
+import { logOutSuccess } from "../../redux/redux-slices/UserSlice";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Permanent = ({ subscriptions }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const handleSubRenewal = async(id) => {
     try{
       await makeRequest.post(`subscriptions/reservations/renew/${id}`);
       toast.success("Successfully renew")
     }catch(err) {
-      toast.error("Something went wrong")
-      console.log(err);
+      if (err.response?.status === 401) {
+        dispatch(logOutSuccess());
+        navigate('/login', { state: { from: location }, replace: true });
+      } else {
+        toast.error("Something went wrong")
+      }
     }
   }
   return (

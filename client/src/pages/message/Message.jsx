@@ -4,11 +4,21 @@ import "./message.css";
 import { format } from "timeago.js";
 import { makeRequest } from "../../axios.js"
 import { getMessageFailure, getMessageStart, getMessageSuccess } from '../../redux/redux-slices/messageSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { logOutSuccess } from '../../redux/redux-slices/UserSlice.js';
 
 const Message = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user?.currentUser);
+  const isAuthenticated = useSelector((state) => state.user?.isLoggedIn);
   const messages = useSelector((state) => state.message?.messages?.filter((item) => user?.subscriptionIds?.includes(item?.subscriptionId)))
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
+  }, [isAuthenticated])
 
   useEffect(() => {
     const getMessages = async() => {
@@ -18,7 +28,12 @@ const Message = () => {
         console.log(res.data)
         dispatch(getMessageSuccess(res.data))
       }catch(err) {
-        dispatch(getMessageFailure())
+        if (err.response?.status === 401) {
+        dispatch(logOutSuccess());
+        navigate('/login', { state: { from: location }, replace: true });
+      } else {
+          dispatch(getMessageFailure())
+      }
       }
     }
     getMessages()

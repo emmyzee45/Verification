@@ -1,18 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import "./support.css";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeRequest } from '../../axios';
 import Supports from '../../components/support/Support';
 import Form from '../../components/ticket/form/Form';
+import { getTicketFailure, getTicketStart, getTicketSuccess } from '../../redux/redux-slices/ticketSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { logOutSuccess } from '../../redux/redux-slices/UserSlice';
 
 const Support = () => {
   const [focus, setFocus] = useState(false);
-  const [tickets, setTickets] = useState([]);
   const [openForm, setOpenForm] = useState(false);
+
   const user = useSelector((state) => state.user.currentUser);
+  const tickets = useSelector((state) => state.ticket.tickets);
+  const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
   const openTicket = tickets?.filter((item) => item?.status?.toLowerCase() === "open");
-  const closeTicket = tickets?.filter((item) => item?.status?.toLowerCase() === "close");
+  const closeTicket = tickets?.filter((item) => item?.status?.toLowerCase() === "closed");
   
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const location = useLocation();
+
+
+  useEffect(() => {
+    !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
+  }, [isAuthenticated])
+
   const handleFiat = () => {
     setFocus(false);
   }
@@ -26,10 +40,18 @@ const Support = () => {
 
   useEffect(() => {
     const getTickets = async() => {
+      dispatch(getTicketStart())
       try {
         const res = await makeRequest.get(`tickets/${user?._id}`);
-        setTickets(res.data);
+        dispatch(getTicketSuccess(res.data))
       }catch(err) {
+        if (err.response?.status === 401) {
+        dispatch(logOutSuccess());
+        dispatch(getTicketFailure())
+        navigate('/login', { state: { from: location }, replace: true });
+      } else {
+          dispatch(getTicketFailure())
+      }
         // console.log(err);
       }
     }

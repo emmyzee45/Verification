@@ -1,14 +1,19 @@
 import "./messenger.css";
 import Message from "../message/Message";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { makeRequest } from "../../axios";
+import { logOutSuccess } from "../../redux/redux-slices/UserSlice";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Messenger({ currentTicket, setOpen }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const user = useSelector((state) => state.user.currentUser);
   const scrollRef = useRef();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getMessages = async () => {
@@ -16,8 +21,12 @@ export default function Messenger({ currentTicket, setOpen }) {
         const res = await makeRequest.get(`messages/${currentTicket?._id}`);
         setMessages(res.data);
       } catch (err) {
-      }
-    };
+        if (err.response?.status === 401) {
+        dispatch(logOutSuccess());
+        navigate('/login', { state: { from: location }, replace: true });
+      } 
+    }
+  };
     getMessages();
   }, [currentTicket]);
 
@@ -28,12 +37,16 @@ export default function Messenger({ currentTicket, setOpen }) {
       text: newMessage,
       ticketId: currentTicket?._id,
     };
-
+    
     try {
       const res = await makeRequest.post("/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
+      if (err.response?.status === 401) {
+      dispatch(logOutSuccess());
+      navigate('/login', { state: { from: location }, replace: true });
+    } 
     }
   };
 

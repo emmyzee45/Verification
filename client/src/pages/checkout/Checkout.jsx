@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./checkout.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Notiflix from "notiflix";
 import { toast } from "react-toastify";
 import { makeRequest } from '../../axios';
-import { updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/redux-slices/UserSlice';
+import { logOutSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/redux-slices/UserSlice';
 import { emptyCart } from '../../redux/redux-slices/cartSlice';
 
 const Checkout = () => {
   const {total, products, quantity, duration } = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user.currentUser);
+  const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
+  }, [isAuthenticated])
 
   const handleBackward = ()=> {
     navigate("/subscription")
@@ -64,7 +70,16 @@ const Checkout = () => {
       dispatch(emptyCart())
       toast.success("Transaction successful")
     }catch(err) {
+      if (!err?.response) {
+        toast.error('No Server Response');
+    }  else if (err.response?.status === 401) {
       dispatch(updateUserFailure())
+      dispatch(logOutSuccess());
+      navigate('/login', { state: { from: location }, replace: true });
+    } else {
+        toast.error('Something went wrong');
+        dispatch(updateUserFailure())
+    }
     }
   }
 

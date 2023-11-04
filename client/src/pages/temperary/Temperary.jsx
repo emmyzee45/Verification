@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './temperary.css';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import { Switch } from '@mui/material';
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Temperary = () => {
   const [onechecked, onesetChecked] = useState(false); // Switch
   const [checked, setChecked] = useState(false); // Switch
   const [threeChecked, setThreeChecked] = useState(false); // Switch
   const [weekChecked, setWeekChecked] = useState(false); // Switch
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.user.isLoggedIn)
+
+  useEffect(() => {
+    !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
+}, [isAuthenticated])
 
   const switchHandler = (event) => {
     setChecked(event.target.checked);

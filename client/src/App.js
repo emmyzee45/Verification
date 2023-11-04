@@ -21,6 +21,7 @@ import Permanent from "./pages/permanent/Permanent";
 import PermanentSub from "./pages/permanent-sub/PermanentSub";
 import Message from "./pages/message/Message";
 import Support from "./pages/support/Support";
+import Missing from "./pages/missing/404";
 // #1C233F
 // #0C0D0F
 function App() {
@@ -47,6 +48,7 @@ function App() {
         <Route exact path="/login" element={<Login />}/>
         <Route exact path="/register" element={<Register />}/>
         <Route exact path="/messages" element={<Message />}/>
+        <Route path="*" element={<Missing />} />
       </Routes>
       {/* <Footer /> */}
     </div>

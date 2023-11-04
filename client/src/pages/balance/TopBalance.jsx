@@ -1,33 +1,48 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import "./topBalance.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { makeRequest } from '../../axios';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import { updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/redux-slices/UserSlice';
+import { logOutSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/redux-slices/UserSlice';
 import { toast } from 'react-toastify';
 
 export default function TopBalance() {
     const dispatch = useDispatch();
     const [amount, setAmount] = useState(null);
     const user = useSelector((state) => state.user.currentUser)
+    const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
     const amountRef = useRef();
     const navigate = useNavigate();
+    const location = useLocation();
+
+
+  useEffect(() => {
+    !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
+  }, [isAuthenticated])
 
     const handleTopUp = async() => {
       const data = {amount, currency: "USD", user_id: user._id }
         // dispatch(updateUserStart())
         try {
             const res = await makeRequest.post(`webhooks/checkout`,data);
-            console.log(res.data.hosted_url)
             // dispatch(updateUserSuccess(res.data));
             amountRef.current.value = ""
             toast.success("Redirecting to Coinbase, after your payment is successful, the balance will be updated once payment is comfirmed")
             window.location.href = res.data.hosted_url;
           }catch(err) {
             // dispatch(updateUserFailure())
-            toast.error("Something went wrong!")
+            if (!err?.response) {
+              toast.error('No Server Response');
+          }  else if (err.response?.status === 401) {
+            dispatch(updateUserFailure())
+            dispatch(logOutSuccess());
+            navigate('/login', { state: { from: location }, replace: true });
+          } else {
+              toast.error('Something went wrong');
+              dispatch(updateUserFailure())
+          }
         }
     }
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./permanentSub.css"
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { makeRequest } from '../../axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSubscriptionFailure, getSubscriptionStart, getSubscriptionSuccess } from '../../redux/redux-slices/SubscriptionSlice';
@@ -14,12 +14,18 @@ const PermanentSub = () => {
     const [filteredSub, setFilteredSub ] = useState([]);
 
     const products = useSelector((state) => state.cart.products);
+    const isAuthenticated = useSelector((state) => state.user.isLoggedIn)
     const productIds = useSelector((state) => state.cart.products.map((item) => item.targetId));
     const subscriptions = useSelector((state) => state.subscription.subscriptions);
 
     const location = useLocation();
     const alwaysOn = location.search.split("=")[1]
     const dispatch = useDispatch()
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
+  }, [isAuthenticated])
 
     useEffect(() => {
         const getSubscriptions = async() => {

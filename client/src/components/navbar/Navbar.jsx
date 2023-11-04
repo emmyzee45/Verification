@@ -3,13 +3,10 @@ import "./navbar.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutSuccess } from "../../redux/redux-slices/UserSlice";
-import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
-import SubscriptionsOutlinedIcon from '@mui/icons-material/SubscriptionsOutlined';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
-import LogoutOutlined from "@mui/icons-material/LogoutOutlined";
+import NotListedLocationOutlinedIcon from '@mui/icons-material/NotListedLocationOutlined';
 
 const Navbar = () => {
   const [openSub, setOpenSub ] = useState(false);
@@ -72,6 +69,10 @@ const Navbar = () => {
         <li className="navlistItem">
           <MessageOutlinedIcon />
           <Link to="/messages" className="navitem">Messages</Link>
+        </li>
+        <li className="navlistItem">
+          <NotListedLocationOutlinedIcon />
+          <Link to="/faq" className="navitem">FAQ</Link>
         </li>
         <li className="navcart">
             <Link to='/checkout'>

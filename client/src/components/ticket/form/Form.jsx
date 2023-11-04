@@ -1,12 +1,39 @@
 import React, { useState } from 'react';
 import "./form.css";
+import { addTicketFailure, addTicketStart, addTicketSuccess } from '../../../redux/redux-slices/ticketSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { makeRequest } from '../../../axios';
+import { toast } from 'react-toastify';
+import { logOutSuccess } from '../../../redux/redux-slices/UserSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Form = ({ setOpenForm }) => {
     const [title, setTitle ] = useState(null);
     const [msg, setMsg] = useState(null);
 
+    const user = useSelector((state) => state.user.currentUser);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const handleSubmit = async(e) => {
         e.preventDefault();
+        dispatch(addTicketStart())
+        try{
+          const res = await makeRequest.post('tickets', { title, msg, sender: user?._id });
+          dispatch(addTicketSuccess(res.data));
+          setOpenForm(false);
+          toast.success("Ticket successfully creasted!")
+        }catch(err) {
+          if (err.response?.status === 401) {
+            dispatch(logOutSuccess());
+            navigate('/login', { state: { from: location }, replace: true });
+          } else {
+            dispatch(addTicketFailure());
+            toast.error("something went wrong!");
+          }
+        }
     }
 
     const handleOpenForm = () => {

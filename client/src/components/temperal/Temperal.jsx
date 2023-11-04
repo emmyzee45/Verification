@@ -2,9 +2,15 @@ import { useState } from "react";
 import "./temperal.css";
 import { makeRequest } from "../../axios";
 import { toast } from "react-toastify";
+import { logOutSuccess } from "../../redux/redux-slices/UserSlice";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Temperal = ({ subscriptions }) => {
   const [isClose, setIsClose ] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
 const handleClose = () => {
   setIsClose(!isClose)
@@ -13,11 +19,14 @@ const handleClose = () => {
 const handlewakeup = async(id) => {
   try {
     const res = await makeRequest.post(`subscriptions/reservations/catalog/wakeup?subscriptionId=${id}&reservationId=${id}`);
-    console.log(res.data);
     toast.success(`Your line will be available in ${res.data}s`)
-  } catch (error) {
-    toast.error("something went wrong")
-    console.log(error)
+  } catch (err) {
+    if (err.response?.status === 401) {
+      dispatch(logOutSuccess());
+      navigate('/login', { state: { from: location }, replace: true });
+    } else {
+      toast.error("something went wrong")
+    }
   }
 }
 

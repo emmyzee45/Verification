@@ -6,23 +6,31 @@ import { makeRequest } from '../../axios';
 import { useDispatch, useSelector } from "react-redux";
 import { getSubscriptionFailure, getSubscriptionStart, getSubscriptionSuccess } from '../../redux/redux-slices/SubscriptionSlice';
 import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Manage = () => {
   const [isOpen, setIsOpen ] = useState(false);
   const [ temperarySub, setTemperarySub ] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
+  const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
   const subscriptions = useSelector((state) => state.subscription?.subscriptions);
   const permanentSub = subscriptions.filter((item) => item?.isPermanent == true || item?.isMulti == true && user?.subscriptionIds?.includes(item._id))
   const temperalSub = temperarySub.filter((item) => user?.subscriptionIds?.includes(item.id))
   
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
+  }, [isAuthenticated])
+
   useEffect(() => {
    
     const getTemperarySubscriptions = async() => {
       // dispatch(getSubscriptionStart())
       try {
         const res = await makeRequest.get("subscriptions/reservations/catalog/temperary");
-        console.log(res.data);
         setTemperarySub(res.data);
         // dispatch(getSubscriptionSuccess(res.data))
       }catch(err) {
@@ -38,7 +46,6 @@ const Manage = () => {
       // dispatch(getSubscriptionStart())
       try {
         const res = await makeRequest.get("subscriptions/reservations/catalog/all");
-        console.log(res.data);
         // setTemperarySub(res.data);
         // dispatch(getSubscriptionSuccess(res.data))
       }catch(err) {

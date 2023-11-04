@@ -1,17 +1,37 @@
+import User from "../models/User.js"
 import Ticket from "../models/Ticket.js"
+import Message from "../models/Message.js"
+
 
 // CREATE TICKET
 export const createTicket = async(req, res) => {
-  const { members, msg, title } = req.body;
-  if(!members || !msg || !title) return res.status(400).json("All fields are required");
+  const { sender, msg, title } = req.body;
+  if(!sender || !msg || !title) return res.status(400).json("All fields are required");
 
-    const newTicket = new Ticket(req.body);
-    try {
-        const saveTicket = await newTicket.save();
-        res.status(200).json(saveTicket)
+  try {
+      const admin = await User.find({isAdmin: true}, { 
+        projection: {
+            id: {$toString: "$_id" },
+
+        }
+    });
+      const members = [sender, ...admin.map((item) => item.id)];
+      
+      const newTicket = new Ticket({
+        members,
+        title,
+      });
+
+      const saveTicket = await newTicket.save();
+      const newMsg = new Message({
+        ticketId: saveTicket._id,
+        text: msg,
+        sender,
+      });
+      await newMsg.save();
+      res.status(200).json(saveTicket);
     }catch(err) {
         res.status(500).json(err);
-        console.log(err)
     }
 }
 
@@ -34,6 +54,7 @@ export const updateTicket = async(req, res) => {
 export const deleteTicket = async(req, res) => {
     try {
       await Ticket.findByIdAndDelete(req.params.id);
+      await Message.deleteMany({ticketId: req.params.id})
       res.status(200).json("Ticket has been deleted...");
     } catch (err) {
       res.status(500).json(err);

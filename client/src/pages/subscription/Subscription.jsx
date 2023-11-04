@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './subscription.css'
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Subscription = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.user.isLoggedIn)
+
+  useEffect(() => {
+    !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
+}, [isAuthenticated])
   
   return (
     <div className="subContainer">

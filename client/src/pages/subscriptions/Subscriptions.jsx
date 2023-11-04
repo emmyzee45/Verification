@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./subscriptions.css"
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { makeRequest } from '../../axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSubscriptionFailure, getSubscriptionStart, getSubscriptionSuccess } from '../../redux/redux-slices/SubscriptionSlice';
@@ -17,14 +17,18 @@ const Subscriptions = () => {
     const products = useSelector((state) => state.cart.products);
     const productIds = useSelector((state) => state.cart.products.map((item) => item.targetId));
     const subscriptions = useSelector((state) => state.subscription.subscriptions);
+    const isAuthenticated = useSelector((state) => state.user.isLoggedIn)
     const params = useParams()
-    console.log(params)
+    const navigate = useNavigate()
     const location = useLocation();
     const alwaysOn = location.search.split("=")[1]
 
     const dispatch = useDispatch()
     const category = params.category;
 
+    useEffect(() => {
+        !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
+    }, [isAuthenticated])
     useEffect(() => {
         const getSubscriptions = async() => {
             dispatch(getSubscriptionStart())
