@@ -49,7 +49,7 @@ const Subscription = () => {
             </li>
           </ul>
           <Link to='/temporary-subscription'>
-            <button className="subButton">Select plan</button>
+            <div className="subButton">Select plan</div>
           </Link>
         </div>
         <div className="subItem">
@@ -83,7 +83,7 @@ const Subscription = () => {
             </li>
           </ul>
           <Link to='/permanent-subscription/isSingle'>
-            <button className="subButton">Select plan</button>
+            <div className="subButton">Select plan</div>
           </Link>
         </div>
         <div className="subItem">
@@ -117,7 +117,7 @@ const Subscription = () => {
             </li>
           </ul>
           <Link to='/permanent-subscription/isMulti'>
-            <button className="subButton">Select plan</button>
+            <div className="subButton">Select plan</div>
           </Link>
         </div>
       </div>
