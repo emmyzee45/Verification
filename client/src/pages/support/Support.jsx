@@ -7,6 +7,7 @@ import Form from '../../components/ticket/form/Form';
 import { getTicketFailure, getTicketStart, getTicketSuccess } from '../../redux/redux-slices/ticketSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { logOutSuccess } from '../../redux/redux-slices/UserSlice';
+import Footer from '../../components/footer/Footer';
 
 const Support = () => {
   const [focus, setFocus] = useState(false);
@@ -59,6 +60,7 @@ const Support = () => {
   }, [user])
 
   return (
+    <>
     <div className='supportContainer'>
         <div className="support-title">
             <h1 className="left-title">Support</h1>
@@ -76,6 +78,8 @@ const Support = () => {
       )}
       { openForm && <Form  setOpenForm={setOpenForm} />}
     </div>
+    <Footer />
+    </>
   );
 }
 

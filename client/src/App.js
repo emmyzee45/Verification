@@ -22,6 +22,8 @@ import PermanentSub from "./pages/permanent-sub/PermanentSub";
 import Message from "./pages/message/Message";
 import Support from "./pages/support/Support";
 import Missing from "./pages/missing/404";
+import Footer from "./components/footer/Footer";
+import MultiCheck from "./pages/multiCheck/MultiCheck";
 // #1C233F
 // #0C0D0F
 function App() {
@@ -32,7 +34,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />}/>
         {/* <Route exact path="/contact" element={<Contact />}/> */}
-        <Route exact path="/about" element={<About />}/>
+        {/* <Route exact path="/about" element={<About />}/> */}
         <Route exact path="/orders" element={<Orders />}/>
         <Route exact path="/subscription" element={<Subscription />}/>
         <Route exact path="/subscription/:category" element={<Subscriptions />}/>
@@ -48,6 +50,7 @@ function App() {
         <Route exact path="/login" element={<Login />}/>
         <Route exact path="/register" element={<Register />}/>
         <Route exact path="/messages" element={<Message />}/>
+        <Route exact path="/multi-check" element={<MultiCheck />}/>
         <Route path="*" element={<Missing />} />
       </Routes>
       {/* <Footer /> */}

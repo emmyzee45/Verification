@@ -15,6 +15,7 @@ const Navbar = () => {
 
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.currentUser);
+  const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
   const quantity = useSelector((state) => state.cart.quantity);
 
   const handleLogout = async() => {
@@ -53,7 +54,7 @@ const Navbar = () => {
         <li className="navlistItem navsubContainer" >
           <div onClick={handleSubscriptions}>
             <Link className="navitem">Subscriptions</Link>
-            <ArrowDropDownOutlinedIcon />
+            <ArrowDropDownOutlinedIcon className="nav-icons" />
           </div>
           {openSub && (
             <div className="navsubscriptions">
@@ -67,11 +68,11 @@ const Navbar = () => {
           )}
         </li>
         <li className="navlistItem">
-          <MessageOutlinedIcon />
+          <MessageOutlinedIcon className="nav-icons" />
           <Link to="/messages" className="navitem">Messages</Link>
         </li>
         <li className="navlistItem">
-          <NotListedLocationOutlinedIcon />
+          <NotListedLocationOutlinedIcon className="nav-icons" />
           <Link to="/faq" className="navitem">FAQ</Link>
         </li>
         <li className="navcart">
@@ -82,7 +83,7 @@ const Navbar = () => {
           </li>
         {!user ? (
           <li className="navlistItem">
-            <PersonAddAltOutlinedIcon />
+            <PersonAddAltOutlinedIcon className="nav-icons" />
           <Link to="/login" className="navitem">Login</Link>
         </li>
         ) : (
@@ -115,28 +116,34 @@ const Navbar = () => {
           <Link to="/" className="navitem">Home</Link>
         </li>
         <li className="navmenuItem">
-          <Link to="/about" className="navitem">$0.00</Link>
-        </li>
-        <li className="navmenuItem">
-          <Link to="/balance" className="navitem">Top up</Link>
-        </li>
-        <li className="navmenuItem">
           <Link to="/subscription" className="navitem">Subscriptions</Link>
         </li>
-        <li className="navmenuItem">
-          <Link to="/messages" className="navitem">Messages</Link>
-        </li>
-        {!user ? (
+        {!isAuthenticated ? (
           <li className="navmenuItem">
             <Link to="/login" className="navitem">Login</Link>
           </li>
         ): (
           <>
-          <li className="navlistItem" onClick={handleLogout}>    
+          <li className="navmenuItem" >    
+          <Link to="/orders" className="navitem">Order History</Link>
+          </li>
+          <li className="navmenuItem">
+          <Link to="/messages" className="navitem">Messages</Link>
+          </li>
+          <li className="navmenuItem" >    
+          <Link to="/support" className="navitem">Support</Link>
+          </li>
+          <li className="navmenuItem" >    
+          <Link to="/balance" className="navitem">Top Up</Link>
+          </li>
+          <li className="navmenuItem" onClick={handleLogout}>    
           <Link className="navitem">Logout</Link>
-        </li>
+          </li>
         </>
         )}
+        <li className="navmenuItem">
+          <Link to="/faq" className="navitem">FAQ</Link>
+        </li>
       </ul>
     </div>
   );

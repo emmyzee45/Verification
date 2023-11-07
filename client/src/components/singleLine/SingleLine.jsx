@@ -1,10 +1,12 @@
 import React from "react";
 import './singleLine.css'
 import { Link } from "react-router-dom";
+import Footer from "../footer/Footer";
 
 const SingleLine = () => {
  
   return (
+    <>
     <div className="subContainer">
       <div className="subItems">
         <div className="subItem">
@@ -37,7 +39,9 @@ const SingleLine = () => {
           </Link>
         </div>
       </div>
+    <Footer />
     </div>
+    </>
   );
 };
 

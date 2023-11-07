@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { makeRequest } from '../../axios';
 import { logOutSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/redux-slices/UserSlice';
 import { emptyCart } from '../../redux/redux-slices/cartSlice';
+import Footer from '../../components/footer/Footer';
 
 const Checkout = () => {
   const {total, products, quantity, duration } = useSelector((state) => state.cart);
@@ -21,7 +22,8 @@ const Checkout = () => {
   }, [isAuthenticated])
 
   const handleBackward = ()=> {
-    navigate("/subscription")
+    dispatch(emptyCart())
+    // navigate("/subscription")
   }
 
   const handleBuy = () => {
@@ -65,7 +67,7 @@ const Checkout = () => {
         ? `subscriptions/reservations/create` 
         : `subscriptions/single-service`, data
         );
-      const updateUser = await makeRequest.put(`users/decrease/${user._id}`, {balance: parseInt(total)});
+      const updateUser = await makeRequest.put(`users/decrease/${user._id}`, {balance: parseInt(total?.toFixed(2))});
       dispatch(updateUserSuccess(updateUser.data));
       dispatch(emptyCart())
       toast.success("Transaction successful")
@@ -84,36 +86,40 @@ const Checkout = () => {
   }
 
   return (
+    <>
     <div className='checkoutContainer'>
         <h1 className='checkoutTitle'>Confirm Subscription Purchase</h1>
       <div className='checkItem'>
         <div className="checkItems heading">
-            <div>Service</div>
-            <div>Prorated Charges</div>
-            <div>Renewal Price</div>
+            <div className='heading-item'>Service</div>
+            <div className='heading-item'>Prorated Charges</div>
+            <div className='heading-item heading-right'>Renewal Price</div>
         </div>
         {products.map((product) => {
           return (
             <div className="checkItems boding" key={product.targetId}>
-              <div>
+              <div className='bodyItems body-item-left'>
                 <img src={`https://www.phoneblur.com${product?.iconUri}`} className='subIcon'/>
                 {product.name}
               </div>
-              <div className='bodyItems'>{product.price} X {product.quantity}</div>
+              <div className='bodyItems '>{product.price} X {product.quantity}</div>
               <div className='bodyItems'>${product.price * product.quantity}</div>
             </div>
           )
         })}
         <div className="checkItems checkTotal">
-            <div>Total</div>
-            <div className='bodyItems'>${total}</div>
+            <div className='bodyItems'>Total</div>
+            <div className='bodyItems'></div>
+            <div className='bodyItems'>${total?.toFixed(2)}</div>
         </div>
       </div>
       <div className='checkButtons'>
         <button className='checkBuyButton' onClick={handleBuy}>Buy</button> 
-        <button className='checkBuyButton' onClick={handleBackward}>Go back</button> 
+        <button className='checkBuyButton' onClick={handleBackward}>Clear Cart</button> 
       </div>
     </div>
+      <Footer />
+    </>
   );
 }
 

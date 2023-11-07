@@ -1,6 +1,6 @@
 .subContainer {
     color: white;
-    height: calc(100vh - 180px);
+    /* height: calc(100vh - 180px); */
 }
 .subItems {
     display: flex;
@@ -46,3 +46,13 @@
         
   }
   
+  @media (max-width: 280px) {
+    .subContainer .subItems .subItem {
+     padding: 10px;
+     font-size: 15px;
+    }
+    
+    .headerprice {
+        font-size: 23px !important;
+    }
+ }

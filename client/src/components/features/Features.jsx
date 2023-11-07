@@ -10,7 +10,7 @@ const Features = () => {
         <h3 className='feature-desc'>SIMver - Carrier Phone Number Providers</h3>
     </div>
     <div className="row g-3 pt-40">
-                        <div className="col-lg-4 col-md-6 col-12 aos-init aos-animate" data-aos="zoom-in">
+        <div className="col-lg-4 col-md-6 col-12 aos-init aos-animate" data-aos="zoom-in">
                 <div className="card">
                     <div className="d-flex">
                         <div className="thumb">

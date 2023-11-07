@@ -127,7 +127,6 @@ export const createSingleLineSub = async(req, res) => {
 
 // CREATE Multi LINE SUBSCRIPTION
 export const createMultiLineSub = async(req, res) => {
-  console.log(req.body)
   try {
 
     const result = await axios.post(`${base_url}/multi-purpose-line`, req.body, {

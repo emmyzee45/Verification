@@ -1,36 +1,63 @@
 .subsContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center; */
+    /* justify-content: center; */
+    padding: 0 200px;
 }
 
 .subsTitle {
     margin: 20px 0px;
 }
 
-table {
-    width: 1100px;
+.table-subs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
-thead {
+.table-head {
     background-color: rgb(71, 71, 114);
     color: white;
+    display: flex;
+    /* justify-content: space-between; */
+    padding: 20px;
 }
 
-tr {
+.table-head-name {
+    flex: 1;
+}
+
+.table-head-price {
+    flex: 2;
+}
+
+.table-tr {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
+    /* justify-content: space-between; */
+    padding: 20px;
 }
-tr:nth-child(2n) {
+.table-tr:nth-child(2n) {
     background-color: #f7f3f3;
 }
 
-td {
-    padding: 20px;
+.price {
+    flex: 1;
+    text-align: center;
+}
+
+.sub-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.name {
     flex: 1;
 }
+
 .subsActions {
     flex: 2;
     display: flex;
@@ -43,13 +70,6 @@ td {
 .subIcon {
     width: 25px;
     height: 25px;
-}
-
-.price {
-display: flex;
-align-items: center;
-justify-content: center;
-padding-right: 40px;
 }
 
 .actionsInput {
@@ -75,84 +95,60 @@ padding-right: 40px;
 }
 
 
-@media screen and (max-width: 1080px) {
-    table {
-        /* display: none; */
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        margin-right: 60px;
-    }
-    tr {
-        justify-content: center;
-    }
-    td {
-        padding: 0;
-        margin: 0;
-        /* width: 200px; */
+@media (max-width: 1200px) {
+   .subsContainer {
+    padding: 100px;
+   }
+}
+  
+
+@media screen and (max-width: 992px) {
+    .actionsInput, .warning {
+        display: none;
     }
 }
-
-@media screen and (max-width:1100px) {
-    .subsContainer {
-        overflow: hidden;
-    }
-    tr {
-        width: 800px;
-        padding: 7px;
-    }
-   
-}
-@media screen and (max-width:780px) {
-    .subsContainer {
-        overflow: hidden;
-    }
-    tr {
-        width: 600px;
-        padding: 7px;
-    }
-   
-}
-
-@media screen and (max-width: 580px) {
-    tbody {
-        margin: 0;
-        padding: 0;
-    }
-    .subsTitle {
-        margin: 0px;
-        padding: 0;
-        font-size: 22px;
+@media (max-width: 768px) {
+    .table-tr {
+       padding: 10px; 
     }
 
-    tr {
-        width: 400px;
-        margin: 0px;
-        padding: 7px;
-        justify-content: space-between;
-        display: flex;
+    .name {
+        /* flex: 1; */
+        font-size: 14px;
+        width: 150px;
     }
-    td {
+
+    .price{
         flex: 1;
-        margin: 0;
-        padding: 0;
-        /* width: 100px; */
+        font-size: 14px;
+        margin-left: 20px;
+        text-align: left;
     }
 
     .subsActions {
-        margin: 0;
-        padding: 0;
+        padding-right: 0;
+        flex: 1;
+        font-size: 14px;
     }
-    .actionsInput {
-        display: none;
-    }
-    .warning {
-        display: none;
-    }
-    .addButton {
-        width: 10px;
-        margin: 0;
-        padding: 3px;
-        max-width: 10px;
-    }
+}
+
+@media (max-width: 576px) {
+   .subsContainer {
+    padding: 20px;
+    overflow: scroll;
+   }
+
+   .subsActions .addButton {
+    min-width: 50px;
+   }
+}
+
+@media (max-width: 286px) {
+   .subsContainer {
+    padding: 20px;
+   }
+
+   .subsActions .addButton {
+    min-width: 50px;
+   }
 }

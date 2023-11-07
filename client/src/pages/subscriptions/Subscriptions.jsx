@@ -6,17 +6,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSubscriptionFailure, getSubscriptionStart, getSubscriptionSuccess } from '../../redux/redux-slices/SubscriptionSlice';
 import { addProduct, emptyCart, removeCart, updateCart } from '../../redux/redux-slices/cartSlice';
 import SearchBar from '../../components/searchbox/SearchBar';
+import Skeleton from '../../components/skeleton/Skeleton';
 
 const Subscriptions = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [price, setPrice ]  = useState(0)
     const [quantity, setQuantity] = useState(1);
     const [searchText, setSearchText ] = useState(null);
     const [filteredSub, setFilteredSub ] = useState([]);
+    const [subscriptions, setSubscriptions ] = useState([]);
 
     const products = useSelector((state) => state.cart.products);
     const productIds = useSelector((state) => state.cart.products.map((item) => item.targetId));
-    const subscriptions = useSelector((state) => state.subscription.subscriptions);
+    // const subscriptions = useSelector((state) => state.subscription.subscriptions);
     const isAuthenticated = useSelector((state) => state.user.isLoggedIn)
     const params = useParams()
     const navigate = useNavigate()
@@ -31,17 +34,17 @@ const Subscriptions = () => {
     }, [isAuthenticated])
     useEffect(() => {
         const getSubscriptions = async() => {
-            dispatch(getSubscriptionStart())
+            setIsLoading(true)
             try {
                 const res = await makeRequest.get(`/subscriptions/reservations/catalog/duration?duration=${category}:00:00:00&instantAvailability=${alwaysOn}`);
-                dispatch(getSubscriptionSuccess(res.data.advertisedTargets))
+                setSubscriptions(res.data.advertisedTargets);
+                setIsLoading(false)
             }catch(er) {
-                console.log(er)
-                dispatch(getSubscriptionFailure())
+                setIsLoading(false)
             }
         }
         getSubscriptions();
-    }, [category, alwaysOn, dispatch])
+    }, [category, alwaysOn])
 
     useEffect(() => {
         setFilteredSub(subscriptions.filter((item) => item?.name?.toLowerCase().includes(searchText?.toLowerCase())))
@@ -64,50 +67,51 @@ const Subscriptions = () => {
         const product = products.filter((product) => product?.targetId === id)[0];
         dispatch(updateCart({...product, quantity, tempQuantity: quantity - product.quantity}))
     }
+
     const handleRemoveCart = (id) => {
         const product = products.filter((product) => product?.targetId === id)[0];
         dispatch(removeCart({...product, id}))
-    }
-    const handleEmptyCart = () => {
-        dispatch(emptyCart())
     }
 
     return (
     <div className='subsContainer'>
       <h1 className='subsTitle'>Available Services</h1>
       <SearchBar setSearchText={setSearchText} />
-      <table>
-        <thead>
-            <tr>
-                <td>Name</td>
-                <td>Cost Per {category == 7 ? "1 week": category > 7 ? "2 weeks" : category == 1 ? "1 day": `3 days`} </td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-           {filteredSub.length ? (
+      <div className='table-subs'>
+            <div className='table-head'>
+                <div className='table-head-name'>Name</div>
+                <div className='table-head-price'>Cost Per {category == 7 ? "1 week": category > 7 ? "2 weeks" : category == 1 ? "1 day": `3 days`} </div>
+                <div></div>
+            </div>
+            {isLoading ? (
+                <div className='sub-loader'>
+                    <Skeleton type="custom" />
+                </div>
+            ): (
+                <>
+                    {filteredSub.length ? (
             filteredSub?.map((item) => {
                 return (
-                    <tr key={item?.targetId}>
-                        <td><img src={`https://www.phoneblur.com${item?.iconUri}`} className='subIcon'/>{item?.name}</td>
+                    <div key={item?.targetId} className='table-tr'>
+                        <div className='name table-td'><img src={`https://www.phoneblur.com${item?.iconUri}`} className='subIcon'/>{item?.name}</div>
                             {category == 1 && alwaysOn === "true" ? (
-                                <td className='price'>${(item?.baseAlwaysOnPriceOneDay?.amount + 30/100 * item?.baseAlwaysOnPriceOneDay?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceOneDay?.amount + 30/100 * item?.baseAlwaysOnPriceOneDay?.amount).toFixed(2)}</div>
                             ): category == 3 && alwaysOn === "true" ? (
-                                <td className='price'>${(item?.baseAlwaysOnPriceThreeDay?.amount + 30/100 * item?.baseAlwaysOnPriceThreeDay?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceThreeDay?.amount + 30/100 * item?.baseAlwaysOnPriceThreeDay?.amount).toFixed(2)}</div>
                             ): category == 7 && alwaysOn === "true" ? (
-                                <td className='price'>${(item?.baseAlwaysOnPriceOneWeek?.amount + 30/100 * item?.baseAlwaysOnPriceOneWeek?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceOneWeek?.amount + 30/100 * item?.baseAlwaysOnPriceOneWeek?.amount).toFixed(2)}</div>
                             ): category == 14 && alwaysOn === "true" ? (
-                                <td className='price'>${(item?.baseAlwaysOnPriceTwoWeek?.amount + 30/100 * item?.baseAlwaysOnPriceTwoWeek?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceTwoWeek?.amount + 30/100 * item?.baseAlwaysOnPriceTwoWeek?.amount).toFixed(2)}</div>
                             ): category == 1 ? (
-                                <td className='price'>${(item?.basePriceOneDay?.amount + 30/100 * item?.basePriceOneDay?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.basePriceOneDay?.amount + 30/100 * item?.basePriceOneDay?.amount).toFixed(2)}</div>
                             ): category == 3 ? (
-                                <td className='price'>${(item?.basePriceThreeDay?.amount + 30/100 * item?.basePriceThreeDay?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.basePriceThreeDay?.amount + 30/100 * item?.basePriceThreeDay?.amount).toFixed(2)}</div>
                             ): category == 7 ? (
-                                <td className='price'>${(item?.basePriceOneWeek?.amount + 30/100 * item?.basePriceOneWeek?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.basePriceOneWeek?.amount + 30/100 * item?.basePriceOneWeek?.amount).toFixed(2)}</div>
                             ): (
-                                <td className='price'>${(item?.basePriceTwoWeek?.amount + 30/100 * item?.basePriceTwoWeek?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.basePriceTwoWeek?.amount + 30/100 * item?.basePriceTwoWeek?.amount).toFixed(2)}</div>
                             )}
-                        <td className='subsActions'>
+                        <div className='subsActions'>
                             <input type='number' min={1} className='actionsInput' name='quantity' onChange={(e)=> setQuantity(e.target.value)} />
                             {productIds.includes(item.targetId) ? (
                                 <>
@@ -118,33 +122,33 @@ const Subscriptions = () => {
                                 <button className='addButton' onClick={() => handleAdd(item)}>Add</button>
     
                             )}
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
                 )
                })
            ):(
             subscriptions?.map((item) => {
                 return (
-                    <tr key={item?.targetId}>
-                        <td><img src={`https://www.phoneblur.com${item?.iconUri}`} className='subIcon'/>{item?.name}</td>
+                    <div key={item?.targetId} className='table-tr'>
+                        <div className='name'><img src={`https://www.phoneblur.com${item?.iconUri}`} className='subIcon'/>{item?.name}</div>
                             {category == 1 && alwaysOn === "true" ? (
-                                <td className='price'>${(item?.baseAlwaysOnPriceOneDay?.amount + 30/100 * item?.baseAlwaysOnPriceOneDay?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceOneDay?.amount + 30/100 * item?.baseAlwaysOnPriceOneDay?.amount).toFixed(2)}</div>
                             ): category == 3 && alwaysOn === "true" ? (
-                                <td className='price'>${(item?.baseAlwaysOnPriceThreeDay?.amount + 30/100 * item?.baseAlwaysOnPriceThreeDay?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceThreeDay?.amount + 30/100 * item?.baseAlwaysOnPriceThreeDay?.amount).toFixed(2)}</div>
                             ): category == 7 && alwaysOn === "true" ? (
-                                <td className='price'>${(item?.baseAlwaysOnPriceOneWeek?.amount + 30/100 * item?.baseAlwaysOnPriceOneWeek?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceOneWeek?.amount + 30/100 * item?.baseAlwaysOnPriceOneWeek?.amount).toFixed(2)}</div>
                             ): category == 14 && alwaysOn === "true" ? (
-                                <td className='price'>${(item?.baseAlwaysOnPriceTwoWeek?.amount + 30/100 * item?.baseAlwaysOnPriceTwoWeek?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceTwoWeek?.amount + 30/100 * item?.baseAlwaysOnPriceTwoWeek?.amount).toFixed(2)}</div>
                             ): category == 1 ? (
-                                <td className='price'>${(item?.basePriceOneDay?.amount + 30/100 * item?.basePriceOneDay?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.basePriceOneDay?.amount + 30/100 * item?.basePriceOneDay?.amount).toFixed(2)}</div>
                             ): category == 3 ? (
-                                <td className='price'>${(item?.basePriceThreeDay?.amount + 30/100 * item?.basePriceThreeDay?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.basePriceThreeDay?.amount + 30/100 * item?.basePriceThreeDay?.amount).toFixed(2)}</div>
                             ): category == 7 ? (
-                                <td className='price'>${(item?.basePriceOneWeek?.amount + 30/100 * item?.basePriceOneWeek?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.basePriceOneWeek?.amount + 30/100 * item?.basePriceOneWeek?.amount).toFixed(2)}</div>
                             ): (
-                                <td className='price'>${(item?.basePriceTwoWeek?.amount + 30/100 * item?.basePriceTwoWeek?.amount).toFixed(2)}</td>
+                                <div className='price table-td'>${(item?.basePriceTwoWeek?.amount + 30/100 * item?.basePriceTwoWeek?.amount).toFixed(2)}</div>
                             )}
-                        <td className='subsActions'>
+                        <div className='subsActions'>
                             <input type='number' min={1} className='actionsInput' name='quantity' onChange={(e)=> setQuantity(e.target.value)} />
                             {productIds.includes(item.targetId) ? (
                                 <>
@@ -155,13 +159,14 @@ const Subscriptions = () => {
                                 <button className='addButton' onClick={() => handleAdd(item)}>Add</button>
     
                             )}
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
                 )
                })
            )}
-        </tbody>
-      </table>
+                </>
+            )}
+      </div>
     </div>
   );
 }

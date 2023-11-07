@@ -1,7 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import "./crypto.css";
 
 
 const Crypto = ({ orders }) => {
+  const navigate = useNavigate();
+
+  const handleHelp = () => {
+    navigate('/support')
+  }
+
   return (
     <div className="cryptoContainer">
       <div className="cryptoheader">
@@ -21,7 +28,7 @@ const Crypto = ({ orders }) => {
             <div className="c-body-item">{item?.pay_amount} {item?.currency}</div>
             <div className="c-body-item">{item?.receive_amount} USD</div>
             <div className="c-body-item ">
-                <button className="c-body-button">Help</button>
+                <button className="c-body-button" onClick={handleHelp}>Help</button>
             </div>
           </div>
         )

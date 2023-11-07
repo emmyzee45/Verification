@@ -4,6 +4,7 @@ import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import { Switch } from '@mui/material';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Footer from "../../components/footer/Footer";
 
 const Temperary = () => {
   const [onechecked, onesetChecked] = useState(false); // Switch
@@ -36,6 +37,7 @@ const Temperary = () => {
   };
   
   return (
+    <>
     <div className="subContainer">
       <h1 className="subtitle">Non-Renewable Plans</h1>
       <div className="subItems">
@@ -192,7 +194,9 @@ const Temperary = () => {
           </Link>
         </div>
       </div>
+    <Footer />
     </div>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 .checkoutContainer {
     padding: 0 100px;
     height: calc(100vh - 80px);
+    margin-bottom: 30px;
 }
 .checkItem {
     display: flex;
@@ -32,6 +33,32 @@
 .boding {
     padding: 20px;
     
+}
+
+.service-header {
+    background-color: #1C233F;
+    padding: 20px;
+    margin-top: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.service-items {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.service-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 100px 15px 20px;  
+}
+
+.service-item:nth-child(2n) {
+    background-color: whitesmoke;
 }
 
 .boding:nth-child(even) {
@@ -67,6 +94,12 @@
 }
 
 @media (max-width: 768px){
+    .checkoutContainer {
+        height: auto;
+    }
+    .fee-button {
+        display: none;
+    }
     .checkoutTitle {
         font-size: 22px;
     }
@@ -98,6 +131,10 @@
 
    .heading-item {
         flex: 1;
+   }
+
+   .service-item {
+    padding-right: 20px;
    }
 
    .checkBuyButton {

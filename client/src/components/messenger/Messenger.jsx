@@ -85,17 +85,19 @@ export default function Messenger({ currentTicket, setOpen }) {
                     </div>
                   ))}
                 </div>
-                <div className="chatBoxBottom">
-                  <textarea
-                    className="chatMessageInput"
-                    placeholder="write something..."
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    value={newMessage}
-                  ></textarea>
-                  <button className="chatSubmitButton" onClick={handleSubmit}>
-                    Send
-                  </button>
-                </div>
+                {currentTicket?.status === "open" && (
+                  <div className="chatBoxBottom">
+                    <textarea
+                      className="chatMessageInput"
+                      placeholder="write something..."
+                      onChange={(e) => setNewMessage(e.target.value)}
+                      value={newMessage}
+                    ></textarea>
+                    <button className="chatSubmitButton" onClick={handleSubmit}>
+                      Send
+                    </button>
+                  </div>
+                )}
           </div>
         </div>
         <div className="chatOnline">

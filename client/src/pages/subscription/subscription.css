@@ -1,6 +1,6 @@
 .subContainer {
     color: white;
-    /* height: calc(100vh - 180px); */
+    height: auto;
 }
 
 .subtitle {
@@ -14,7 +14,7 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    margin-top: 20px;
+    margin: 20px 0 100px 0;
 }
 
 .subItem {
@@ -23,10 +23,10 @@
     /* height: 900px; */
     border: 1.5px solid #1C233F;
     border-radius: 20px;
-    padding: 10px 20px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     position: relative;
 }
 
@@ -38,7 +38,7 @@
     list-style-type: none;
     display: flex;
     gap: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .subCheck {
@@ -64,25 +64,6 @@
     text-align: center;
 }
 
-
-@media (max-width: 1400px) {
-    
-}
-
-@media (max-width: 1200px) {
-   
-}
-  
-
-@media  (max-width: 992px) {
-    
-}
-@media (max-width: 768px) {
-    
-}
-@media (max-width: 576px) {
-   
-}
 @media (max-width: 300px) {
     .subContainer {
         width: 280px;
@@ -114,5 +95,8 @@
    }
     .subContainer .subItems .subItem .subButton {
         width: 120px;
+  }
+  h1 .subtitle {
+    font-size: 16px;
   }
 }

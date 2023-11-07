@@ -58,14 +58,14 @@ const Support = ({ tickets }) => {
   return (
     <div className="support-item-Container">
       <div className="support-item-header">
-        <div className="s-header-item">Date</div>
+        <div className="s-header-item s-body-time">Date</div>
         <div className="s-header-item">Subject</div>
         <div className="s-header-item s-header-action">Action(s)</div>
       </div>
       {tickets?.map((item) => {
         return (
           <div className="support-item-body" key={item?._id}>
-            <div className="s-body-item">{item?.createdAt?.slice(0,10)}</div>
+            <div className="s-body-item s-body-time">{item?.createdAt?.slice(0,10)}</div>
             <div className="s-body-item">{item?.title}</div>
             <div className="s-body-item s-body-action">
                 <button className="s-body-button" onClick={() => handleMessages(item)}>View</button>

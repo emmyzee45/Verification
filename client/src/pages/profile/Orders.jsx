@@ -7,6 +7,7 @@ import Fiat from '../../components/orders/fiat/Fiat';
 import { makeRequest } from '../../axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { logOutSuccess } from '../../redux/redux-slices/UserSlice';
+import Footer from '../../components/footer/Footer';
 
 const Profile = () => {
   const [focus, setFocus] = useState(false);
@@ -46,14 +47,21 @@ const Profile = () => {
   }, [])
   
   return (
+    <>
     <div className='profileContainer'>
       <div className="profileTop">
         <button style={{ color: !focus ? "#121d4e": "black", borderBottom: !focus ? "3px solid #121d4e": "white"}} className="topButton" onClick={handleFiat}>Fiat</button>
         <button style={{ color: focus ? "#121d4e": "black", borderBottom: focus ? "3px solid #121d4e": "white"}} className="topButton" onClick={handleFocus}>Crypto</button>
       </div>
       <h2 className='orderheader'>{focus ? "Crypto": "Fiat"} Orders History</h2>
+      <div className="profileBottom">
       {focus ? <Crypto orders={crypto} />: <Fiat orders={fiat} />}
+      </div>
     </div>
+    <div className="footer">
+    <Footer />
+    </div>
+    </>
   );
 }
 

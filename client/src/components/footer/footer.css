@@ -1,20 +1,22 @@
 
   /* #723EEB */
-.footer-section {
+.footer-section-area {
   display: flex;
   flex-direction: column;
+  /* height: 120px; */
 }
 
-.footer-top {
+.footer-top-area {
   background-color: #27115C;
   width:  100%;
-  height: 80px;
-  margin-top: 10px;
+  height: 100px;
+  padding-top: 20px;
 }
 
 .copyright-area {
   background-color: #723EEB;
   padding: 20px;
+  text-align: center;
 }
 
 .copyright-text p {

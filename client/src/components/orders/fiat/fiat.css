@@ -35,3 +35,21 @@
     background-color: #3c435e;
     color: white;
 }
+
+@media screen and (max-width: 720px) {
+    .fiatContainer {
+        overflow: scroll;
+    } 
+
+    .fiatheader {
+        width: 600px;
+    }
+
+    .fiatbody {
+        width: 600px;
+    }
+
+    .c-body-button {
+        padding: 5px 15px;
+    }
+}

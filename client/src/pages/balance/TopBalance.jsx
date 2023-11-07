@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { logOutSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/redux-slices/UserSlice';
 import { toast } from 'react-toastify';
+import Footer from '../../components/footer/Footer';
 
 export default function TopBalance() {
     const dispatch = useDispatch();
@@ -46,6 +47,7 @@ export default function TopBalance() {
         }
     }
   return (
+    <div>
     <div className='balanceContainer'>
       <h1 className='title'>Select Payment Method</h1>
       <div className="left">
@@ -66,7 +68,7 @@ export default function TopBalance() {
         <div className="leftItem">
           <div className="labelContainer">
           <input type="radio" />
-          <label htmlFor="" className='radioLabel'>Cryptocurrency</label>
+          <label htmlFor="#" className='radioLabel'>Cryptocurrency</label>
           </div>
           <img alt='/' src="img/crypto1.jpeg" className='img' />
         </div>
@@ -108,6 +110,7 @@ export default function TopBalance() {
         </div>
       </div>  
     </div>
-  
+    <Footer />
+    </div>
   );
 }

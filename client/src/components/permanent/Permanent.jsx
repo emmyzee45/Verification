@@ -40,10 +40,19 @@ const Permanent = ({ subscriptions }) => {
           <div>{item?.name}</div>
           <div className="lines">
               <div className="line line1">Close All</div>
-              <div className="line line2">{item?.strReservations[0]?.target.name}</div>
-              <div className="line line3">({item?.strReservations[0]?.lineNumber})</div>
+              {item?.strReservations?.length ? (
+                <>
+                <div className="line line2">{item?.strReservations[0]?.target.name}</div>
+                <div className="line line3">({item?.strReservations[0]?.lineNumber})</div>
+                </>
+              ): (
+                <>
+                <div className="line line2">Whole Lines</div>
+                <div className="line line3">({item?.wholeLineReservations[0]?.lineNumber})</div>
+                </>
+              )}
           </div>
-        <div>{item?.noLongerAvailableAt}</div>
+        <div>{item?.noLongerAvailableAt ? item?.noLongerAvailableAt : item?.cycleEnd?.slice(0,16)}</div>
           <div className="actions">
               <button className="action" onClick={() => handleSubRenewal(item?.id)}>Renew</button>
               <button className="action action2">Edit Nickname</button>

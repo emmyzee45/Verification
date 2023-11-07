@@ -6,6 +6,7 @@ import { makeRequest } from "../../axios.js"
 import { getMessageFailure, getMessageStart, getMessageSuccess } from '../../redux/redux-slices/messageSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { logOutSuccess } from '../../redux/redux-slices/UserSlice.js';
+import Footer from '../../components/footer/Footer.jsx';
 
 const Message = () => {
   const dispatch = useDispatch();
@@ -28,18 +29,19 @@ const Message = () => {
         console.log(res.data)
         dispatch(getMessageSuccess(res.data))
       }catch(err) {
-        if (err.response?.status === 401) {
-        dispatch(logOutSuccess());
-        navigate('/login', { state: { from: location }, replace: true });
-      } else {
-          dispatch(getMessageFailure())
-      }
-      }
+      //   if (err.response?.status === 401) {
+      //   dispatch(logOutSuccess());
+      //   navigate('/login', { state: { from: location }, replace: true });
+      // } else {
+      // }
+      dispatch(getMessageFailure())
+    }
     }
     getMessages()
   }, [])
 
   return (
+    <>
     <div className='messageContainer'>
       <h1 className="messageTitle">Latest Messages</h1>
       <div>
@@ -72,6 +74,8 @@ const Message = () => {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }
 

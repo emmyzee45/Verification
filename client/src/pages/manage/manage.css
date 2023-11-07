@@ -1,7 +1,9 @@
 .manageContainer {
     display: flex;
+    height: calc(100vh - 80px);
     flex-direction: column;
     margin: 0 200px;
+    overflow: hidden;
 }
 
 .manageTop {

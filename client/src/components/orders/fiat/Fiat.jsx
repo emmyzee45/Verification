@@ -1,7 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import "./fiat.css";
 
 
 const Fiat = ({ orders }) => {
+  const navigate = useNavigate();
+
+  const handleHelp = () => {
+    navigate('/support')
+  }
   return (
     <div className="fiatContainer">
       <div className="fiatheader">
@@ -21,7 +27,7 @@ const Fiat = ({ orders }) => {
             <div className="c-body-item">{item?.pay_amount} {item?.currency}</div>
             <div className="c-body-item">{item?.receive_amount} USD</div>
             <div className="c-body-item ">
-                <button className="c-body-button">Help</button>
+                <button className="c-body-button" onClick={handleHelp}>Help</button>
             </div>
           </div>
         )

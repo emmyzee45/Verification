@@ -31,10 +31,6 @@
   box-sizing: border-box;
 }
 
-.features {
-    margin-bottom: 40px;
-}
-
 .text-content {
     display: flex;
     flex-direction: column;

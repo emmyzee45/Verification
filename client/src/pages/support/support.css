@@ -4,6 +4,7 @@
     width: 100vw;
     height: calc(100vh - 80px);
     padding: 0 200px;
+    overflow: hidden;
 }
 
 .support-title {
@@ -37,4 +38,37 @@
     margin: 20px 0;
     font-size: 30px;
     font-weight: 500;
+}
+
+@media screen and (max-width: 1200px){
+    .supportContainer {
+        padding: 0 100px;
+    }
+}
+
+@media screen and (max-width: 610px){
+    .supportContainer {
+        padding: 0 50px;
+    }
+}
+
+@media screen and (max-width: 520px){
+    .supportContainer {
+        padding: 0 30px;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .supportContainer {
+        padding: 0 20px;
+    }
+
+    .ticket {
+        font-size: 14px;
+        padding: 5px;
+    }
+
+    .supportheader {
+        font-size: 22px;
+    }
 }

@@ -7,15 +7,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSubscriptionFailure, getSubscriptionStart, getSubscriptionSuccess } from '../../redux/redux-slices/SubscriptionSlice';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Footer from '../../components/footer/Footer';
 
 const Manage = () => {
   const [isOpen, setIsOpen ] = useState(false);
   const [ temperarySub, setTemperarySub ] = useState([]);
-  const dispatch = useDispatch();
+  const [ permanent, setPermanent ] = useState([]);
+
   const user = useSelector((state) => state.user.currentUser);
   const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
-  const subscriptions = useSelector((state) => state.subscription?.subscriptions);
-  const permanentSub = subscriptions.filter((item) => item?.isPermanent == true || item?.isMulti == true && user?.subscriptionIds?.includes(item._id))
+  const permanentSub = permanent.filter((item) => user?.subscriptionIds?.includes(item.id))
   const temperalSub = temperarySub.filter((item) => user?.subscriptionIds?.includes(item.id))
   
   const location = useLocation();
@@ -28,13 +29,10 @@ const Manage = () => {
   useEffect(() => {
    
     const getTemperarySubscriptions = async() => {
-      // dispatch(getSubscriptionStart())
       try {
         const res = await makeRequest.get("subscriptions/reservations/catalog/temperary");
         setTemperarySub(res.data);
-        // dispatch(getSubscriptionSuccess(res.data))
       }catch(err) {
-        // dispatch(getSubscriptionFailure())
       }
     }
     getTemperarySubscriptions();
@@ -43,19 +41,17 @@ const Manage = () => {
   useEffect(() => {
    
     const getAllSubscriptions = async() => {
-      // dispatch(getSubscriptionStart())
       try {
         const res = await makeRequest.get("subscriptions/reservations/catalog/all");
-        // setTemperarySub(res.data);
-        // dispatch(getSubscriptionSuccess(res.data))
+        setPermanent(res.data);
       }catch(err) {
-        // dispatch(getSubscriptionFailure())
       }
     }
     getAllSubscriptions();
   },[])
 
   return (
+    <>
     <div className='manageContainer'>
       <div className="manageTop">
         <h1 className="manageTitle">Subscriptions</h1>
@@ -68,6 +64,8 @@ const Manage = () => {
         <Temperal subscriptions={temperalSub} />
       )}
     </div>
+    <Footer />
+    </>
   );
 }
 

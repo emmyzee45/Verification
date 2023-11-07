@@ -41,9 +41,9 @@ const handlewakeup = async(id) => {
         <div>Actions</div>
       </div>
 
-      <div className="temperalItem headerItemMessage">
+      {/* <div className="temperalItem headerItemMessage">
         <div>You don't have any temporary subscriptions.</div>
-      </div>
+      </div> */}
 
       {subscriptions.map((item) => {
         return (

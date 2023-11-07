@@ -5,8 +5,10 @@ import { Link, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { makeRequest } from "../../axios";
+import Footer from "../../components/footer/Footer";
 
 const Register = () => {
+  const [isFetching, setIsFetching] = useState(false);
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -37,13 +39,6 @@ const Register = () => {
       required: true,
     },
     {
-      id: 3,
-      name: "birthday",
-      type: "date",
-      placeholder: "Birthday",
-      label: "Birthday",
-    },
-    {
       id: 4,
       name: "password",
       type: "password",
@@ -68,14 +63,15 @@ const Register = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(values)
+    setIsFetching(true)
     try {
       await makeRequest.post("auth/register", values);
       toast.success("Registration successful")
+      setIsFetching(false);
       window.location.replace("/login");
     }catch(err) {
       toast.error("Something went wrong");
-      console.log(err);
+      setIsFetching(false)
     }
   };
 
@@ -84,9 +80,10 @@ const Register = () => {
   };
 
   return (
+    <>
     <div className="regContainer">
       <form onSubmit={handleSubmit}>
-        <h1>Register</h1>
+        <h1 className="register-title">Register</h1>
         {inputs.map((input) => (
           <FormInput
             key={input.id}
@@ -95,10 +92,19 @@ const Register = () => {
             onChange={onChange}
           />
         ))}
-        <button className="regButton">Submit</button>
+        <button 
+          className="regButton"
+          disabled={isFetching} 
+          style={{background: isFetching && "#46507c", cursor: isFetching && "not-allowed"}} 
+          onClick={handleSubmit}
+        >
+          {isFetching ? "Processing..." : "Submit"}
+        </button>
       </form>
       <Link to="/login" className="loginButton">Login</Link>
     </div>
+    <Footer />
+    </>
   );
 };
 

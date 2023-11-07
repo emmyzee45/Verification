@@ -3,13 +3,12 @@
     height: calc(100vh - 80px);
     background-color: rgb(241, 241, 241);
     display: flex;
-    /* align-items: center; */
     justify-content: center;
     gap: 20px;
     padding-top: 80px;
     position: relative;
     font-size: 18px;
-    /* font-weight: bold; */
+    overflow: hidden;
 }
 
 .title {
@@ -99,4 +98,99 @@
 .lists {
     font-size: 15px;
     padding-top: 20px;
+}
+
+@media screen and (max-width: 1400px) {
+    .balanceContainer {
+        padding-right: 100px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .balanceContainer {
+        padding-right: 200px;
+    }
+
+    .leftItem {
+        min-width: 250px;
+    }
+
+    .title {
+        left: 300px;
+    }
+
+}
+
+@media screen and (max-width: 980px) {
+    .balanceContainer {
+        padding-right: 100px;
+    }
+
+    .title {
+        left: 200px;
+    }
+
+    .leftItem {
+        min-width: 250px;
+    }
+
+    .rightItems {
+        width: 350px;
+    }
+
+    .input {
+        width: 100px;
+    }
+
+}
+
+@media screen and (max-width: 720px) {
+    .balanceContainer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-right: 30px;
+        padding-bottom: 50px;
+        height: auto;
+    }
+
+    .title {
+        left: 100px;
+    }
+
+    .rightItems {
+        height: inherit
+    }
+
+    .lists {
+        font-size: 14px;
+        padding-top: 10px;
+    }
+
+}
+
+@media screen and (max-width: 520px) {
+    .title {
+        left: 50px;
+    }
+
+}
+
+
+@media screen and (max-width: 450px) {
+    .title {
+        font-size: 22px;
+    }
+
+    .title {
+        left: 20px;
+    }
+
+    .rightItems {
+        width: 280px;
+    }
+    .input {
+        width: 230px;
+    }
+
 }

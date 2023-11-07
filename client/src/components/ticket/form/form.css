@@ -50,3 +50,32 @@
 .t-form-submit {
     background-color: #131933;
 }
+
+@media screen and (max-width: 576px) {
+    .t-form-subject {
+        min-width: 300px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .t-form-subject {
+        min-width: 250px;
+    }
+
+    .t-form-button {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 365px) {
+    .t-form-subject {
+        min-width: 200px;
+    }
+}
+
+@media screen and (max-width: 345px) {
+    .t-form-subject {
+        width: 180px !important;
+    }
+}

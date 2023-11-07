@@ -1,21 +1,24 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./login.css";
 import FormInput from "../../components/login/FormInput";
 import { loginFailure, loginStart, loginSuccess } from "../../redux/redux-slices/UserSlice";
 import { toast } from "react-toastify";
 import { makeRequest } from "../../axios";
+import Footer from "../../components/footer/Footer";
 
 const Login = () => {
+  // const [isFetching, setIsFetching] = useState(false)
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
+  const isFetching = useSelector((state) => state.user.isFetching);
 
   const inputs = [
     {
-      id: 2,
+      id: 1,
       name: "email",
       type: "email",
       placeholder: "Email",
@@ -24,10 +27,11 @@ const Login = () => {
       required: true,
     },
     {
-      id: 4,
+      id: 2,
       name: "password",
       type: "password",
       placeholder: "Password",
+      label: "Password",
      
     },
   ];
@@ -65,9 +69,10 @@ const Login = () => {
   };
 
   return (
+    <>
     <div className="loginContainer">
       <form>
-        <h1>Login</h1>
+        <h1 className="login-title">Login</h1>
         {inputs.map((input) => (
           <FormInput
             key={input.id}
@@ -76,8 +81,16 @@ const Login = () => {
             onChange={onChange}
           />
         ))}
-        <button className="logButton" onClick={handleSubmit}>Submit</button>
-        <div className="loginHrContainer">
+          <button 
+            className="logButton" 
+            disabled={isFetching} 
+            style={{background: isFetching && "#46507c", cursor: isFetching && "not-allowed"}} 
+            onClick={handleSubmit}
+          >
+            {isFetching ? "Processing..." : "Submit"}
+          </button>
+      
+        {/* <div className="loginHrContainer">
           <div className="loginHr"></div>
           <div className="loginOr">OR</div>
           <div className="loginHr"></div>
@@ -85,10 +98,12 @@ const Login = () => {
         <button className="logingoogle">
           <img src="/img/g2.png" className="googleIcon"/>
           <div className="googleText">Login with Google</div>
-        </button>
+        </button> */}
       </form>
       <Link to="/register" className="registerButton">Register</Link>
     </div>
+    <Footer />
+    </>
   );
 };
 

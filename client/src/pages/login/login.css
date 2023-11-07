@@ -18,6 +18,10 @@
       border-radius: 10px;
       position: relative;
   }
+
+  .login-title {
+    margin: 10px;
+  }
   
   h1{
       color: #131933;
@@ -88,4 +92,21 @@
 .googleIcon {
   width: 25px;
   height: 25px;
+}
+
+@media screen and (max-width: 460px) {
+  form {
+    max-width: 300px;
+    padding: 0 10px !important;
+  } 
+
+  .logButton {
+    padding: 5px !important;
+    height: 40px !important;
+  }
+
+  .registerButton {
+    padding: 10px;
+  }
+
 }

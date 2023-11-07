@@ -4,6 +4,7 @@ import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Footer from "../../components/footer/Footer";
 
 const Subscription = () => {
   const location = useLocation();
@@ -15,6 +16,7 @@ const Subscription = () => {
 }, [isAuthenticated])
   
   return (
+    <>
     <div className="subContainer">
       <h1 className="subtitle">Subscription Plans</h1>
       <div className="subItems">
@@ -37,7 +39,7 @@ const Subscription = () => {
             </li>
             <li className="subTexts disableIcon">
               <CloseOutlinedIcon className="subClose" />
-              <div className="subText">Non-Renewable Subscription</div>
+              <div className="subText">Non-Renewable</div>
             </li>
             <li className="subTexts disableIcon">
               <CloseOutlinedIcon className="subClose" />
@@ -45,7 +47,7 @@ const Subscription = () => {
             </li>
             <li className="subTexts disableIcon">
               <CloseOutlinedIcon className="subClose" />
-              <div className="subText">No Area code Selection</div>
+              <div className="subText">No Area code</div>
             </li>
           </ul>
           <Link to='/temporary-subscription'>
@@ -71,7 +73,7 @@ const Subscription = () => {
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">Non-Renewable Subscription</div>
+              <div className="subText">Non-Renewable</div>
             </li>
             <li className="subTexts disableIcon">
               <CloseOutlinedIcon className="subClose " />
@@ -79,7 +81,7 @@ const Subscription = () => {
             </li>
             <li className="subTexts disableIcon">
               <CloseOutlinedIcon className="subClose" />
-              <div className="subText">No Area code Selection</div>
+              <div className="subText">No Area code</div>
             </li>
           </ul>
           <Link to='/permanent-subscription/isSingle'>
@@ -105,7 +107,7 @@ const Subscription = () => {
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">Non-Renewable Subscription</div>
+              <div className="subText">Non-Renewable</div>
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
@@ -113,7 +115,7 @@ const Subscription = () => {
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">No Area code Selection</div>
+              <div className="subText">No Area code</div>
             </li>
           </ul>
           <Link to='/permanent-subscription/isMulti'>
@@ -121,7 +123,9 @@ const Subscription = () => {
           </Link>
         </div>
       </div>
+      <Footer />
     </div>
+    </>
   );
 };
 
