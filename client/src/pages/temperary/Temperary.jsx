@@ -45,7 +45,7 @@ const Temperary = () => {
           <h2 className="subTitle">1 day</h2>
           <div className="secondHeader">
             <p className="subDesc">Starting at</p>
-            <div className="subPrice"><b className="headerprice">${ onechecked ? "3.9":"1.9"}</b>/service</div>
+            <div className="subPrice"><b className="headerprice">${ onechecked ? "8.10":"4.05"}</b>/service</div>
           </div>
           <ul className="subList">
             <li className="subTexts">
@@ -83,7 +83,7 @@ const Temperary = () => {
           <h2 className="subTitle">3 days</h2>
           <div className="secondHeader">
             <p className="subDesc">Starting at</p>
-            <div className="subPrice"><b className="headerprice">${ threeChecked ? "4.55":"2.27"}</b>/service</div>
+            <div className="subPrice"><b className="headerprice">${ threeChecked ? "9.45":"4.72"}</b>/service</div>
           </div>
           <ul className="subList">
             <li className="subTexts">
@@ -121,7 +121,7 @@ const Temperary = () => {
           <h2 className="subTitle">1 week</h2>
           <div className="secondHeader">
             <p className="subDesc">Starting at</p>
-            <div className="subPrice"><b className="headerprice">${ weekChecked ? "5.20":"2.60"}</b>/service</div>
+            <div className="subPrice"><b className="headerprice">${ weekChecked ? "10.80":"5.40"}</b>/service</div>
           </div>
           <ul className="subList">
             <li className="subTexts">
@@ -159,7 +159,7 @@ const Temperary = () => {
           <h2 className="subTitle">2 weeks</h2>
           <div className="secondHeader">
             <p className="subDesc">Starting at</p>
-            <div className="subPrice"><b className="headerprice">${ checked ? "7.80":"5.20"}</b>/service</div>
+            <div className="subPrice"><b className="headerprice">${ checked ? "16.20":"10.80"}</b>/service</div>
           </div>
           <ul className="subList">
             <li className="subTexts">

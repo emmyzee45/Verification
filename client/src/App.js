@@ -24,9 +24,14 @@ import Support from "./pages/support/Support";
 import Missing from "./pages/missing/404";
 import Footer from "./components/footer/Footer";
 import MultiCheck from "./pages/multiCheck/MultiCheck";
+import Faq from "./pages/faq/Faq";
+import { disableReactDevTools } from "@fvilers/disable-react-devtools";
+
+if(process.env.NODE_ENV === 'production') disableReactDevTools()
 // #1C233F
 // #0C0D0F
 function App() {
+
   return (
     <div>
       <ToastContainer />
@@ -51,6 +56,7 @@ function App() {
         <Route exact path="/register" element={<Register />}/>
         <Route exact path="/messages" element={<Message />}/>
         <Route exact path="/multi-check" element={<MultiCheck />}/>
+        <Route exact path="/faq" element={<Faq />}/>
         <Route path="*" element={<Missing />} />
       </Routes>
       {/* <Footer /> */}

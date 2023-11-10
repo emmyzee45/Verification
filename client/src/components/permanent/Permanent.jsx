@@ -4,12 +4,19 @@ import "./permanent.css";
 import { logOutSuccess } from "../../redux/redux-slices/UserSlice";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Permanent = ({ subscriptions }) => {
+  const [close, setClose ] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
+  const handleClose = () => {
+    setClose(!close)
+  }
+
+  console.log(subscriptions)
   const handleSubRenewal = async(id) => {
     try{
       await makeRequest.post(`subscriptions/reservations/renew/${id}`);
@@ -23,43 +30,59 @@ const Permanent = ({ subscriptions }) => {
       }
     }
   }
+
+  const handleWakeUp = async(id) => {
+    try {
+      const res = await makeRequest.post(`subscriptions/reservations/catalog/wakeup?subscriptionId=${id}&reservationId=${id}`);
+      toast.success(`Your line will be available in ${res.data}s`)
+    } catch (err) {
+      if (err.response?.status === 401) {
+        dispatch(logOutSuccess());
+        navigate('/login', { state: { from: location }, replace: true });
+      } else {
+        toast.error("something went wrong")
+      }
+    }
+  }
   return (
     <div className="permanentSub">
       <h1 className="permanentTitle">Permanent Subscriptions</h1>
-      <div className="permanentItem headerItem">
-        <div>Subscription Number</div>
-        <div>Nickname</div>
-        <div>Lines</div>
-        <div>End Date</div>
-        <div>Actions</div>
-      </div>
+      <table>
+      <tr className="permanentItem headerItem">
+        <td className="table-header-item">Number</td>
+        <td className="table-header-item">Nickname</td>
+        <td className="table-header-item table-header-lines">Lines</td>
+        <td className="table-header-item">End Date</td>
+        <td className="table-header-item">Actions</td>
+      </tr>
       {subscriptions.map((item) => {
         return (
-          <div className="permanentItem bodyItem" key={item?.id}>
-          <div>{item?.subscriptionNumber}</div>
-          <div>{item?.name}</div>
-          <div className="lines">
-              <div className="line line1">Close All</div>
+          <tr className="permanentItem bodyItem" key={item?.id}>
+          <td className="table-item">{item?.subscriptionNumber}</td>
+          <td className="table-item">{item?.name}</td>
+          <td className="lines">
+              <div className="line line1" onClick={handleClose}>Close All</div>
               {item?.strReservations?.length ? (
                 <>
-                <div className="line line2">{item?.strReservations[0]?.target.name}</div>
+                {!close && <div className="line line2">{item?.strReservations[0]?.target.name}</div>}
                 <div className="line line3">({item?.strReservations[0]?.lineNumber})</div>
                 </>
               ): (
                 <>
-                <div className="line line2">Whole Lines</div>
+                {!close && <div className="line line2">Whole Lines</div>}
                 <div className="line line3">({item?.wholeLineReservations[0]?.lineNumber})</div>
                 </>
               )}
-          </div>
-        <div>{item?.noLongerAvailableAt ? item?.noLongerAvailableAt : item?.cycleEnd?.slice(0,16)}</div>
-          <div className="actions">
+          </td>
+        <td className="table-item">{item?.noLongerAvailableAt ? item?.noLongerAvailableAt : item?.cycleEnd?.slice(0,16)}</td>
+          <td className="actions">
               <button className="action" onClick={() => handleSubRenewal(item?.id)}>Renew</button>
-              <button className="action action2">Edit Nickname</button>
-          </div>
-      </div>
+              {!item?.wholeLineReservations[0]?.alwaysOn && <button className="action action2" onClick={() => handleWakeUp(item?.id)}>Wake Up</button>}
+          </td>
+      </tr>
         )
       })}
+    </table>
     </div>
   );
 }

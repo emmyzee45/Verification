@@ -27,7 +27,7 @@ const Subscription = () => {
           <ul className="subList">
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">Non-VoIP US Number</div>
+              <div className="subText">Real Carrier US Number</div>
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
@@ -61,7 +61,7 @@ const Subscription = () => {
           <ul className="subList">
           <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">Non-VoIP US Number</div>
+              <div className="subText">Real Carrier US Number</div>
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
@@ -69,11 +69,11 @@ const Subscription = () => {
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">1 Day - 14 Day Rental</div>
+              <div className="subText">30 Days Rental</div>
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">Non-Renewable</div>
+              <div className="subText">Renewable Subscription</div>
             </li>
             <li className="subTexts disableIcon">
               <CloseOutlinedIcon className="subClose " />
@@ -81,7 +81,7 @@ const Subscription = () => {
             </li>
             <li className="subTexts disableIcon">
               <CloseOutlinedIcon className="subClose" />
-              <div className="subText">No Area code</div>
+              <div className="subText">No Area code Selection</div>
             </li>
           </ul>
           <Link to='/permanent-subscription/isSingle'>
@@ -95,27 +95,27 @@ const Subscription = () => {
           <ul className="subList">
           <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">Non-VoIP US Number</div>
+              <div className="subText">Real Carrier US Number</div>
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">Choose Individual Services</div>
+              <div className="subText">Unlimited Services</div>
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">1 Day - 14 Day Rental</div>
+              <div className="subText">30 Days Rental</div>
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">Non-Renewable</div>
+              <div className="subText">Renewable Subscription</div>
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">Cannot Send SMS</div>
+              <div className="subText">Reply with Limited SMS</div>
             </li>
             <li className="subTexts">
               <CheckOutlinedIcon className="subCheck" />
-              <div className="subText">No Area code</div>
+              <div className="subText">Area code Selection</div>
             </li>
           </ul>
           <Link to='/permanent-subscription/isMulti'>

@@ -29,7 +29,45 @@
     cursor: pointer;
 }
 
-/* .manageButton:active {
-    background-color: gray;
-} */
+@media screen and (max-width: 1200px) {
+    .manageContainer {
+        margin: 0 100px;
+    }
+    .manageTitle {
+        font-size: 40px;
+    }
+}
 
+@media screen and (max-width: 987px) {
+    .manageContainer {
+        margin: 0 50px 100px 50px;
+        height: auto;
+        /* overflow: scroll; */
+    }
+    .manageTitle {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .manageContainer {
+        margin: 0 20px 100px 20px;
+    }
+    .manageTitle {
+        font-size: 25px;
+    }
+    .manageButton {
+        padding: 5px;
+        font-weight: 400;
+        height: 40px;
+    }
+
+}
+
+@media screen and (max-width: 420px) {
+
+    .manageTitle {
+        display: none;
+    }
+
+}

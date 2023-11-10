@@ -15,7 +15,7 @@ const Temperal = ({ subscriptions }) => {
 const handleClose = () => {
   setIsClose(!isClose)
 }
-
+console.log(subscriptions)
 const handlewakeup = async(id) => {
   try {
     const res = await makeRequest.post(`subscriptions/reservations/catalog/wakeup?subscriptionId=${id}&reservationId=${id}`);
@@ -33,13 +33,14 @@ const handlewakeup = async(id) => {
   return (
     <div className='temperalSub'>
       <h1 className="temperalTitle">Temporal Subscriptions</h1>
-      <div className="temperalItem headerItem">
-        <div>Number</div>
-        <div>Lines</div>
-        <div>Expires</div>
-        <div>AlwaysOn</div>
-        <div>Actions</div>
-      </div>
+      <table>
+      <tr className="temperalItem headerItem">
+        <td className="table-header-item">Number</td>
+        <td className="table-header-item table-header-lines">Lines</td>
+        <td className="table-header-item">Expires</td>
+        <td className="table-header-item">AlwaysOn</td>
+        <td className="table-header-item">Actions</td>
+      </tr>
 
       {/* <div className="temperalItem headerItemMessage">
         <div>You don't have any temporary subscriptions.</div>
@@ -47,22 +48,23 @@ const handlewakeup = async(id) => {
 
       {subscriptions.map((item) => {
         return (
-            <div className="temperalItem bodyItem" key={item?.id}>
-                <div className="number">{item?.subscriptionNumber}</div>
-                <div className="lines">
+            <tr className="temperalItem bodyItem" key={item?.id}>
+                <td className="table-item number">{item?.subscriptionNumber}</td>
+                <td className="lines">
                   <div className="line line1" onClick={handleClose}>{!isClose ? "Close All": "Expand All"}</div>
                   {!isClose && <div className="line line2">{item?.strReservations[0]?.target.name}</div>}
                   <div className="line line3">({item?.strReservations[0]?.lineNumber})</div>
-                </div>
-                <div className="time">{item?.noLongerAvailableAt?.slice(0, 19)}</div>
-                <div className="alwaysOn">{item?.alwaysOn ? "Yes": "No"}</div>
-                <div className="actions">
+                </td>
+                <td className="table-item time">{item?.noLongerAvailableAt?.slice(0, 19)}</td>
+                <td className="table-item alwaysOn">{item?.alwaysOn ? "Yes": "No"}</td>
+                <td className="actions">
                   {!item?.alwaysOn && <button className="action" onClick={() => handlewakeup(item?.id)}>Wake up</button>}
                   {/* <button className="action action2">Edit Nickname</button> */}
-                </div>
-            </div>
+                </td>
+            </tr>
           )
         })}
+      </table>
     </div>
   );
 }

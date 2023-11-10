@@ -65,9 +65,9 @@ const MultiPurpose = () => {
 
       <div className="multiPurposeItem headerItemMessage">
         <div className="headerItems header-item-left">Multipurpose Line</div>
-        <div className="headerItems">${alwaysOn === "true" ? 85.00 : 65.00}</div>
+        <div className="headerItems">${alwaysOn === "true" ? 65.00 : 45.00}</div>
         <div className="headerItems header-item-center">Waived</div>
-        <div className="headerItems header-item-center">$0.00</div>
+        <div className="headerItems header-item-center">${apply ? "20.00" : "0.00" }</div>
         <div className="headerItems header-item-center"><input type="number" className="lineQty" id="lineQty" min="1" max="22" value="1" oninput="ValidateQty(event)" /></div>
       </div>
       

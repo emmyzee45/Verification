@@ -1,0 +1,17 @@
+.faqContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0 200px;
+    background-color: whitesmoke;
+}
+/* #011335 */
+/* #011335 */
+.faq-title {
+    margin: 30px 0;
+    /* color: white; */
+}
+
+.question-container {
+    display: flex;
+    flex-direction: column;
+}

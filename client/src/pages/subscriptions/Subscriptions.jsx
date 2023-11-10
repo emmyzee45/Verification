@@ -60,7 +60,7 @@ const Subscriptions = () => {
         const seven = product?.basePriceOneWeek?.amount;
         const fourteen = product?.basePriceTwoWeek?.amount;
         const price = category == 1 && alwaysOn === "true" ? oneOn: category == 3 && alwaysOn === "true" ? threeOn : category == 7 && alwaysOn === "true" ? sevenOn : category == 14 && alwaysOn === "true" ? fourteenOn : category == 1 ? one : category == 3 ? three : category == 7 ? seven : fourteen;
-        dispatch(addProduct({...product, quantity, price: (price + 30/100 * price).toFixed(2), duration: `${category}:00:00:00`}))
+        dispatch(addProduct({...product, quantity, price: (price + 170/100 * price).toFixed(2), duration: `${category}:00:00:00`}))
     }
 
     const handleUpdate = (id) => {
@@ -95,21 +95,21 @@ const Subscriptions = () => {
                     <div key={item?.targetId} className='table-tr'>
                         <div className='name table-td'><img src={`https://www.phoneblur.com${item?.iconUri}`} className='subIcon'/>{item?.name}</div>
                             {category == 1 && alwaysOn === "true" ? (
-                                <div className='price table-td'>${(item?.baseAlwaysOnPriceOneDay?.amount + 30/100 * item?.baseAlwaysOnPriceOneDay?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceOneDay?.amount + 170/100 * item?.baseAlwaysOnPriceOneDay?.amount).toFixed(2)}</div>
                             ): category == 3 && alwaysOn === "true" ? (
-                                <div className='price table-td'>${(item?.baseAlwaysOnPriceThreeDay?.amount + 30/100 * item?.baseAlwaysOnPriceThreeDay?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceThreeDay?.amount + 170/100 * item?.baseAlwaysOnPriceThreeDay?.amount).toFixed(2)}</div>
                             ): category == 7 && alwaysOn === "true" ? (
-                                <div className='price table-td'>${(item?.baseAlwaysOnPriceOneWeek?.amount + 30/100 * item?.baseAlwaysOnPriceOneWeek?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceOneWeek?.amount + 170/100 * item?.baseAlwaysOnPriceOneWeek?.amount).toFixed(2)}</div>
                             ): category == 14 && alwaysOn === "true" ? (
-                                <div className='price table-td'>${(item?.baseAlwaysOnPriceTwoWeek?.amount + 30/100 * item?.baseAlwaysOnPriceTwoWeek?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceTwoWeek?.amount + 170/100 * item?.baseAlwaysOnPriceTwoWeek?.amount).toFixed(2)}</div>
                             ): category == 1 ? (
-                                <div className='price table-td'>${(item?.basePriceOneDay?.amount + 30/100 * item?.basePriceOneDay?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.basePriceOneDay?.amount + 170/100 * item?.basePriceOneDay?.amount).toFixed(2)}</div>
                             ): category == 3 ? (
-                                <div className='price table-td'>${(item?.basePriceThreeDay?.amount + 30/100 * item?.basePriceThreeDay?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.basePriceThreeDay?.amount + 170/100 * item?.basePriceThreeDay?.amount).toFixed(2)}</div>
                             ): category == 7 ? (
-                                <div className='price table-td'>${(item?.basePriceOneWeek?.amount + 30/100 * item?.basePriceOneWeek?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.basePriceOneWeek?.amount + 170/100 * item?.basePriceOneWeek?.amount).toFixed(2)}</div>
                             ): (
-                                <div className='price table-td'>${(item?.basePriceTwoWeek?.amount + 30/100 * item?.basePriceTwoWeek?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.basePriceTwoWeek?.amount + 170/100 * item?.basePriceTwoWeek?.amount).toFixed(2)}</div>
                             )}
                         <div className='subsActions'>
                             <input type='number' min={1} className='actionsInput' name='quantity' onChange={(e)=> setQuantity(e.target.value)} />
@@ -132,21 +132,21 @@ const Subscriptions = () => {
                     <div key={item?.targetId} className='table-tr'>
                         <div className='name'><img src={`https://www.phoneblur.com${item?.iconUri}`} className='subIcon'/>{item?.name}</div>
                             {category == 1 && alwaysOn === "true" ? (
-                                <div className='price table-td'>${(item?.baseAlwaysOnPriceOneDay?.amount + 30/100 * item?.baseAlwaysOnPriceOneDay?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceOneDay?.amount + 170/100 * item?.baseAlwaysOnPriceOneDay?.amount).toFixed(2)}</div>
                             ): category == 3 && alwaysOn === "true" ? (
-                                <div className='price table-td'>${(item?.baseAlwaysOnPriceThreeDay?.amount + 30/100 * item?.baseAlwaysOnPriceThreeDay?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceThreeDay?.amount + 170/100 * item?.baseAlwaysOnPriceThreeDay?.amount).toFixed(2)}</div>
                             ): category == 7 && alwaysOn === "true" ? (
-                                <div className='price table-td'>${(item?.baseAlwaysOnPriceOneWeek?.amount + 30/100 * item?.baseAlwaysOnPriceOneWeek?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceOneWeek?.amount + 170/100 * item?.baseAlwaysOnPriceOneWeek?.amount).toFixed(2)}</div>
                             ): category == 14 && alwaysOn === "true" ? (
-                                <div className='price table-td'>${(item?.baseAlwaysOnPriceTwoWeek?.amount + 30/100 * item?.baseAlwaysOnPriceTwoWeek?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.baseAlwaysOnPriceTwoWeek?.amount + 170/100 * item?.baseAlwaysOnPriceTwoWeek?.amount).toFixed(2)}</div>
                             ): category == 1 ? (
-                                <div className='price table-td'>${(item?.basePriceOneDay?.amount + 30/100 * item?.basePriceOneDay?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.basePriceOneDay?.amount + 170/100 * item?.basePriceOneDay?.amount).toFixed(2)}</div>
                             ): category == 3 ? (
-                                <div className='price table-td'>${(item?.basePriceThreeDay?.amount + 30/100 * item?.basePriceThreeDay?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.basePriceThreeDay?.amount + 170/100 * item?.basePriceThreeDay?.amount).toFixed(2)}</div>
                             ): category == 7 ? (
-                                <div className='price table-td'>${(item?.basePriceOneWeek?.amount + 30/100 * item?.basePriceOneWeek?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.basePriceOneWeek?.amount + 170/100 * item?.basePriceOneWeek?.amount).toFixed(2)}</div>
                             ): (
-                                <div className='price table-td'>${(item?.basePriceTwoWeek?.amount + 30/100 * item?.basePriceTwoWeek?.amount).toFixed(2)}</div>
+                                <div className='price table-td'>${(item?.basePriceTwoWeek?.amount + 170/100 * item?.basePriceTwoWeek?.amount).toFixed(2)}</div>
                             )}
                         <div className='subsActions'>
                             <input type='number' min={1} className='actionsInput' name='quantity' onChange={(e)=> setQuantity(e.target.value)} />

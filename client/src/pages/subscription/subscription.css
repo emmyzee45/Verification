@@ -19,7 +19,7 @@
 
 .subItem {
     color: black;
-    width: 300px;
+    width: 350px;
     /* height: 900px; */
     border: 1.5px solid #1C233F;
     border-radius: 20px;
@@ -64,7 +64,19 @@
     text-align: center;
 }
 
-@media (max-width: 300px) {
+@media screen and (max-width: 480px) {
+    .subContainer .subItems .subItem {
+        width: 280px;
+        height: 440px;
+        padding: 0px;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        margin-left: 20px;
+       }
+}
+
+@media (max-width: 320px) {
     .subContainer {
         width: 280px;
         padding: 0 30px;

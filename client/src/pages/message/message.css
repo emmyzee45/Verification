@@ -1,8 +1,6 @@
 .messageContainer {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-    /* justify-content: center; */
     position: relative;
     overflow: hidden;
     width: 100vw;
@@ -15,21 +13,24 @@
     margin-top: 20px;
   }
 
-  .thead {
+  .t-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #3c435e;
     color: white;
+
   }
 
-  .thead-item {
+  .t-head-item {
+    flex: 1;
     padding: 20px;
   }
 
-  .text {
-    width: 500px;
+  .message-body {
+    flex: 5;
   }
+
 
 .messageItems {
   display: flex;
@@ -38,6 +39,7 @@
 }
 
 .messageItem {
+  flex: 1;
   padding: 20px;  
 }
   
@@ -51,6 +53,65 @@
     width: 100%;
     font-size: 16px;
     cursor: pointer;
+  }
+  
+  @media screen and (max-width: 1300px) {
+  
+    .messageContainer {
+      padding: 0 100px;
+    }
+  }
+  
+  @media screen and (max-width: 900px) {
+  
+    .messageContainer {
+      padding: 0 50px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+   
+    .messageContainer {
+      height: auto;
+      padding: 0;
+      overflow: scroll;
+    }
+
+    /* .t-container {
+      overflow: scroll;
+    } */
+/*
+    .t-head {
+      flex: 1;
+      flex-flow: column wrap-reverse;
+      justify-content: left;
+      align-items: left;
+      background-color: white;
+      color: black;
+    }
+
+    .t-head-item {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .tbody {
+      flex: 2;
+    }
+
+    .messageItems {
+      flex: 2;
+      flex-flow: column wrap-reverse;
+    }
+
+    .messageItem {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .message-body {
+      flex: 5;
+    } */
   }
   
   @media screen and (max-width: 480px) {

@@ -87,7 +87,7 @@ const PermanentSub = () => {
                 return (
                     <div key={item?.targetId} className='table-tr'>
                         <div className='name table-td'><img src={`https://www.phoneblur.com${item?.iconUri}`} className='subIcon'/>{item?.name}</div>
-                            <div className='price table-td'>${item.alwaysOn ? (item?.baseAlwaysOnRenewalPrice?.amount + 30/100 * item?.baseAlwaysOnRenewalPrice?.amount).toFixed(2) : (item?.baseRenewalPrice?.amount + 30/100 * item?.baseRenewalPrice?.amount).toFixed(2)}</div>
+                            <div className='price table-td'>${item.alwaysOn ? (item?.baseAlwaysOnRenewalPrice?.amount + 170/100 * item?.baseAlwaysOnRenewalPrice?.amount).toFixed(2) : (item?.baseRenewalPrice?.amount + 170/100 * item?.baseRenewalPrice?.amount).toFixed(2)}</div>
                         <div className='subsActions'>
                             <input type='number' min={1} className='actionsInput' name='quantity' onChange={(e)=> setQuantity(e.target.value)} />
                             {productIds.includes(item.targetId) ? (
@@ -108,7 +108,7 @@ const PermanentSub = () => {
                 return (
                     <div key={item?.targetId} className='table-tr'>
                         <div className='name table-td'><img src={`https://www.phoneblur.com${item?.iconUri}`} className='subIcon'/>{item?.name}</div>
-                            <div className='price table-td'>${item.alwaysOn ? (item?.baseAlwaysOnRenewalPrice?.amount + 30/100 * item?.baseAlwaysOnRenewalPrice?.amount).toFixed(2) : (item?.baseRenewalPrice?.amount + 30/100 * item?.baseRenewalPrice?.amount).toFixed(2)}</div>
+                            <div className='price table-td'>${item.alwaysOn ? (item?.baseAlwaysOnRenewalPrice?.amount + 170/100 * item?.baseAlwaysOnRenewalPrice?.amount).toFixed(2) : (item?.baseRenewalPrice?.amount + 170/100 * item?.baseRenewalPrice?.amount).toFixed(2)}</div>
                         <div className='subsActions'>
                             <input type='number' min={1} className='actionsInput' name='quantity' onChange={(e)=> setQuantity(e.target.value)} />
                             {productIds.includes(item.targetId) ? (

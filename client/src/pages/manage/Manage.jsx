@@ -5,12 +5,13 @@ import Temperal from '../../components/temperal/Temperal';
 import { makeRequest } from '../../axios';
 import { useDispatch, useSelector } from "react-redux";
 import { getSubscriptionFailure, getSubscriptionStart, getSubscriptionSuccess } from '../../redux/redux-slices/SubscriptionSlice';
-import axios from 'axios';
+import Skeleton from "../../components/skeleton/Skeleton";
 import { useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../../components/footer/Footer';
 
 const Manage = () => {
   const [isOpen, setIsOpen ] = useState(false);
+  const [isLoading, setIsLoading ] = useState(false);
   const [ temperarySub, setTemperarySub ] = useState([]);
   const [ permanent, setPermanent ] = useState([]);
 
@@ -29,10 +30,13 @@ const Manage = () => {
   useEffect(() => {
    
     const getTemperarySubscriptions = async() => {
+      setIsLoading(true)
       try {
         const res = await makeRequest.get("subscriptions/reservations/catalog/temperary");
         setTemperarySub(res.data);
+        setIsLoading(false)
       }catch(err) {
+        setIsLoading(false)
       }
     }
     getTemperarySubscriptions();
@@ -41,10 +45,13 @@ const Manage = () => {
   useEffect(() => {
    
     const getAllSubscriptions = async() => {
+      setIsLoading(true)
       try {
         const res = await makeRequest.get("subscriptions/reservations/catalog/all");
         setPermanent(res.data);
+        setIsLoading(false)
       }catch(err) {
+        setIsLoading(false)
       }
     }
     getAllSubscriptions();
@@ -58,10 +65,18 @@ const Manage = () => {
         <div className='manageButton' style={{backgroundColor: isOpen ? "gray": "rgb(236, 230, 230)"}} onClick={()=> setIsOpen(true)}>Permanent</div>
         <div className='manageButton' style={{backgroundColor: !isOpen ? "gray": "rgb(236, 230, 230)"}} onClick={() => setIsOpen(false)}>Temperary</div>
       </div>
-      {isOpen ? (
+      {isLoading ? (
+        <div style={{marginTop: "60px"}}>
+          <Skeleton type="custom" />
+        </div>
+      ): (
+        <>
+          {isOpen ? (
         <Permanent subscriptions={permanentSub} />
       ):(
         <Temperal subscriptions={temperalSub} />
+      )}
+        </>
       )}
     </div>
     <Footer />

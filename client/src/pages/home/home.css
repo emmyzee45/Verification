@@ -42,6 +42,14 @@
     }
   }
   
+  @media screen and (max-width: 768px) {
+    .homeContainer {
+      gap: 50px;
+      overflow: scroll;
+    }
+    
+  }
+  
   @media screen and (max-width: 760px) {
     .homeContainer {
       flex-direction: column;

@@ -3,11 +3,11 @@ import "./features.css";
 
 const Features = () => {
   return (
-    <section className="features ptb-60 bg_img-2" data-background="#/public/frontend/images/element/fbg.png" style={{backgroundImage: "url(&quot;#/public/frontend/images/element/fbg.png&quot;);"}}>
-<div className="container mx-auto">
+    <section className="features ptb-60 " data-background="#/public/frontend/images/element/fbg.png" style={{backgroundImage: "url(&quot;#/public/frontend/images/element/fbg.png&quot;);"}}>
+<div className="container-feature mx-auto">
     <div className="text-content">
         <h4 className='feature-title'>OUR FEATURES</h4>
-        <h3 className='feature-desc'>SIMver - Carrier Phone Number Providers</h3>
+        <h3 className='feature-desc'>SIMver - Carrier Phone Numbers Provider</h3>
     </div>
     <div className="row g-3 pt-40">
         <div className="col-lg-4 col-md-6 col-12 aos-init aos-animate" data-aos="zoom-in">
@@ -44,7 +44,7 @@ const Features = () => {
                         </div>
                         <div  className='card-desc'>
                             <h3 className='card-title'>Call &amp; SMS Forwarding</h3>
-                            <p>Embrace a new way to spoof, re-route and wear different identify through our SMS and call forwarding phones.</p>
+                            <p>Embrace a new way to spoof, re-route and wear different identity through our SMS and call forwarding phones.</p>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@ const Features = () => {
                         </div>
                         <div  className='card-desc'>
                             <h3 className='card-title'>Easy Payment</h3>
-                            <p>Enjoy timesless flow of easy payments and wallet deposits of all kinds of cryptocurrency, Card and coupon payments.</p>
+                            <p>Enjoy seamless flow of wallet top-up through cryptocurrency, cards and coupon.</p>
                         </div>
                     </div>
                 </div>

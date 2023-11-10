@@ -40,39 +40,43 @@ const Message = () => {
     getMessages()
   }, [])
 
+  const handleReply = async() => {
+
+  }
+
   return (
     <>
     <div className='messageContainer'>
       <h1 className="messageTitle">Latest Messages</h1>
-      <div>
-        <div className='thead'>
-          <div className='thead-item'>Line Type</div>
-          <div className='thead-item'>Service</div>
-          <div className='thead-item'>Line Number</div>
-          <div className='thead-item'>Message</div>
-          <div className='thead-item'>Sent From</div>
-          <div className='thead-item'>Time</div>
-          <div className='thead-item'>Actions</div>
-        </div>
-        <div className='tbody'>
+      <table className='t-container'>
+        <tr className='t-head'>
+          <td className='t-head-item'>Line Type</td>
+          <td className='t-head-item'>Service</td>
+          <td className='t-head-item'>Line Number</td>
+          <td className=' message-body'>Message</td>
+          <td className='t-head-item'>Sent From</td>
+          <td className='t-head-item'>Time</td>
+          {/* <td className='t-head-item'>Actions</td> */}
+        </tr>
+        <tbody className='tbody'>
           {messages.map((item) => {
             return (
-              <div className='messageItems'>
-                <div className="messageItem">{item?.lineType}</div>
-                <div className="messageItem">{item?.target?.name}</div>
-                <div className="messageItem">{item?.lineNumber}</div>
-                <div className="messageItem text">{item?.fullPayloadValue}</div>
-                <div className="messageItem">{item?.sentFrom}</div>
-                <div className="messageItem">{format(item?.sentAt)}</div>
-                <div className="messageItem">
-                  <button className='action'>Action</button>
+              <tr className='messageItems' key={item?.id}>
+                <td className="messageItem">{item?.lineType}</td>
+                <td className="messageItem">{item?.target?.name}</td>
+                <td className="messageItem">{item?.lineNumber}</td>
+                <td className="message-body">{item?.fullPayloadValue}</td>
+                <td className="messageItem">{item?.sentFrom}</td>
+                <td className="messageItem">{format(item?.sentAt)}</td>
+                <td className="messageItem">
+                  <button className='action' onClick={handleReply}>Reply</button>
                   {/* <button className='action'>Action</button> */}
-                </div>
-              </div>
+                </td>
+              </tr>
             )
           })}
-        </div>
-      </div>
+        </tbody>
+      </table>
     </div>
     <Footer />
     </>

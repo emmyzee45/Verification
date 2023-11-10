@@ -104,8 +104,11 @@ export default function TopBalance() {
          </Box> */}
           <button className='button' style={{backgroundColor: "#1C233F"}} onClick={handleTopUp}>Confirm and pay {amount && `$${amount}`}</button>
           <ul className="lists">
-            <li className="list" style={{fontWeight: "bold"}}>You agree that your deposite is non-refundable!</li>
-            <li className="list">Usually the payment is confirmed in few minutes, but it can take up to 3 hours.</li>
+            <li className="list" style={{fontWeight: "bold"}}>Note:</li>
+            <li className="list">
+              Our payment system is automated and handled by blockchain, funds is available 
+              after 1 confirmation. Minimum deposit is $10. For help kindly contact support.
+            </li>
           </ul>
         </div>
       </div>  

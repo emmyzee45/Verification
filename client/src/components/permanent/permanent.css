@@ -71,3 +71,46 @@
 .action2 {
     border: 1px solid rgb(133, 21, 133);
 }
+
+@media screen and (max-width: 768px) {
+    .permanentSub {
+        margin-top: 0px;
+        overflow: scroll;
+    }
+    .permanentTitle {
+        font-size: 25px;
+    }
+
+    .table-item {
+        min-width: 100px;
+    }
+
+    .permanentItem {
+        justify-content: left;
+    }
+
+    .table-header-item {
+        flex: 1;
+        /* align-items: right; */
+    }
+
+    .table-header-lines {
+        flex: 2;
+    }
+
+    .lines {
+        margin-right: 30px;
+        flex: 2;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .permanentTitle {
+        font-size: 20px;
+    }
+
+    .action {
+        padding: 5px;
+        font-size: 15px;
+    }
+}

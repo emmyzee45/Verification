@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   });
   app.use(
     cors({
-      origin: "http://ec2-13-58-73-40.us-east-2.compute.amazonaws.com",
+      origin: "http://localhost:3000",
     })
     );
 

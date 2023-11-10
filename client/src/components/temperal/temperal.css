@@ -78,3 +78,47 @@
 .action2 {
     border: 1px solid rgb(133, 21, 133);
 }
+
+
+@media screen and (max-width: 768px) {
+    .temperalSub {
+        margin-top: 0px;
+        overflow: scroll;
+    }
+    .temperalTitle {
+        font-size: 25px;
+    }
+
+    .table-item {
+        min-width: 100px;
+    }
+
+    .temperalItem {
+        justify-content: left;
+    }
+
+    .table-header-item {
+        flex: 1;
+        /* align-items: right; */
+    }
+
+    .table-header-lines {
+        flex: 2;
+    }
+
+    .lines {
+        margin-right: 30px;
+        flex: 2;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .temperalTitle {
+        font-size: 20px;
+    }
+
+    .action {
+        padding: 5px;
+        font-size: 15px;
+    }
+}
