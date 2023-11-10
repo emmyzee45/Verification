@@ -56,7 +56,7 @@ const Message = () => {
           <td className=' message-body'>Message</td>
           <td className='t-head-item'>Sent From</td>
           <td className='t-head-item'>Time</td>
-          {/* <td className='t-head-item'>Actions</td> */}
+          <td className='t-head-item'>Actions</td>
         </tr>
         <tbody className='tbody'>
           {messages.map((item) => {

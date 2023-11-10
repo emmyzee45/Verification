@@ -83,7 +83,7 @@ const Features = () => {
                         </div>
                         <div  className='card-desc'>
                             <h3 className='card-title'>Security and Support</h3>
-                            <p>Rely on top-notch security, privacy guarranty and services assistance by our experts dedicated customer support.</p>
+                            <p>Rely on top-notch security, privacy guarranty, bypass tracking, also gain assistance by our experts dedicated customer support.</p>
                         </div>
                     </div>
                 </div>
