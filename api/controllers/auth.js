@@ -62,8 +62,6 @@ export const thirdPartyLogin = async(req, res, next) => {
   
   // Create a base64-encoded token for basic authentication
   const base64Token = Buffer.from(`${username}:${apiKey}`).toString('base64');
-  console.log(apiKey)
-  console.log(base64Token)
   try {
     const result = await axios.post(apiServerUrl,{}, { headers: {'Authorization': `Basic ${base64Token}`,}});
     req.token = result.data.token;

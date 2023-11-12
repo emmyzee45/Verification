@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   });
   app.use(
     cors({
-      origin: "http://54.84.80.103:3000",
+      origin: "http://http://ec2-54-84-80-103.compute-1.amazonaws.com",
     })
     );
 
