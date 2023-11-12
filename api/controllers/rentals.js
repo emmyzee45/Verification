@@ -3,6 +3,7 @@ import User from "../models/User.js";
 const base_url = "https://www.phoneblur.com/api"
 
 export const getTemperalTargetsByLength = async(req, res) => {
+  console.log("Routes called")
     try {
         const { duration, instantAvailability } = req.query;
 
@@ -19,14 +20,17 @@ export const getTemperalTargetsByLength = async(req, res) => {
               "Authorization": `Bearer ${req.token}`,
           }
       });
+      // console.log(result.data)
         return res.status(200).json(result.data);
       } catch (error) {
+        console.log(error)
         return res.status(500).json({ error: 'Internal Server Error' });
       }
 }
 
 // GET ALL TargetS AVAILABLE FOR PARMENT SUBSCRIPTION
 export const availableTargetForParmentSub = async(req ,res) => {
+  console.log("Permanents subs")
     try {
       const { instantAvailability } = req.query;
       if(!instantAvailability) return res.status(400).json("Invalid request");
@@ -36,7 +40,7 @@ export const availableTargetForParmentSub = async(req ,res) => {
             "Authorization": `Bearer ${req.token}`,
         }
     });
-    
+    // console.log(result.data)
       return res.status(200).json(result.data);
       } catch (error) {
         console.error('Error fetching available targets:', error);

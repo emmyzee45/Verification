@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   });
   app.use(
     cors({
-      origin: "https://simver.net",
+      origin: "http://127.0.0.1:3000",
     })
     );
 
@@ -82,7 +82,7 @@ if (process.env.NODE_ENV !== "production") {
   })
 }
 
-app.listen(5000, ()=>{
-    console.log("App has started at 5000");
+app.listen(process.env.PORT, ()=>{
+    console.log(`App has started at ${process.env.PORT}`);
     connect()
 })
