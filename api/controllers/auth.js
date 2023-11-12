@@ -18,7 +18,6 @@ export const register = async (req, res) => {
 };
 // function to login
 export const login = async (req, res) => {
-  console.log("Login Routes")
     // const encodedAuthHeader = base64.encode(authHeader)
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -42,7 +41,6 @@ export const login = async (req, res) => {
 export const refreshBearerToken = (req, res) => {
     try {
     
-    console.log(req.user)
     const token = generateToken(req.headers.token.split(" ")[1]);
   
       res.header("authorization", token).status(200).json(token);
