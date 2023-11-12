@@ -65,7 +65,7 @@ export const thirdPartyLogin = async(req, res, next) => {
     req.token = result.data.token;
     next()
   }catch(err) {
-    return res.status(401).json("Unauthorized")
+    return res.status(err.response.status).json(err.response.statusText)
   }
   
   }
