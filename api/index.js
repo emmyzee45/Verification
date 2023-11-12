@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   });
   app.use(
     cors({
-      origin: "http://127.0.0.1:3000",
+      origin: "http://54.84.80.103:3000",
     })
     );
 
