@@ -3,5 +3,6 @@ client/node_modules
 client/text.txt
 client/build
 api/.env
+client/.env
 api/package-lock.json
 api/node_modules
