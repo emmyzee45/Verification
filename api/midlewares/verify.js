@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-
+import crypto from "crypto";
 export const generateToken = (user) => {
     return jwt.sign({
         id: user._id,
@@ -31,3 +31,9 @@ export const isAuth = (req, res, next) => {
         res.status(401).json('No Token' );
     }
 }
+
+// Hash Token
+export const hashToken = (token) => {
+    return crypto.createHash("sha256").update(token.toString()).digest("hex");
+  };
+  

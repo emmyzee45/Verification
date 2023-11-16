@@ -14,7 +14,7 @@ export const createTransaction = async(req, res) => {
     const { amount, currency, user_id, email } = req.body;
 
     if(user_id !== req.user.id || !amount || !currency || !email) return res.status(400).json("Invalid parameters");
-    const order = Order.create({
+    const order = new Order({
         user_id,
         method: "Crypto"
     })
@@ -37,6 +37,7 @@ export const createTransaction = async(req, res) => {
         // console.log(charge)
         res.status(200).json(charge);
     }catch(err) {
+        console.log(err)
         res.status(500).json(err);
     }
 }
