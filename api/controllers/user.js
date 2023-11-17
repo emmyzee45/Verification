@@ -1,6 +1,8 @@
 import User from "../models/User.js";
 import Token from "../models/Token.js";
 import axios from "axios";
+import crypto from "crypto";
+import bcrypt from "bcryptjs";
 import { hashToken } from "../midlewares/verify.js";
 import sendEmail from "../utils/sendEmail.js";
 
@@ -16,7 +18,6 @@ export const getBalance = async(res, req) => {
                 'Content-Type': 'text/plain'
             }
         });
-        console.log(result.data)
         // res.status(200).json(result.data);
     }catch(err) {
         console.log(err)
@@ -31,7 +32,6 @@ export const getNotifications = async(req, res) => {
                 "Authorization": `Bearer ${req.token}`
             }
         })
-        console.log(result);
     }catch(err){
         console.log(err);
     }
@@ -58,7 +58,6 @@ export const increaseBalance = async(req, res) => {
         {new: true}
         );
         const {password, ...others} = result._doc;
-        console.log(others);
         res.status(200).json(result);
     }catch(err) {
         res.status(500).json(err);
@@ -74,8 +73,6 @@ export const decreaseBalance = async(req, res) => {
         { new: true }
         );
         const {password, ...others} = result._doc;
-        console.log(others)
-        console.log(result)
         res.status(200).json(result);
     }catch(err) {
         res.status(500).json(err);
@@ -85,70 +82,64 @@ export const decreaseBalance = async(req, res) => {
 // Forgot Password
 export const forgotPassword = async (req, res) => {
     const { email } = req.body;
-  
-    const user = await User.findOne({ email });
-  
-    if (!user) {
-      res.status(404);
-      throw new Error("No user with this email");
-    }
-  
-    // Delete Token if it exists in DB
-    let token = await Token.findOne({ userId: user._id });
-    if (token) {
-      await token.deleteOne();
-    }
-  
-    //   Create Verification Token and Save
-    const resetToken = crypto.randomBytes(32).toString("hex") + user._id;
-    console.log(resetToken);
-  
-    // Hash token and save
-    const hashedToken = hashToken(resetToken);
-    await new Token({
-      userId: user._id,
-      rToken: hashedToken,
-      createdAt: Date.now(),
-      expiresAt: Date.now() + 60 * (60 * 1000), // 60mins
-    }).save();
-  
-    // Construct Reset URL
-    const resetUrl = `${process.env.FRONTEND_URL}/resetPassword/${resetToken}`;
-  
-    // Send Email
-    const subject = "Password Reset Request - AUTH:Z";
-    const send_to = user.email;
-    const sent_from = process.env.EMAIL_USER;
-    const reply_to = "noreply@zino.com";
-    const template = "forgotPassword";
-    const name = user.name;
-    const link = resetUrl;
-  
-    try {
-      await sendEmail(
-        subject,
-        send_to,
-        sent_from,
-        reply_to,
-        template,
-        name,
-        link
-      );
-      res.status(200).json({ message: "Password Reset Email Sent" });
-    } catch (error) {
-      res.status(500);
-      throw new Error("Email not sent, please try again");
-    }
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(404).json("No user with this email");
+  }
+
+  // Delete Token if it exists in DB
+  let token = await Token.findOne({ userId: user._id });
+  if (token) {
+    await token.deleteOne();
+  }
+
+  //   Create Verification Token and Save
+  const resetToken = crypto.randomBytes(32).toString("hex") + user._id;
+
+  // Hash token and save
+  const hashedToken = hashToken(resetToken);
+  await new Token({
+    userId: user._id,
+    rToken: hashedToken,
+    createdAt: Date.now(),
+    expiresAt: Date.now() + 60 * (60 * 1000), // 60mins
+  }).save();
+
+  // Construct Reset URL
+  const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
+
+  // Send Email
+  const subject = "Password Reset Request - AUTH:Z";
+  const send_to = user.email;
+  const sent_from = process.env.EMAIL_USER;
+  const reply_to = "noreply@simver.net";
+  const template = "forgotPassword";
+  const name = user.name;
+  const link = resetUrl;
+
+  try {
+    await sendEmail(
+      subject,
+      send_to,
+      sent_from,
+      reply_to,
+      template,
+      name,
+      link
+    );
+    res.status(200).json({ message: "Password Reset Email Sent" });
+  } catch (error) {
+    res.status(500).json("Email not sent, please try again");
+  }
   };
 
   // Reset Password
 export const resetPassword = async (req, res) => {
-    const { resetToken } = req.params;
+    const { token } = req.params;
     const { password } = req.body;
-    console.log(resetToken);
-    console.log(password);
   
-    const hashedToken = hashToken(resetToken);
+    const hashedToken = hashToken(token);
   
     const userToken = await Token.findOne({
       rToken: hashedToken,
@@ -161,9 +152,10 @@ export const resetPassword = async (req, res) => {
   
     // Find User
     const user = await User.findOne({ _id: userToken.userId });
-  
+    const hash = bcrypt.hashSync(password, 5);
+
     // Now Reset password
-    user.password = password;
+    user.password = hash;
     await user.save();
   
     res.status(200).json({ message: "Password Reset Successful, please login" });

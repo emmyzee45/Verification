@@ -16,8 +16,8 @@ const SingleLine = () => {
             <div className="subPrice"><b className="headerprice">$13.50</b>/month</div>
           </div>
           <div className="subList">
-            Standard lines require users to click the "Wake U
-            p" button and then typically have a delay of at least
+            Standard lines require users to click the "Wake Up" 
+            button and then typically have a delay of at least
              2 minutes before the line is ready for use.
         </div>
           <Link to={`/permanent-subscription/catalog?alwaysOn=false`}>

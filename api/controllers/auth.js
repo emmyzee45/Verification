@@ -45,7 +45,6 @@ export const refreshBearerToken = (req, res) => {
   
       res.header("authorization", token).status(200).json(token);
     } catch (error) {
-      console.error('Error refreshing token:', error);
       return res.status(500).json({ error: 'Error refreshing token' });
     }
   }

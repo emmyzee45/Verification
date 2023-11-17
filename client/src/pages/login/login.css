@@ -75,6 +75,7 @@
   color: rgb(136, 126, 126);
   /* background-color: gray; */
 }
+
 .logingoogle {
   display: flex;
   align-items: center;
@@ -92,6 +93,12 @@
 .googleIcon {
   width: 25px;
   height: 25px;
+}
+
+.forgot-password {
+  display: block !important;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 @media screen and (max-width: 460px) {

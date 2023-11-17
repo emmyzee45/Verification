@@ -24,8 +24,10 @@ import Support from "./pages/support/Support";
 import Missing from "./pages/missing/404";
 import Footer from "./components/footer/Footer";
 import MultiCheck from "./pages/multiCheck/MultiCheck";
+import Recovery from "./pages/recovery/Recovery"
 import Faq from "./pages/faq/Faq";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
+import Reset from "./pages/reset/Reset";
 
 if(process.env.NODE_ENV === 'production') disableReactDevTools()
 // #1C233F
@@ -49,13 +51,14 @@ function App() {
         <Route exact path="/permanent-subscription/catalog" element={<PermanentSub />}/>
         <Route exact path="/permanent-subscription/:category" element={<Permanent />}/>
         <Route exact path="/checkout" element={<Checkout />}/>
-        <Route exact path="/MultiPurpose" element={<MultiPurpose />}/>
         <Route exact path="/support" element={<Support />}/>
         <Route exact path="/balance" element={<TopBalance />}/>
         <Route exact path="/login" element={<Login />}/>
         <Route exact path="/register" element={<Register />}/>
         <Route exact path="/messages" element={<Message />}/>
         <Route exact path="/multi-check" element={<MultiCheck />}/>
+        <Route exact path="/recovery" element={<Recovery />}/>
+        <Route exact path="/resetpassword/:token" element={<Reset />}/>
         <Route exact path="/faq" element={<Faq />}/>
         <Route path="*" element={<Missing />} />
       </Routes>

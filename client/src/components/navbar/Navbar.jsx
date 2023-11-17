@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./navbar.css";
 import { Link } from "react-router-dom";
+import { Button, Modal } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 import { logOutSuccess } from "../../redux/redux-slices/UserSlice";
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
@@ -13,6 +14,8 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [openProfile, setOpenProfile ] = useState(false);
 
+  const profileRef = useRef();
+  const subRef = useRef();
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user.currentUser);
   const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
@@ -28,6 +31,24 @@ const Navbar = () => {
   const handleProfile = () => {
     setOpenProfile(!openProfile)
   }
+
+  useEffect(() => {
+    let handler = (e) => {
+      if(!profileRef?.current?.contains(e.target)) {
+        setOpenProfile(false)
+      }
+
+      if(!subRef?.current?.contains(e.target)) {
+        setOpenSub(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handler);
+
+    return () => {
+      document.removeEventListener('mousedown', handler)
+    }
+  })
 
   return (
     <div className="navContainer">
@@ -57,7 +78,7 @@ const Navbar = () => {
             <ArrowDropDownOutlinedIcon className="nav-icons" />
           </div>
           {openSub && (
-            <div className="navsubscriptions">
+            <div className="navsubscriptions" ref={subRef}>
               <Link to="/subscriptions">
                 <div className="navsubItem" >Manage</div>
               </Link>
@@ -91,7 +112,7 @@ const Navbar = () => {
             <li>
             <img className="navimg" onClick={handleProfile} src={user?.img ? user?.img : "https://firebasestorage.googleapis.com/v0/b/cardano-d265c.appspot.com/o/images.jpeg?alt=media&token=8c34ea8e-71f2-4b6f-bf93-f823e2b3a90e"} />
             {openProfile && (
-              <div className="navprofile">
+              <div className="navprofile" ref={profileRef}>
                 <Link to="/orders">
                   <div  className="profilenav">Order History</div>
                 </Link>

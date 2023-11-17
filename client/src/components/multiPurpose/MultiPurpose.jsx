@@ -15,11 +15,11 @@ const MultiPurpose = () => {
             <div className="subPrice"><b className="headerprice">$45</b>/month</div>
           </div>
           <div className="subList">
-            Standard lines require users to click the "Wake U
-            p" button and then typically have a delay of at least
+            Standard lines require users to click the "Wake Up" 
+            button and then typically have a delay of at least
              2 minutes before the line is ready for use.
         </div>
-          <Link to={`/MultiPurpose?alwaysOn=${false}`}>
+          <Link to={`/MultiPurpose?alwaysOn=${false}&price=${45}`}>
             <button className="subButton">Select plan</button>
           </Link>
         </div>
@@ -33,7 +33,7 @@ const MultiPurpose = () => {
           No Wake Up lines do not require users to click the "Wake Up" 
           button when they want to use them.
           </div>
-          <Link to={`/MultiPurpose?alwaysOn=${true}`}>
+          <Link to={`/MultiPurpose?alwaysOn=${true}&price=${65}`}>
             <button className="subButton">Select plan</button>
           </Link>
         </div>

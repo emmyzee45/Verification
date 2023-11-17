@@ -12,15 +12,17 @@ import Footer from "../../components/footer/Footer";
 const MultiPurpose = () => {
   const [ state, setState ] =  useState(null);
   const [areaCode, setAreaCode] = useState(null);
+  const [charges, setCharges] = useState(0);
   const [ discount, setDiscount ] = useState(null);
   const [ apply, setApply ] = useState(false);
   const user = useSelector((state) => state.user.currentUser);
   const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
 
   const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const alwaysOn = location.search.split("=")[1];
-  const navigate = useNavigate();
+  const price = location.search.split("=")[2];
 
   useEffect(() => {
     !isAuthenticated && navigate('/login', { state: { from: location }, replace: true })
@@ -30,10 +32,17 @@ const MultiPurpose = () => {
     setApply(true)
   }
 
+  const handleAreaCode = (e) => {
+    setAreaCode(e.target.value);
+    setCharges(20)
+  }
+
   const handleSubmit = async() => {
     const data = {
+      price,
+      charges,
+      areaCode,
       discountCode: discount,
-      areaCode: 217,
       instantAvailability: alwaysOn === "true" ? true : false,
       subscriptionId: ""
       }
@@ -65,7 +74,7 @@ const MultiPurpose = () => {
 
       <div className="multiPurposeItem headerItemMessage">
         <div className="headerItems header-item-left">Multipurpose Line</div>
-        <div className="headerItems">${alwaysOn === "true" ? 65.00 : 45.00}</div>
+        <div className="headerItems">${price}</div>
         <div className="headerItems header-item-center">Waived</div>
         <div className="headerItems header-item-center">${apply ? "20.00" : "0.00" }</div>
         <div className="headerItems header-item-center"><input type="number" className="lineQty" id="lineQty" min="1" max="22" value="1" oninput="ValidateQty(event)" /></div>
@@ -97,7 +106,7 @@ const MultiPurpose = () => {
           <input 
             className="areaCode" 
             type="text" 
-            onChange={(e) => setAreaCode(e.target.value)} 
+            onChange={handleAreaCode} 
             placeholder="Enter area code here..."
           />
         </div>}
@@ -122,7 +131,7 @@ const MultiPurpose = () => {
         <div>
           Your subscription billing cycle will begin today and run for 30 days before renewal.
         </div>
-        {apply && (
+        {apply &&   (
           <div className="apply-message">
           This number can take up to 48 hours to be activated. If we can't get your exact area code 
           you'll get an area code from nearby the one you chose. Thank you for your patience!
@@ -136,7 +145,7 @@ const MultiPurpose = () => {
           </Link>
         </div>
         <div className="previous_page">
-          <button className="multi-button" disabled={!apply} type="submit" onClick={handleSubmit}>Continue</button>
+          <button className="multi-button" type="submit" onClick={handleSubmit}>Continue</button>
         </div>
       </div>
     </div>

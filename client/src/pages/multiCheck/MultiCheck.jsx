@@ -53,10 +53,17 @@ const MultiCheck = () => {
   };
 
   const handleSubscriptions = async() => {
+    // console.log(data)
+    const {areaCode, discountCode, instantAvailability, subscriptionId } = data
+
+    if(user?.balance < parseInt(data?.price) + data?.charges){
+      return toast.warn("Insufficient balance")
+    }
+    
     dispatch(updateUserStart())
       try {
-        const res = await makeRequest.post(`subscriptions/multi-purpose-line`, data);
-        const updateUser = await makeRequest.put(`users/decrease/${user?._id}`, {balance: data.instantAvailability ? 85 : 65});
+        const res = await makeRequest.post(`subscriptions/multi-purpose-line`, {areaCode, discountCode, instantAvailability, subscriptionId });
+        const updateUser = await makeRequest.put(`users/decrease/${user?._id}`, {balance: parseInt(data?.price) + charges});
         dispatch(updateUserSuccess(updateUser.data));
         toast.success("Subscription Successful")
     }catch(err) {
@@ -89,8 +96,8 @@ const MultiCheck = () => {
             Multipurpose Line
             </div>
             <div className='bodyItems fee-button'>Waived</div>
-            <div className='bodyItems'>${data?.instantAvailability ? 60: 45}</div>
-            <div className='bodyItems'>$20</div>
+            <div className='bodyItems'>${data?.price}</div>
+            <div className='bodyItems'>{data?.charges}</div>
         </div>
       </div>
       <div className="service-header">Summary</div>
@@ -99,13 +106,15 @@ const MultiCheck = () => {
             <div className="service-text">Activation Fee</div>
             <div className="service-text">Waived</div>
         </div>
-        <div className="service-item">
-            <div className="service-text">Customization Fees (Selected Area Code {data?.areaCode} )</div>
-            <div className="service-text">$20</div>
+        {data?.areaCode && (
+          <div className="service-item">
+            <div className="service-text">Customization Fees (Selected Area Code {data?.areaCode > 0 ? data?.areaCode : "Nill" } )</div>
+            <div className="service-text">{data?.charges}</div>
         </div>
+        )}
         <div className="service-item">
             <div className="service-text">Porated Fees</div>
-            <div className="service-text">${data?.instantAvailability ? 65 : 35}</div>
+            <div className="service-text">${data?.price}</div>
         </div>
         <div className="service-item">
             <div className="service-text">Discounts</div>
@@ -113,21 +122,21 @@ const MultiCheck = () => {
         </div>
         <div className="service-item">
             <div className="service-text">Total Due Today</div>
-            <div className="service-text">${data?.instantAvailability ? 85 : 65}</div>
+            <div className="service-text">${parseInt(data?.price) + data?.charges}</div>
         </div>
         <div className="service-item">
             <div className="service-text">Estimated Monthly Charges</div>
-            <div className="service-text">${data?.instantAvailability ? 65: 40}</div>
+            <div className="service-text">${data?.price}</div>
         </div>
       </div>
       <div className='checkButtons'>
-        {user?.balance >= 85 ? (
-            <button className='checkBuyButton' onClick={handleBuy}>Buy</button> 
+        <button className='checkBuyButton' onClick={handleBuy}>Buy</button> 
+        {/* {user?.balance >= 85 ? (
         ): user.balance >= 65 ? (
             <button className='checkBuyButton' onClick={handleBuy}>Buy</button> 
         ): (
             <button className='checkBuyButton' onClick={handleBackward}>Top up</button>
-        ) }
+        ) } */}
       </div>
     </div>
       <Footer />

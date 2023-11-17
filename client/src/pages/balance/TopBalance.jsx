@@ -8,6 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { logOutSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from '../../redux/redux-slices/UserSlice';
 import { toast } from 'react-toastify';
 import Footer from '../../components/footer/Footer';
+import Notice from '../../components/notice/Notice';
 
 export default function TopBalance() {
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export default function TopBalance() {
   }, [isAuthenticated])
 
     const handleTopUp = async() => {
-      const data = {amount, currency: "USD", user_id: user._id }
+      const data = {amount, currency: "USD", user_id: user._id, email: user?.email }
         // dispatch(updateUserStart())
         try {
             const res = await makeRequest.post(`webhooks/checkout`,data);
@@ -33,6 +34,7 @@ export default function TopBalance() {
             toast.success("Redirecting to Coinbase, after your payment is successful, the balance will be updated once payment is comfirmed")
             window.location.href = res.data.hosted_url;
           }catch(err) {
+            console.log(err)
             // dispatch(updateUserFailure())
             if (!err?.response) {
               toast.error('No Server Response');
@@ -48,9 +50,17 @@ export default function TopBalance() {
     }
   return (
     <div>
+      <Notice />
     <div className='balanceContainer'>
       <h1 className='title'>Select Payment Method</h1>
       <div className="left">
+        <div className="leftItem">
+          <div className="labelContainer">
+          <input type="radio" />
+          <label htmlFor="#" className='radioLabel'>Cryptocurrency</label>
+          </div>
+          <img alt='/' src="img/bitcoin-logo-5-1.png" className='img' />
+        </div>
         <div className="leftItem">
           <div className="labelContainer">
           <input type="radio" disabled />
@@ -65,20 +75,13 @@ export default function TopBalance() {
           </div>
           <img alt='/' src='img/paypal1.png' className='img' />
         </div>
-        <div className="leftItem">
-          <div className="labelContainer">
-          <input type="radio" />
-          <label htmlFor="#" className='radioLabel'>Cryptocurrency</label>
-          </div>
-          <img alt='/' src="img/crypto1.jpeg" className='img' />
-        </div>
-        <div className="leftItem">
+        {/* <div className="leftItem">
           <div className="labelContainer">
           <input type="radio" disabled />
           <label htmlFor="" className='radioLabel'>Banker Tranfer</label>
           </div>
           <img alt='/' src="img/download.png" className='img' />
-        </div>
+        </div> */}
       </div>
       <div className="right">
         <div className="rightItems">
@@ -102,7 +105,7 @@ export default function TopBalance() {
           {/* <Box sx={{ display: 'flex', }}>
          <CircularProgress />
          </Box> */}
-          <button className='button' style={{backgroundColor: "#1C233F"}} onClick={handleTopUp}>Confirm and pay {amount && `$${amount}`}</button>
+          <button className='button' style={{backgroundColor: "#1C233F"}} onClick={handleTopUp}>Confirm and pay</button>
           <ul className="lists">
             <li className="list" style={{fontWeight: "bold"}}>Note:</li>
             <li className="list">

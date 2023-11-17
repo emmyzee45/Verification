@@ -1,0 +1,34 @@
+.reset-container {
+    width: 100vw;
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+}
+.reset-title {
+    display: block !important;
+}
+
+.reset-form {
+    padding: 20px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: rgb(233, 230, 230);
+}
+
+.form-input {
+    min-width: 300px;
+    margin-bottom: 20px;
+}
+
+.reset-button {
+    width: 100%;
+    background-color: steelblue;
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+

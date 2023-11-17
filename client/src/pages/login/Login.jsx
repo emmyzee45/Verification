@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./login.css";
 import FormInput from "../../components/login/FormInput";
@@ -14,6 +14,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const user = useSelector((state) => state.user.currentUser);
   const isFetching = useSelector((state) => state.user.isFetching);
 
   const inputs = [
@@ -89,7 +90,9 @@ dispatch(loginFailure())
           >
             {isFetching ? "Processing..." : "Submit"}
           </button>
-      
+          <div className="forgot-password text-center py-4">
+                <span className='forgot-password text-gray-500'>Forgot Password? <NavLink to="/recovery" style={{color: "green"}} >Recover Now</NavLink></span>
+            </div>
         {/* <div className="loginHrContainer">
           <div className="loginHr"></div>
           <div className="loginOr">OR</div>
