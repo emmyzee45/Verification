@@ -63,7 +63,7 @@ const MultiCheck = () => {
     dispatch(updateUserStart())
       try {
         const res = await makeRequest.post(`subscriptions/multi-purpose-line`, {areaCode, discountCode, instantAvailability, subscriptionId });
-        const updateUser = await makeRequest.put(`users/decrease/${user?._id}`, {balance: parseInt(data?.price) + charges});
+        const updateUser = await makeRequest.put(`users/decrease/${user?._id}`, {balance: parseInt(data?.price) + data?.charges});
         dispatch(updateUserSuccess(updateUser.data));
         toast.success("Subscription Successful")
     }catch(err) {

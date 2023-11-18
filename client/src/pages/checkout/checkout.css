@@ -1,6 +1,10 @@
 .checkoutContainer {
+    /* height: calc(100vh - 80px); */
+}
+.checkout-item-container {
     padding: 0 100px;
-    height: calc(100vh - 80px);
+    margin-bottom: 100px;
+
 }
 .checkItem {
     display: flex;

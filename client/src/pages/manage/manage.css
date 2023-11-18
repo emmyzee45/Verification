@@ -3,6 +3,7 @@
     height: calc(100vh - 80px);
     flex-direction: column;
     margin: 0 200px;
+    margin-bottom: 100px;
     overflow: hidden;
 }
 
@@ -41,7 +42,7 @@
 @media screen and (max-width: 987px) {
     .manageContainer {
         margin: 0 50px 100px 50px;
-        height: auto;
+        /* height: auto; */
         /* overflow: scroll; */
     }
     .manageTitle {

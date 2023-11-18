@@ -87,7 +87,8 @@ const Checkout = () => {
 
   return (
     <>
-    <div className='checkoutContainer'>
+    <div className=''>
+      <div className='checkout-item-container'>
         <h1 className='checkoutTitle'>Confirm Subscription Purchase</h1>
       <div className='checkItem'>
         <div className="checkItems heading">
@@ -117,8 +118,9 @@ const Checkout = () => {
         <button className='checkBuyButton' onClick={handleBuy}>Buy</button> 
         <button className='checkBuyButton' onClick={handleBackward}>Clear Cart</button> 
       </div>
-    </div>
+      </div>
       <Footer />
+    </div>
     </>
   );
 }

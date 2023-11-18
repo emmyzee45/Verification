@@ -36,8 +36,9 @@ export default function Messenger({ currentTicket, setOpen }) {
       sender: user._id,
       text: newMessage,
       ticketId: currentTicket?._id,
+      sendto: currentTicket.members.filter((id) => id != user._id)[0]
     };
-    
+
     try {
       const res = await makeRequest.post("/messages", message);
       setMessages([...messages, res.data]);

@@ -3,6 +3,7 @@
     flex-direction: column;
     padding: 0 200px;
     background-color: whitesmoke;
+    overflow: hidden;
 }
 /* #011335 */
 /* #011335 */
@@ -14,4 +15,28 @@
 .question-container {
     display: flex;
     flex-direction: column;
+}
+
+@media screen and (max-width: 1200px) {
+    .faqContainer {
+        padding: 0 100px;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .faqContainer {
+        padding: 0 50px;
+    }
+}
+
+@media screen and (max-width: 660px) {
+    .faqContainer {
+        padding: 0 30px;
+    }
+}
+
+@media screen and (max-width: 367px) {
+    .faqContainer {
+        padding: 0 20px;
+    }
 }

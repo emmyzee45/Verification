@@ -21,8 +21,8 @@ export const createTransaction = async(req, res) => {
     try {
         const newOrder = await order.save();
         const charge = await resources.Charge.create({
-            name: "Test Charge",
-            description: "Test charge description",
+            name: "Balance Topup",
+            description: "balance Topup description",
             local_price: {
                 amount,
                 currency,
@@ -63,13 +63,14 @@ export const confirmTransaction = async(req, res) => {
                     pay_amount: crypto_amount, 
                     currency: crypto_currency, 
                     receive_amount: usd_amount,
-                    status: "confirmed",
+                    status: "CONFIRMED",
                     transaction_id, 
                 }
             }
         )
         res.status(200).json("Successfully topup account");
     } else if(event.type === "charge:resolved") {
+       
         let amount = event.data.pricing.local.amount;
         let user_id = event.data.metadata.user_id;
         let order_id = event.data.metadata.order_id;
@@ -77,13 +78,14 @@ export const confirmTransaction = async(req, res) => {
         const usd_amount = event.data.payments[0].value.local.amount;
         const crypto_amount = event.data.payments[0].value.crypto.amount;
         const crypto_currency = event.data.payments[0].value.crypto.currency;
+
         await User.findByIdAndUpdate(user_id, { $inc: { balance: amount }});
         await Order.findByIdAndUpdate(order_id, 
             { $set: {
                     pay_amount: crypto_amount, 
                     currency: crypto_currency, 
                     receive_amount: usd_amount,
-                    status: "resolved",
+                    status: "RESOLVED",
                     transaction_id, 
                 }
             }

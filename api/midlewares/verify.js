@@ -3,9 +3,9 @@ import crypto from "crypto";
 export const generateToken = (user) => {
     return jwt.sign({
         id: user._id,
+        email: user.email,
         name: user.username,
-        password: user.password
-
+        password: user.password,
     }, process.env.JWT_SECRET_KEY, {
         expiresIn: '1d',
     } )

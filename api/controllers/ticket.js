@@ -1,6 +1,7 @@
 import User from "../models/User.js"
 import Ticket from "../models/Ticket.js"
 import Message from "../models/Message.js"
+import sendEmail from "../utils/sendEmail.js";
 
 
 // CREATE TICKET
@@ -29,6 +30,28 @@ export const createTicket = async(req, res) => {
         sender,
       });
       await newMsg.save();
+
+      const ticketUrl = `${process.env.FRONTEND_URL}/support`;
+
+      // Send Email
+      const subject = "Ticket booking";
+      const send_to = process.env.EMAIL_USER;
+      const sent_from = process.env.EMAIL_USER;
+      const reply_to = req.user.email;
+      const template = "changeRole";
+      const name = req.user.name;
+      const link = ticketUrl;
+
+      await sendEmail(
+        subject,
+        send_to,
+        sent_from,
+        reply_to,
+        template,
+        name,
+        link
+      );
+
       res.status(200).json(saveTicket);
     }catch(err) {
         res.status(500).json(err);
