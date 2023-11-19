@@ -1,10 +1,11 @@
 import axios from "axios";
 import User from "../models/User.js";
+import sendEmail from "../utils/sendEmail.js";
 const base_url = "https://www.phoneblur.com/api"
 
 export const getTemperalTargetsByLength = async(req, res) => {
-  console.log("Routes called")
-    try {
+
+  try {
         const { duration, instantAvailability } = req.query;
 
         // Validate and parse the duration query parameter
@@ -23,15 +24,14 @@ export const getTemperalTargetsByLength = async(req, res) => {
       // console.log(result.data)
         return res.status(200).json(result.data);
       } catch (error) {
-        console.log(error)
         return res.status(500).json({ error: 'Internal Server Error' });
       }
 }
 
 // GET ALL TargetS AVAILABLE FOR PARMENT SUBSCRIPTION
 export const availableTargetForParmentSub = async(req ,res) => {
-  console.log("Permanents subs")
-    try {
+
+  try {
       const { instantAvailability } = req.query;
       if(!instantAvailability) return res.status(400).json("Invalid request");
 
@@ -43,7 +43,6 @@ export const availableTargetForParmentSub = async(req ,res) => {
     // console.log(result.data)
       return res.status(200).json(result.data);
       } catch (error) {
-        console.error('Error fetching available targets:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
       }
 }
@@ -59,8 +58,7 @@ export const CreateTemperaryRental = async(req ,res) => {
             "Authorization": `Bearer ${req.token}`,
         }
     });
-    console.log(result.data.id)
-    console.log(req.user.id)
+
     await User.findByIdAndUpdate(req.user.id, { $push: { subscriptionIds: result.data.id }});
 
     return res.status(200).json(result.data);
@@ -118,9 +116,28 @@ export const createSingleLineSub = async(req, res) => {
           "Authorization": `Bearer ${req.token}`,
       }
   });
-  console.log(result.data.id)
-  console.log(req.user.id)
+
   await User.findByIdAndUpdate(req.user.id, { $push: { subscriptionIds: result.data.id }});
+  
+  const subscriptionUrl = `${process.env.FRONTEND_URL}/subscriptions`;
+   // Send Email
+  const subject = "Subscription - SUPPORT:Z";
+  const send_to = req.user.email;
+  const sent_from = process.env.EMAIL_USER;
+  const reply_to = "noreply@simver.net";
+  const template = "buy";
+  const name = req.user.name;
+  const link = subscriptionUrl;
+
+  await sendEmail(
+      subject,
+      send_to,
+      sent_from,
+      reply_to,
+      template,
+      name,
+      link
+    );
 
   return res.status(200).json(result.data);
   } catch (error) {

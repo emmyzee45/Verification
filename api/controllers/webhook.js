@@ -2,6 +2,8 @@ import dotenv from "dotenv";
 import coinbase from "coinbase-commerce-node";
 import User from "../models/User.js";
 import Order from "../models/Order.js";
+import Text from "../models/Text.js";
+import sendEmail from "../utils/sendEmail.js";
 
 dotenv.config();
 const Client = coinbase.Client;
@@ -99,5 +101,58 @@ export const confirmTransaction = async(req, res) => {
         let order_id = event.data.metadata.order_id;
         await Order.findByIdAndRemove(order_id, { $set: { status: 'failed'}});
         res.status(200)
+    }
+}
+
+export const receiveMessageNotification = async(req, res) => {
+    const newMessage = new Text(req.body);
+    try {
+        await newMessage.save();
+        res.status(200).json('Message received');
+    }catch(err) {
+        res.status(500).json(err);
+    }
+}
+
+export const lineAssignmentNotification = async(req, res) => {
+    
+    const subscriptionUrl = `${process.env.FRONTEND_URL}/subscriptions`;
+
+    try {
+        await Promise.all(
+            req.body.map(async(item) => {
+                try {
+                    const newNotification = new Notification(item);
+                    await newNotification.save();
+                    const user = await User.findOne({subscriptionIds: {$in: [item.subscriptionId]}});
+                    
+                     // Send Email
+                    const subject = "Subscription renewal - SUPPORT:Z";
+                    const send_to = user.email;
+                    const sent_from = process.env.EMAIL_USER;
+                    const reply_to = "noreply@simver.net";
+                    const template = "renew";
+                    const name = user.name;
+                    const link = subscriptionUrl;
+
+                    await sendEmail(
+                        subject,
+                        send_to,
+                        sent_from,
+                        reply_to,
+                        template,
+                        name,
+                        link
+                      );
+
+                }catch(err){
+
+                }
+            })
+        )
+       
+        res.status(200).json("Notification received")
+    }catch(err) {
+        res.status(500).json(err);
     }
 }
