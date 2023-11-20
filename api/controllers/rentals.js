@@ -1,5 +1,6 @@
 import axios from "axios";
 import User from "../models/User.js";
+import Text from "../models/Text.js";
 import sendEmail from "../utils/sendEmail.js";
 const base_url = "https://www.phoneblur.com/api"
 
@@ -195,10 +196,11 @@ export const getAllSubscriptions = async(req, res) => {
 }
 
 export const wakeupLine = async(req, res) => {  
-  const { subscriptionId, reservationId } = req.query;
-  console.log(subscriptionId, reservationId)
+  const { subscriptionId } = req.query;
+  const text = await Text.find({subscriptionId})
+  
   try {
-    const result = await axios.post(`${base_url}/subscriptions/${subscriptionId}/reservations/${reservationId}/wake`, {
+    const result = await axios.post(`${base_url}/subscriptions/${text.subscriptionId}/reservations/${text.reservationId}/wake`, {
       headers: {
           "Authorization": `Bearer ${req.token}`,
       }

@@ -15,7 +15,6 @@ const Temperal = ({ subscriptions }) => {
 const handleClose = () => {
   setIsClose(!isClose)
 }
-console.log(subscriptions)
 const handlewakeup = async(id) => {
   try {
     const res = await makeRequest.post(`subscriptions/reservations/catalog/wakeup?subscriptionId=${id}&reservationId=${id}`);

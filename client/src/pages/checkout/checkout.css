@@ -1,11 +1,12 @@
 .checkoutContainer {
     /* height: calc(100vh - 80px); */
 }
+
 .checkout-item-container {
     padding: 0 100px;
     margin-bottom: 100px;
-
 }
+
 .checkItem {
     display: flex;
     flex-direction: column;
@@ -70,14 +71,19 @@
     gap: 5px;
 }
 
+@media  (max-width: 992px) {
+    .checkout-item-container {
+        padding: 0 50px;
+    }
+    
+    .checkoutTitle {
+        font-size: 40px;
+    }
+}
+
 @media (max-width: 768px){
     .checkoutTitle {
         font-size: 22px;
-    }
-}
-@media  (max-width: 992px) {
-    .checkoutTitle {
-        font-size: 40px;
     }
 }
 
@@ -85,6 +91,10 @@
    .checkoutContainer {
     padding: 20px;
    }
+
+   .checkout-item-container {
+    padding: 0 20px;
+}
    .checkoutTitle {
     font-size: 25px;
    }

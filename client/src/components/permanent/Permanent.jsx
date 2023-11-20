@@ -4,7 +4,7 @@ import "./permanent.css";
 import { logOutSuccess } from "../../redux/redux-slices/UserSlice";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Permanent = ({ subscriptions }) => {
   const [close, setClose ] = useState(false);
@@ -16,7 +16,6 @@ const Permanent = ({ subscriptions }) => {
     setClose(!close)
   }
 
-  console.log(subscriptions)
   const handleSubRenewal = async(id) => {
     try{
       await makeRequest.post(`subscriptions/reservations/renew/${id}`);
@@ -33,7 +32,7 @@ const Permanent = ({ subscriptions }) => {
 
   const handleWakeUp = async(id) => {
     try {
-      const res = await makeRequest.post(`subscriptions/reservations/catalog/wakeup?subscriptionId=${id}&reservationId=${id}`);
+      const res = await makeRequest.post(`subscriptions/reservations/catalog/wakeup?subscriptionId=${id}`);
       toast.success(`Your line will be available in ${res.data}s`)
     } catch (err) {
       if (err.response?.status === 401) {
@@ -77,7 +76,7 @@ const Permanent = ({ subscriptions }) => {
         <td className="table-item">{item?.noLongerAvailableAt ? item?.noLongerAvailableAt : item?.cycleEnd?.slice(0,16)}</td>
           <td className="actions">
               <button className="action" onClick={() => handleSubRenewal(item?.id)}>Renew</button>
-              {!item?.wholeLineReservations[0]?.alwaysOn && <button className="action action2" onClick={() => handleWakeUp(item?.id)}>Wake Up</button>}
+              {!item?.strReservations[0]?.alwaysOn && <button className="action action2" onClick={() => handleWakeUp(item?.id)}>Wake Up</button>}
           </td>
       </tr>
         )

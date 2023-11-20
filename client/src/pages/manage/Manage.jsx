@@ -33,6 +33,7 @@ const Manage = () => {
       setIsLoading(true)
       try {
         const res = await makeRequest.get("subscriptions/reservations/catalog/temperary");
+        console.log(res.data)
         setTemperarySub(res.data);
         setIsLoading(false)
       }catch(err) {
@@ -48,6 +49,7 @@ const Manage = () => {
       setIsLoading(true)
       try {
         const res = await makeRequest.get("subscriptions/reservations/catalog/all");
+        console.log(res.data)
         setPermanent(res.data);
         setIsLoading(false)
       }catch(err) {

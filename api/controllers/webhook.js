@@ -3,6 +3,7 @@ import coinbase from "coinbase-commerce-node";
 import User from "../models/User.js";
 import Order from "../models/Order.js";
 import Text from "../models/Text.js";
+import Notification from "../models/Notification.js";
 import sendEmail from "../utils/sendEmail.js";
 
 dotenv.config();
@@ -105,9 +106,18 @@ export const confirmTransaction = async(req, res) => {
 }
 
 export const receiveMessageNotification = async(req, res) => {
-    const newMessage = new Text(req.body);
+    console.log("message received from phoneblur")
+    console.log(req.body)
     try {
-        await newMessage.save();
+        await Promise.all(
+            req.body.map(async(item)=> {
+                try {
+                    const newMessage = new Text(item);
+                    await newMessage.save();
+                }catch(err) {
+                }
+            })
+        )
         res.status(200).json('Message received');
     }catch(err) {
         res.status(500).json(err);
@@ -115,7 +125,7 @@ export const receiveMessageNotification = async(req, res) => {
 }
 
 export const lineAssignmentNotification = async(req, res) => {
-    
+    console.log("notification from phoneblur", req.body)
     const subscriptionUrl = `${process.env.FRONTEND_URL}/subscriptions`;
 
     try {
@@ -125,8 +135,8 @@ export const lineAssignmentNotification = async(req, res) => {
                     const newNotification = new Notification(item);
                     await newNotification.save();
                     const user = await User.findOne({subscriptionIds: {$in: [item.subscriptionId]}});
-                    
-                     // Send Email
+
+                    // Send Email
                     const subject = "Subscription renewal - SUPPORT:Z";
                     const send_to = user.email;
                     const sent_from = process.env.EMAIL_USER;
@@ -146,7 +156,6 @@ export const lineAssignmentNotification = async(req, res) => {
                       );
 
                 }catch(err){
-
                 }
             })
         )
