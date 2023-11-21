@@ -119,8 +119,8 @@ const Checkout = () => {
         <button className='checkBuyButton' onClick={handleBackward}>Clear Cart</button> 
       </div>
       </div>
-      <Footer />
     </div>
+    <Footer />
     </>
   );
 }

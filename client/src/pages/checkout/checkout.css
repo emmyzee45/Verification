@@ -1,8 +1,8 @@
 .checkoutContainer {
-    /* height: calc(100vh - 80px); */
 }
 
 .checkout-item-container {
+    height: calc(100vh - 80px);
     padding: 0 100px;
     margin-bottom: 100px;
 }

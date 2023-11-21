@@ -12,7 +12,8 @@ const Message = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user?.currentUser);
   const isAuthenticated = useSelector((state) => state.user?.isLoggedIn);
-  const messages = useSelector((state) => state.message?.messages?.filter((item) => user?.subscriptionIds?.includes(item?.subscriptionId)))
+  const messages = useSelector((state) => state.message?.messages)
+  // const messages = useSelector((state) => state.message?.messages?.filter((item) => user?.subscriptionIds?.includes(item?.subscriptionId)))
 
   const location = useLocation();
   const navigate = useNavigate();
