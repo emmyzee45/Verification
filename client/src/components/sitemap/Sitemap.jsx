@@ -32,6 +32,7 @@ export default function Sitemap() {
               playIcon={<VideoIcon />} 
               url="https://youtu.be/QNrf723Y9ZU" 
             />
+            <p className='video-desc'>HOW TO MAKE SUBSCRIPTIONS ON SIMVER</p>
           </div>
           <div className="site-map-item">
             <ReactPlayer 
@@ -42,8 +43,9 @@ export default function Sitemap() {
               width={600}
               height={320}
               playIcon={<VideoIcon />} 
-              url="https://youtu.be/QNrf723Y9ZU" 
+              url="https://youtu.be/MYBUZUL45Bc" 
             />
+            <p className='video-desc'>HOW TO RE-ROUTE SIMVER NUMBER TO MAKE CALLS</p>
           </div>
           <div className="site-map-item">
             <ReactPlayer 
@@ -54,8 +56,9 @@ export default function Sitemap() {
               width={600}
               height={320}
               playIcon={<VideoIcon />} 
-              url="https://youtu.be/QNrf723Y9ZU" 
+              url="https://youtu.be/0iqwMp5gLq0" 
             />
+            <p className='video-desc'>HOW TO CHECK SIMVER NUMBER CARRIER PROVIDER</p>
           </div>
           <div className="site-map-item">
             <ReactPlayer 
@@ -66,8 +69,9 @@ export default function Sitemap() {
               width={600}
               height={320}
               playIcon={<VideoIcon />} 
-              url="https://youtu.be/QNrf723Y9ZU" 
+              url="https://youtu.be/3kHIGww-zyA" 
             />
+            <p className='video-desc'>HOW TO CALL FROM SIMVER NUMBER TO ANY LINE</p>
           </div>
         </div>
         <div className="site-map-second-container">
@@ -82,6 +86,7 @@ export default function Sitemap() {
               playIcon={<VideoIcon />} 
               url="https://youtu.be/QNrf723Y9ZU" 
             />
+            <p className='video-desc'>HOW TO MAKE SUBSCRIPTIONS ON SIMVER</p>
           </div>
           <div className="site-map-item">
             <ReactPlayer 
@@ -92,8 +97,9 @@ export default function Sitemap() {
               width={450}
               height={280}
               playIcon={<VideoIcon />} 
-              url="https://youtu.be/QNrf723Y9ZU" 
+              url="https://youtu.be/MYBUZUL45Bc" 
             />
+            <p className='video-desc'>HOW TO RE-ROUTE SIMVER NUMBER TO MAKE CALLS</p>
           </div>
           <div className="site-map-item">
             <ReactPlayer 
@@ -104,8 +110,9 @@ export default function Sitemap() {
               width={450}
               height={280}
               playIcon={<VideoIcon />} 
-              url="https://youtu.be/QNrf723Y9ZU" 
-            />
+              url="https://youtu.be/0iqwMp5gLq0" 
+              />
+              <p className='video-desc'>HOW TO CHECK SIMVER NUMBER CARRIER PROVIDER</p>
           </div>
           <div className="site-map-item">
             <ReactPlayer 
@@ -116,8 +123,9 @@ export default function Sitemap() {
               width={450}
               height={280}
               playIcon={<VideoIcon />} 
-              url="https://youtu.be/QNrf723Y9ZU" 
+              url="https://youtu.be/3kHIGww-zyA" 
             />
+            <p className='video-desc'>HOW TO CALL FROM SIMVER NUMBER TO ANY LINE</p>
           </div>
         </div>
         <div className="site-map-third-container">
@@ -132,6 +140,7 @@ export default function Sitemap() {
               playIcon={<VideoIcon />} 
               url="https://youtu.be/QNrf723Y9ZU" 
             />
+            <p className='video-desc'>HOW TO MAKE SUBSCRIPTIONS ON SIMVER</p>
           </div>
           <div className="site-map-item">
             <ReactPlayer 
@@ -142,8 +151,9 @@ export default function Sitemap() {
               width={350}
               height={200}
               playIcon={<VideoIcon />} 
-              url="https://youtu.be/QNrf723Y9ZU" 
-            />
+              url="https://youtu.be/MYBUZUL45Bc" 
+              />
+              <p className='video-desc'>HOW TO RE-ROUTE SIMVER NUMBER TO MAKE CALLS</p>
           </div>
           <div className="site-map-item">
             <ReactPlayer 
@@ -154,8 +164,9 @@ export default function Sitemap() {
               width={350}
               height={200}
               playIcon={<VideoIcon />} 
-              url="https://youtu.be/QNrf723Y9ZU" 
-            />
+              url="https://youtu.be/0iqwMp5gLq0" 
+              />
+              <p className='video-desc'>HOW TO CHECK SIMVER NUMBER CARRIER PROVIDER</p>
           </div>
           <div className="site-map-item">
             <ReactPlayer 
@@ -166,8 +177,9 @@ export default function Sitemap() {
               width={350}
               height={200}
               playIcon={<VideoIcon />} 
-              url="https://youtu.be/QNrf723Y9ZU" 
-            />
+              url="https://youtu.be/3kHIGww-zyA" 
+              />
+              <p className='video-desc'>HOW TO CALL FROM SIMVER NUMBER TO ANY LINE</p>
           </div>
         </div>
     </div>
