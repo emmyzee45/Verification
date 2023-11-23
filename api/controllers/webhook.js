@@ -73,7 +73,6 @@ export const confirmTransaction = async(req, res) => {
         )
         res.status(200).json("Successfully topup account");
     } else if(event.type === "charge:resolved") {
-       
         let amount = event.data.pricing.local.amount;
         let user_id = event.data.metadata.user_id;
         let order_id = event.data.metadata.order_id;
@@ -93,15 +92,19 @@ export const confirmTransaction = async(req, res) => {
                 }
             }
         )
-        res.status(200).json("Successfully topup account");
+        res.status(200).json("Successfully resolved Topup");
     } else if(event.type === "charge:pending") {
         let order_id = event.data.metadata.order_id;
         await Order.findByIdAndRemove(order_id, { $set: { status: 'pending'}});
-        res.status(200)
+        res.status(200).json("Successfully received pending");
     } else if(event.type === "charge:failed") {
         let order_id = event.data.metadata.order_id;
         await Order.findByIdAndRemove(order_id, { $set: { status: 'failed'}});
-        res.status(200)
+        res.status(200).json("Successfully received failed payment");
+    } else if(event.type === "charge:created") {
+        res.status(200).json("Successfully create payment");
+    } else if(event.type === "charge:delayed") {
+        res.status(200).json("Successfully received delayed payment");
     }
 }
 
