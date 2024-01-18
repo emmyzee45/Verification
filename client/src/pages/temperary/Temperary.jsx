@@ -7,10 +7,10 @@ import { useSelector } from "react-redux";
 import Footer from "../../components/footer/Footer";
 
 const Temperary = () => {
-  const [onechecked, onesetChecked] = useState(false); // Switch
-  const [checked, setChecked] = useState(false); // Switch
-  const [threeChecked, setThreeChecked] = useState(false); // Switch
-  const [weekChecked, setWeekChecked] = useState(false); // Switch
+  const [onechecked, onesetChecked] = useState(true); // Switch
+  const [checked, setChecked] = useState(true); // Switch
+  const [threeChecked, setThreeChecked] = useState(true); // Switch
+  const [weekChecked, setWeekChecked] = useState(true); // Switch
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -69,8 +69,8 @@ const Temperary = () => {
           <div className="temperarySwitch" style={{backgroundColor: onechecked ? "green": "white"}} >
           <Switch
             style={{backgroundColor: onechecked ? "white": "lightgray"}}
-            checked={onechecked}
-            onChange={handleOneCheck}
+            checked={true}
+            // onChange={handleOneCheck}
             />
           </div>
           <div>No Wake up</div>
@@ -107,8 +107,8 @@ const Temperary = () => {
           <div className="temperarySwitch" style={{backgroundColor: threeChecked ? "green": "white"}} >
           <Switch
             style={{backgroundColor: threeChecked ? "white": "lightgray"}}
-            checked={threeChecked}
-            onChange={handleThreeCheck}
+            checked={true}
+            // onChange={handleThreeCheck}
             />
           </div>
           <div>No Wake up</div>
@@ -145,8 +145,8 @@ const Temperary = () => {
           <div className="temperarySwitch" style={{backgroundColor: weekChecked ? "green": "white"}} >
           <Switch
             style={{backgroundColor: weekChecked ? "white": "lightgray"}}
-           checked={weekChecked}
-            onChange={handleWeekCheck}
+           checked={true}
+            // onChange={handleWeekCheck}
             />
           </div>
           <div>No Wake up</div>
@@ -183,8 +183,8 @@ const Temperary = () => {
           <div className="temperarySwitch" style={{backgroundColor: checked ? "green": "white"}} >
           <Switch
             style={{backgroundColor: checked ? "white": "lightgray"}}
-            checked={checked}
-            onChange={switchHandler}
+            checked={true}
+            // onChange={switchHandler}
             />
           </div>
           <div>No Wake up</div>

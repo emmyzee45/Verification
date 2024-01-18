@@ -47,7 +47,7 @@ function App() {
         <Route exact path="/subscription/:category" element={<Subscriptions />}/>
         <Route exact path="/subscriptions" element={<Manage />}/>
         <Route exact path="/temporary-subscription" element={<Temperary />}/>
-        <Route exact path="/MultiPurpose" element={<MultiPurpose />}/>
+        {/* <Route exact path="/MultiPurpose" element={<MultiPurpose />}/> */}
         <Route exact path="/permanent-subscription/catalog" element={<PermanentSub />}/>
         <Route exact path="/permanent-subscription/:category" element={<Permanent />}/>
         <Route exact path="/checkout" element={<Checkout />}/>
@@ -56,7 +56,7 @@ function App() {
         <Route exact path="/login" element={<Login />}/>
         <Route exact path="/register" element={<Register />}/>
         <Route exact path="/messages" element={<Message />}/>
-        <Route exact path="/multi-check" element={<MultiCheck />}/>
+        {/* <Route exact path="/multi-check" element={<MultiCheck />}/> */}
         <Route exact path="/recovery" element={<Recovery />}/>
         <Route exact path="/resetpassword/:token" element={<Reset />}/>
         <Route exact path="/faq" element={<Faq />}/>

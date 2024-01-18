@@ -50,7 +50,7 @@ export default function TopBalance() {
     }
   return (
     <div>
-      <Notice />
+      <Notice message="While we're working to install other forms of payment, You can only fund using Cryptocurrency" />
     <div className='balanceContainer'>
       <h1 className='title'>Select Payment Method</h1>
       <div className="left">

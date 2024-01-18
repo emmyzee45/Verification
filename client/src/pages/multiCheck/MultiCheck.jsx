@@ -67,6 +67,7 @@ const MultiCheck = () => {
         dispatch(updateUserSuccess(updateUser.data));
         toast.success("Subscription Successful")
     }catch(err) {
+      console.log(err)
       if (!err?.response) {
         toast.error('No Server Response');
     }  else if (err.response?.status === 401) {

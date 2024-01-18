@@ -51,7 +51,7 @@ export const availableTargetForParmentSub = async(req ,res) => {
 // Create Temperary Rental SUBSCRIPTION
 export const CreateTemperaryRental = async(req ,res) => {
     try {
-      const { targets, duration } = req.body;
+      const { targets, duration, balance } = req.body;
       if(!targets || !duration ) return res.status(400).json("targets or duration missing");
 
       const result = await axios.post(`${base_url}/temporary-rentals`, req.body, {
@@ -59,10 +59,13 @@ export const CreateTemperaryRental = async(req ,res) => {
             "Authorization": `Bearer ${req.token}`,
         }
     });
-
-    await User.findByIdAndUpdate(req.user.id, { $push: { subscriptionIds: result.data.id }});
-
-    return res.status(200).json(result.data);
+    const updateUser = await User.findByIdAndUpdate(req.user.id, 
+      { 
+        $push: { subscriptionIds: result.data.id }, 
+        $inc: { balance: -balance }}, 
+        {new: true}
+      );
+    return res.status(200).json({line: result.data, user: updateUser});
     } catch (error) {
       console.error('Error fetching available targets:', error);
       return res.status(500).json({ error: 'Internal Server Error' });
@@ -149,6 +152,8 @@ export const createSingleLineSub = async(req, res) => {
 
 // CREATE Multi LINE SUBSCRIPTION
 export const createMultiLineSub = async(req, res) => {
+  console.log(req.body)
+  console.log(req.user.id)
   try {
 
     const result = await axios.post(`${base_url}/multi-purpose-line`, req.body, {
@@ -156,6 +161,7 @@ export const createMultiLineSub = async(req, res) => {
           "Authorization": `Bearer ${req.token}`,
       }
   });
+  console.log(result.data)
   await User.findByIdAndUpdate(req.user.id, { $push: { subscriptionIds: result.data.id }});
 
   return res.status(200).json("Successful");

@@ -57,6 +57,7 @@ const Checkout = () => {
       targets: products.map((item) => item.targetId),
       reserveOnSameNumber: true,
       instantAvailability: products[0].alwaysOn,
+      balance: parseInt(total?.toFixed(2)),
       duration
     }
     if(user.balance < total) return toast.error("Insufficient balance");
@@ -67,8 +68,9 @@ const Checkout = () => {
         ? `subscriptions/reservations/create` 
         : `subscriptions/single-service`, data
         );
-      const updateUser = await makeRequest.put(`users/decrease/${user._id}`, {balance: parseInt(total?.toFixed(2))});
-      dispatch(updateUserSuccess(updateUser.data));
+        console.log(res.data)
+      // const updateUser = await makeRequest.put(`users/decrease/${user._id}`, {balance: parseInt(total?.toFixed(2))});
+      dispatch(updateUserSuccess(res.data.user));
       dispatch(emptyCart())
       toast.success("Transaction successful")
     }catch(err) {

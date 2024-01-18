@@ -53,6 +53,7 @@ export const confirmTransaction = async(req, res) => {
     );
 
     if(event.type === "charge:confirmed") {
+        console.log("confirmed", event.data)
         let amount = event.data.pricing.local.amount;
         let user_id = event.data.metadata.user_id;
         let order_id = event.data.metadata.order_id;
@@ -73,6 +74,7 @@ export const confirmTransaction = async(req, res) => {
         )
         res.status(200).json("Successfully topup account");
     } else if(event.type === "charge:resolved") {
+        console.log("Resolved", event.data)
         let amount = event.data.pricing.local.amount;
         let user_id = event.data.metadata.user_id;
         let order_id = event.data.metadata.order_id;

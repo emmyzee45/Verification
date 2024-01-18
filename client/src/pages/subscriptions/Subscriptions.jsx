@@ -38,6 +38,7 @@ const Subscriptions = () => {
             try {
                 const res = await makeRequest.get(`/subscriptions/reservations/catalog/duration?duration=${category}:00:00:00&instantAvailability=${alwaysOn}`);
                 setSubscriptions(res.data.advertisedTargets);
+                console.log(res.data.advertisedTargets)
                 setIsLoading(false)
             }catch(er) {
                 setIsLoading(false)

@@ -21,7 +21,7 @@ const SingleLine = () => {
              2 minutes before the line is ready for use.
         </div>
           <Link to={`/permanent-subscription/catalog?alwaysOn=false`}>
-            <button className="subButton">Select plan</button>
+            <button className="subButton" id="disabled-button" disabled>Select plan</button>
           </Link>
         </div>
         <div className="subItem">

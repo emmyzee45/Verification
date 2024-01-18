@@ -118,9 +118,9 @@ const Subscription = () => {
               <div className="subText">Area code Selection</div>
             </li>
           </ul>
-          <Link to='/permanent-subscription/isMulti'>
-            <div className="subButton">Select plan</div>
-          </Link>
+          {/* <Link to='/permanent-subscription/isMulti' > */}
+            <div className="subButton" id="disabled-button">Select plan</div>
+          {/* </Link> */}
         </div>
       </div>
       <Footer />

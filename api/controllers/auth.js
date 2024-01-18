@@ -51,23 +51,38 @@ export const refreshBearerToken = (req, res) => {
 
 // third party login
 export const thirdPartyLogin = async(req, res, next) => {
-  const apiServerUrl = 'https://www.phoneblur.com/api/auth';
-
+  const apiServerUrl = 'https://www.textverified.com/api/pub/v2/auth';
   // Replace with your actual username and API Key
-  const username = process.env.USERNAME;
-  const apiKey = process.env.PHONEBLUR_API_KEY;
+  const username = process.env.TEXTVERIFIED_USERNAME;
+  const apiKey = process.env.TEXTVERIFIED_API_KEY;
   
-  // Create a base64-encoded token for basic authentication
-  const base64Token = Buffer.from(`${username}:${apiKey}`).toString('base64');
   try {
-    const result = await axios.post(apiServerUrl,{}, { headers: {'Authorization': `Basic ${base64Token}`,}});
+    const result = await axios.post(apiServerUrl, {}, { headers: {'x-api-key':`${apiKey}`, 'x-api-username':`${username}`}});
     req.token = result.data.token;
     next()
   }catch(err) {
     return res.status(401).json("Unauthorized")
   }
-  
   }
+// // third party login
+// export const thirdPartyLogin = async(req, res, next) => {
+//   const apiServerUrl = 'https://www.phoneblur.com/api/auth';
+
+//   // Replace with your actual username and API Key
+//   const username = process.env.USERNAME;
+//   const apiKey = process.env.PHONEBLUR_API_KEY;
+  
+//   // Create a base64-encoded token for basic authentication
+//   const base64Token = Buffer.from(`${username}:${apiKey}`).toString('base64');
+//   try {
+//     const result = await axios.post(apiServerUrl,{}, { headers: {'Authorization': `Basic ${base64Token}`,}});
+//     req.token = result.data.token;
+//     next()
+//   }catch(err) {
+//     return res.status(401).json("Unauthorized")
+//   }
+  
+//   }
 
   // LOG OUT
   export const logout = (req, res) => {

@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   });
   app.use(
     cors({
-      origin: "https://simver.net",
+      origin: "http://localhost:3000",
     })
     );
 
