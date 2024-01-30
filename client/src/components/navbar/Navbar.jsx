@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import "./navbar.css";
+import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
 import { Button, Modal } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 import { logOutSuccess } from "../../redux/redux-slices/UserSlice";
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
+import { updateUserSuccess } from '../../redux/redux-slices/UserSlice';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import NotListedLocationOutlinedIcon from '@mui/icons-material/NotListedLocationOutlined';
@@ -20,6 +22,22 @@ const Navbar = () => {
   const user = useSelector((state) => state.user.currentUser);
   const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
   const quantity = useSelector((state) => state.cart.quantity);
+
+  const socket = useRef();
+  
+  useEffect(() => {
+    socket.current = io("ws://localhost:5000");
+    // socket.current.on("balance", (data) => {
+    //   // console.log(data)
+    // });
+  }, []);
+
+  useEffect(() => {
+    socket?.current?.on("balance", (data) => {
+      dispatch(updateUserSuccess(data));
+    });
+  }, [socket]);
+
 
   const handleLogout = async() => {
     dispatch(logOutSuccess())

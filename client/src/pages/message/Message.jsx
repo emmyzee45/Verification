@@ -5,7 +5,6 @@ import { format } from "timeago.js";
 import { makeRequest } from "../../axios.js"
 import { getMessageFailure, getMessageStart, getMessageSuccess } from '../../redux/redux-slices/messageSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { logOutSuccess } from '../../redux/redux-slices/UserSlice.js';
 import Footer from '../../components/footer/Footer.jsx';
 
 const Message = () => {
@@ -79,7 +78,7 @@ const Message = () => {
         </tbody>
       </table>
     </div>
-    <Footer />
+    {/* <Footer /> */}
     </>
   );
 }

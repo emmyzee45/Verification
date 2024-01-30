@@ -5,11 +5,11 @@ const TextSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    lineNumber: {
-        type: String,
-        required: false,
+    encrypted: {
+        type: Boolean,
+        default: false,
     },
-    fullPayloadValue: {
+    smsContent: {
         type: String,
         required: false,
     },
@@ -17,19 +17,15 @@ const TextSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    target: {
+    to: {
         type: String,
         required: false,
     },
-    sentAt: {
+    from: {
         type: String,
         required: false,
     },
-    sentFrom: {
-        type: String,
-        required: false,
-    },
-    subscriptionId: {
+    createdAt: {
         type: String,
         required: false,
     },

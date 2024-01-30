@@ -152,7 +152,6 @@ export const createSingleLineSub = async(req, res) => {
 
 // CREATE Multi LINE SUBSCRIPTION
 export const createMultiLineSub = async(req, res) => {
-  console.log(req.body)
   console.log(req.user.id)
   try {
 

@@ -4,9 +4,10 @@
     position: relative;
     overflow: hidden;
     width: 100vw;
-    height: calc(100vh - 80px);;
+    /* height: calc(100vh - 80px); */
     padding: 0 200px;
     gap: 40px;
+    /* overflow-y: scroll; */
     margin-bottom: 100px;
   }
 

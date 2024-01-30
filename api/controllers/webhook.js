@@ -3,17 +3,18 @@ import coinbase from "coinbase-commerce-node";
 import User from "../models/User.js";
 import Order from "../models/Order.js";
 import Text from "../models/Text.js";
+import crypto from 'crypto';
 import Notification from "../models/Notification.js";
 import sendEmail from "../utils/sendEmail.js";
 
 dotenv.config();
 const Client = coinbase.Client;
-const clientObj = Client.init(process.env.API_KEY);
+const clientObj = Client.init(process.env.COINBASE_API_KEY);
 clientObj.setRequestTimeout(3000);
 const resources = coinbase.resources;
 const Webhook = coinbase.Webhook;
 
-export const createTransaction = async(req, res) => {
+export const createTransaction = async(req, res, next) => {
     const { amount, currency, user_id, email } = req.body;
 
     if(user_id !== req.user.id || !amount || !currency || !email) return res.status(400).json("Invalid parameters");
@@ -37,15 +38,20 @@ export const createTransaction = async(req, res) => {
                 order_id: newOrder._id
             }
         });
-        // console.log(charge)
+        
         res.status(200).json(charge);
+        const data = {
+            emitter: "balance",
+            data: 5
+        }
+        next(data)
     }catch(err) {
         console.log(err)
         res.status(500).json(err);
     }
 }
 
-export const confirmTransaction = async(req, res) => {
+export const confirmTransaction = async(req, res, next) => {
     const event = Webhook.verifyEventBody(
         req.rawBody,
         req.headers['x-cc-webhook-signature'],
@@ -61,7 +67,7 @@ export const confirmTransaction = async(req, res) => {
         const usd_amount = event.data.payments[0].value.local.amount;
         const crypto_amount = event.data.payments[0].value.crypto.amount;
         const crypto_currency = event.data.payments[0].value.crypto.currency;
-        await User.findByIdAndUpdate(user_id, { $inc: { balance: amount }});
+        const user = await User.findByIdAndUpdate(user_id, { $inc: { balance: amount }}, {new : true} );
         await Order.findByIdAndUpdate(order_id, 
             { $set: {
                     pay_amount: crypto_amount, 
@@ -73,6 +79,11 @@ export const confirmTransaction = async(req, res) => {
             }
         )
         res.status(200).json("Successfully topup account");
+        const data = {
+            emitter: "balance",
+            data: user
+        }
+        next(data)
     } else if(event.type === "charge:resolved") {
         console.log("Resolved", event.data)
         let amount = event.data.pricing.local.amount;
@@ -83,7 +94,7 @@ export const confirmTransaction = async(req, res) => {
         const crypto_amount = event.data.payments[0].value.crypto.amount;
         const crypto_currency = event.data.payments[0].value.crypto.currency;
 
-        await User.findByIdAndUpdate(user_id, { $inc: { balance: amount }});
+        const user = await User.findByIdAndUpdate(user_id, { $inc: { balance: amount }}, {new: true});
         await Order.findByIdAndUpdate(order_id, 
             { $set: {
                     pay_amount: crypto_amount, 
@@ -95,6 +106,11 @@ export const confirmTransaction = async(req, res) => {
             }
         )
         res.status(200).json("Successfully resolved Topup");
+        const data = {
+            emitter: "balance",
+            data: user
+        }
+        next(data)
     } else if(event.type === "charge:pending") {
         let order_id = event.data.metadata.order_id;
         await Order.findByIdAndRemove(order_id, { $set: { status: 'pending'}});
@@ -169,4 +185,48 @@ export const lineAssignmentNotification = async(req, res) => {
     }catch(err) {
         res.status(500).json(err);
     }
+}
+
+// Your webhook secret
+const webhookSecret = process.env.TEXTVERIFIED_API_KEY;
+
+// Validate the webhook signature
+function validateWebhookSignature(requestBody, signatureHeader) {
+    // console.log(requestBody, signatureHeader)
+  // Extract the signature value without the prefix
+  const signature = signatureHeader.replace('HMAC-SHA512=', '');
+// console.log(Buffer.from(signature, 'base64').toString('utf-8'))
+  // Generate HMAC-SHA512 hash from the request body
+  const hmac = crypto.createHmac('sha512', webhookSecret);
+  hmac.update(requestBody);
+  const calculatedSignature = hmac.digest('base64');
+  console.log(calculatedSignature)
+  // Compare the calculated signature with the received signature
+  return signature === calculatedSignature;
+}
+
+export const rentalWebhook = async(req ,res) => {
+    // console.log(req.body)
+    const event = req.body.Event;
+    // console.log(event)
+    // console.log(validateWebhookSignature(req.body, req.headers["x-webhook-signature"]))
+    // console.log(req.headers["x-webhook-signature"])
+    // if(!validateWebhookSignature(req.body, req.headers["x-webhook-signature"])) {
+    //     return res.status(401).json("Unauthorized")
+    // }
+    if(event === "v2.rental.billingcycle.renewed") {
+        res.status(200).json("success");
+    } else if(event === "v2.rental.billingcycle.expired") {
+        res.status(200).json("Success")
+    } else if(event === "v2.sms.received") {
+        const sms = new Text(req.body.Data);
+        await sms.save();
+        res.status(200).json("success")
+    } else if(event === "v2.rental.backorder.fulfilled") {
+        res.status(200).json("Success")
+    } else if(event === "v2.test") {
+        return res.status(200).json("success")
+    }
+    
+    // res.status(200).json("success")
 }

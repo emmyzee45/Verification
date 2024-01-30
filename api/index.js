@@ -1,21 +1,31 @@
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import path from "path";
+import http from "http";
+import { Server } from "socket.io";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import orderRoutes from "./routes/orders.js";
-import ticketRoutes from "./routes/tickets.js";
-import messageRoutes from "./routes/messages.js";
-import authRoutes from "./routes/auth.js";
-import webhookRoutes from "./routes/webhook.js";
 import rentalRoutes from "./routes/rentals.js";
+import ticketRoutes from "./routes/tickets.js";
+import webhookRoutes from "./routes/webhook.js";
+import messageRoutes from "./routes/messages.js";
+import textverifiedRoutes from "./routes/textverified.js";
 
 dotenv.config();
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: ["http://localhost:3000"]
+  }
+});
+// const Io = io.listen(server)
 
 const connect = () => {
   mongoose.connect(process.env.Mongo)
@@ -58,9 +68,18 @@ app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/tickets", ticketRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/webhooks", webhookRoutes);
 app.use("/api/subscriptions", rentalRoutes);
-app.use("/api/webhooks", webhookRoutes)
-// console.log(process.env.NODE_ENV)
+app.use("/api/services", textverifiedRoutes);
+// /api/webhooks/textverified/rentals
+app.get("/api/test", (req, res) => {
+  io.emit("balance", { message: "Just for testing"});
+  res.status(200).json("Successfully")
+})
+app.use((data, req, res, next) => {
+  io.emit(data.emitter, data.data);
+})
+
 // Serve static assets if in production
 
 if (process.env.NODE_ENV !== "production") {
@@ -82,7 +101,7 @@ if (process.env.NODE_ENV !== "production") {
   })
 }
 
-app.listen(process.env.PORT, ()=>{
+server.listen(process.env.PORT, ()=>{
     console.log(`App has started at ${process.env.PORT}`);
     connect()
 })

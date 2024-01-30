@@ -4,7 +4,7 @@
     width: 100vw;
     height: calc(100vh - 80px);
     padding: 0 200px;
-    overflow: hidden;
+    overflow-y: scroll;
     margin-bottom: 100px;
 }
 

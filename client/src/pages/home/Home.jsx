@@ -5,6 +5,7 @@ import Sitemap from "../../components/sitemap/Sitemap";
 import "./home.css";
 
 const Intro = () => {
+  
   return (
     <div>
     <div className="homeContainer">

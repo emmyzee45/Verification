@@ -76,7 +76,7 @@ const Permanent = ({ subscriptions }) => {
         <td className="table-item">{item?.noLongerAvailableAt ? item?.noLongerAvailableAt : item?.cycleEnd?.slice(0,16)}</td>
           <td className="actions">
               <button className="action" onClick={() => handleSubRenewal(item?.id)}>Renew</button>
-              {!item?.strReservations[0]?.alwaysOn && <button className="action action2" onClick={() => handleWakeUp(item?.id)}>Wake Up</button>}
+              {!item?.strReservations[0]?.alwaysOn && <button disabled className="action action2" onClick={() => handleWakeUp(item?.id)}>Wake Up</button>}
           </td>
       </tr>
         )

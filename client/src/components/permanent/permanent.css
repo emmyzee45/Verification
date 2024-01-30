@@ -70,6 +70,7 @@
 
 .action2 {
     border: 1px solid rgb(133, 21, 133);
+    cursor: not-allowed;
 }
 
 @media screen and (max-width: 768px) {
